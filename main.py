@@ -172,8 +172,8 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
         print("ℹ️ 没有新文章，跳过分析")
         return
 
-    # 4. 统计
-    today_articles = db.get_articles_by_date(today)
+    # 4. 统计（取本轮新采集且未分析的文章）
+    today_articles = db.get_unanalyzed_articles()
     stats = compute_stats(today_articles, db, today)
 
     # 5. AI 分析
