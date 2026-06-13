@@ -1,5 +1,5 @@
 deepseek:
-  api_key: ${sk-ac418d2bfa964b51a0603a658feb5112}
+  api_key: sk-ac418d2bfa964b51a0603a658feb5112
   model: deepseek-chat
   max_tokens: 2000
   base_url: https://api.deepseek.com
