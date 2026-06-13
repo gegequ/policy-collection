@@ -79,10 +79,10 @@ def build_registry() -> FetcherRegistry:
     registry.register(CSRCFetcher())           # 中国证监会
     registry.register(NFRAFetcher())           # 金融监管总局
     registry.register(StatsGovFetcher())       # 国家统计局
-    registry.register(CustomsFetcher())        # 海关总署
+    # registry.register(CustomsFetcher())    # 海关总署 — 有反爬，暂时跳过
     registry.register(NEAFetcher())            # 国家能源局
     registry.register(MOFFetcher())            # 财政部
-    registry.register(MOFCOMFetcher())         # 商务部
+    # registry.register(MOFCOMFetcher())     # 商务部 — 有反爬，暂时跳过
     registry.register(CEIFetcher())            # 中经网
     registry.register(XinhuaFetcher())         # 新华社
     registry.register(PeopleDailyFetcher())    # 人民日报
