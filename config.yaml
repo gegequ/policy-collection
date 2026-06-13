@@ -15,6 +15,7 @@ sources:
   财政商务: true
   政策研究: true
   媒体舆论: true
+  医药卫生: true
 
 database:
   path: "./data/policy_radar.db"

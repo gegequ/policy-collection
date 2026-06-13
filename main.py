@@ -51,6 +51,8 @@ from src.fetchers.mofcom import MOFCOMFetcher
 from src.fetchers.cei import CEIFetcher
 from src.fetchers.xinhua import XinhuaFetcher
 from src.fetchers.people_daily import PeopleDailyFetcher
+from src.fetchers.nhc import NHCFetcher
+from src.fetchers.nmpa import NMPAFetcher
 
 # ── 日志配置 ────────────────────────────────────────────────
 
@@ -86,6 +88,8 @@ def build_registry() -> FetcherRegistry:
     registry.register(CEIFetcher())            # 中经网
     registry.register(XinhuaFetcher())         # 新华社
     registry.register(PeopleDailyFetcher())    # 人民日报
+    # registry.register(NHCFetcher())         # 国家卫健委 — 412 反爬
+    # registry.register(NMPAFetcher())        # 国家药监局 — 412 反爬
     return registry
 
 
