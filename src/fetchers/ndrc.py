@@ -4,7 +4,7 @@ import httpx
 from src.fetchers.base import BaseFetcher
 from src.models import Article
 
-NDRC_URL = "https://www.ndrc.gov.cn/xwzx/xwtt/"
+NDRC_URL = "https://www.ndrc.gov.cn/fzggw/wld/lsdt/"
 NDRC_BASE = "https://www.ndrc.gov.cn"
 
 

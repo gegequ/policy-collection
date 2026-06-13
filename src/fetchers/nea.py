@@ -4,7 +4,7 @@ import httpx
 from src.fetchers.base import BaseFetcher
 from src.models import Article
 
-NEA_URL = "http://www.nea.gov.cn/xwzx/nyyw.htm"
+NEA_URL = "https://www.nea.gov.cn/xwzx/nyyw.htm"
 NEA_BASE = "http://www.nea.gov.cn"
 
 

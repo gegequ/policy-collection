@@ -4,7 +4,7 @@ import httpx
 from src.fetchers.base import BaseFetcher
 from src.models import Article
 
-CUSTOMS_URL = "http://www.customs.gov.cn/customs/xwfb34/302425/index.html"
+CUSTOMS_URL = "http://www.customs.gov.cn/customs/xwfb34/302425/302426/index.html"
 CUSTOMS_BASE = "http://www.customs.gov.cn"
 
 

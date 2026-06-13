@@ -4,7 +4,7 @@ import httpx
 from src.fetchers.base import BaseFetcher
 from src.models import Article
 
-MOFCOM_URL = "http://www.mofcom.gov.cn/article/xwfb/"
+MOFCOM_URL = "http://www.mofcom.gov.cn/article/"
 MOFCOM_BASE = "http://www.mofcom.gov.cn"
 
 

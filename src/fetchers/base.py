@@ -102,6 +102,17 @@ class BaseFetcher(ABC):
 
     # ── 工具方法 ──────────────────────────────────────────────
 
+    # 浏览器 UA，避免被反爬拦截
+    DEFAULT_HEADERS = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/120.0.0.0 Safari/537.36"
+        ),
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+    }
+
     @staticmethod
     async def fetch_html(
         client: httpx.AsyncClient,
@@ -121,7 +132,12 @@ class BaseFetcher(ABC):
         Raises:
             httpx.HTTPError: HTTP 错误（触发重试）。
         """
-        resp = await client.get(url, timeout=timeout, follow_redirects=True)
+        resp = await client.get(
+            url,
+            timeout=timeout,
+            follow_redirects=True,
+            headers=BaseFetcher.DEFAULT_HEADERS,
+        )
         resp.raise_for_status()
         return resp.text
 
