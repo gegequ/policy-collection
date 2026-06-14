@@ -24,6 +24,10 @@ Thumbs.db
 # Project data (runtime artifacts)
 data/
 
+# Reports config (keep markdown files only)
+reports/.obsidian/
+reports/.claudian/
+
 # Environment
 .env
 .env.local
