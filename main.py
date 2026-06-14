@@ -27,7 +27,7 @@ import httpx
 from src.config import load_config
 from src.db import Database
 from src.fetchers.registry import FetcherRegistry
-from src.analyzer import compute_stats, format_stats_for_ai, analyze_with_deepseek
+from src.analyzer import compute_stats, compute_trends, format_stats_for_ai, format_trends_for_ai, analyze_with_deepseek
 from src.reporter import (
     generate_markdown_report,
     print_summary,
@@ -184,8 +184,14 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
     today_articles = db.get_unanalyzed_articles()
     stats = compute_stats(today_articles, db, today)
 
-    # 5. AI 分析
+    # 5. 趋势分析
+    trends = compute_trends(db, days=7)
+    trend_text = format_trends_for_ai(trends) if trends["top_sectors"] else ""
+
+    # 6. AI 分析
     ai_prompt = format_stats_for_ai(stats, today_articles)
+    if trend_text:
+        ai_prompt += "\n\n" + trend_text
     ai_analysis = await analyze_with_deepseek(ai_prompt, config)
 
     if ai_analysis is None:
@@ -195,7 +201,7 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
         print("⚠️ AI 分析跳过（需配置 DEEPSEEK_API_KEY 环境变量）")
 
     # 6. 生成 + 保存报告
-    report_md = generate_markdown_report(stats, ai_analysis, today_articles)
+    report_md = generate_markdown_report(stats, ai_analysis, today_articles, trends)
     report_path = save_report(report_md, config.output.report_dir, today)
 
     # 7. 存储报告到数据库

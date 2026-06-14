@@ -20,6 +20,7 @@ def generate_markdown_report(
     stats: Dict,
     ai_analysis: str,
     articles: List[Article],
+    trends: Dict | None = None,
 ) -> str:
     """生成完整 Markdown 日报。
 
@@ -27,6 +28,7 @@ def generate_markdown_report(
         stats: compute_stats() 返回的统计字典。
         ai_analysis: AI 分析全文（Markdown）。
         articles: 当日文章列表。
+        trends: compute_trends() 返回的趋势数据（可选）。
 
     Returns:
         完整的 Markdown 报告文本。
@@ -58,6 +60,17 @@ def generate_markdown_report(
                 f"| {ch['sector']} | {ch['today']} | {ch['yesterday']} "
                 f"| {arrow} {ch['change_pct']:+.1f}% |"
             )
+        lines.append("")
+
+    # ── 趋势图 ──
+    if trends and trends.get("top_sectors"):
+        lines.append("## 📈 板块热度 {days} 日趋势".format(days=len(trends["dates"])))
+        lines.append("| 板块 | 趋势 | " + " | ".join(trends["dates"]) + " |")
+        lines.append("|------|------|" + "|".join(["-" * 6 for _ in trends["dates"]]) + "|")
+        for sector in trends["top_sectors"]:
+            direction = trends["series"].get(sector + "_direction", "➖")
+            values = " | ".join(str(trends["series"].get(sector, [0]*len(trends["dates"]))[i]) for i in range(len(trends["dates"])))
+            lines.append(f"| {sector} | {direction} | {values} |")
         lines.append("")
 
     # ── 类别分布 ──
