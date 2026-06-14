@@ -14,6 +14,7 @@ from datetime import datetime, timedelta
 from typing import List, Dict, Optional
 
 import httpx
+from httpx import AsyncHTTPTransport
 
 from src.models import Article
 from src.db import Database
@@ -357,6 +358,7 @@ async def analyze_with_deepseek(
     """
     if not config.deepseek.api_key:
         logger.warning("DeepSeek API key 未配置，跳过 AI 分析")
+        print("⚠️ 未设置 DEEPSEEK_API_KEY 环境变量")
         return None
 
     url = f"{config.deepseek.base_url}/v1/chat/completions"
@@ -376,15 +378,26 @@ async def analyze_with_deepseek(
         "Content-Type": "application/json",
     }
 
-    try:
-        async with httpx.AsyncClient(timeout=60) as client:
-            resp = await client.post(url, json=payload, headers=headers)
-            resp.raise_for_status()
-            data = resp.json()
-            return data["choices"][0]["message"]["content"]
-    except httpx.HTTPStatusError as e:
-        logger.error("DeepSeek API HTTP 错误 %d: %s", e.response.status_code, e)
-        return None
-    except (httpx.RequestError, KeyError, json.JSONDecodeError) as e:
-        logger.error("DeepSeek API 调用失败: %s", e)
-        return None
+    # 尝试多种连接方式：系统代理 → 直连
+    for attempt, use_proxy in enumerate([True, False]):
+        try:
+            transport = None
+            if not use_proxy:
+                transport = httpx.AsyncHTTPTransport(retries=1)
+            async with httpx.AsyncClient(timeout=60, transport=transport) as client:
+                resp = await client.post(url, json=payload, headers=headers)
+                resp.raise_for_status()
+                data = resp.json()
+                return data["choices"][0]["message"]["content"]
+        except httpx.HTTPStatusError as e:
+            logger.error("DeepSeek API HTTP %d (attempt %d): %s",
+                         e.response.status_code, attempt + 1, e)
+            if e.response.status_code in (401, 403):
+                break  # 认证失败，不重试
+        except Exception as e:
+            logger.warning("DeepSeek API attempt %d failed: %s", attempt + 1, e)
+            if attempt == 0:
+                continue
+
+    print("⚠️ DeepSeek API 调用失败，请检查网络和 API key")
+    return None

@@ -31,3 +31,4 @@ reports/.claudian/
 # Environment
 .env
 .env.local
+run.bat
