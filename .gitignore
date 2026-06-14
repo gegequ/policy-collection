@@ -23,7 +23,6 @@ Thumbs.db
 
 # Project data (runtime artifacts)
 data/
-reports/
 
 # Environment
 .env
