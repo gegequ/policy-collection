@@ -1,6 +1,7 @@
 """配置加载模块。
 
 从 YAML 配置文件加载系统配置，支持 `${ENV_VAR}` 环境变量替换。
+启动时自动加载 `.env` 文件中的环境变量。
 """
 
 from __future__ import annotations
@@ -11,6 +12,30 @@ from dataclasses import dataclass
 from typing import Dict
 
 import yaml
+
+
+def _load_dotenv() -> None:
+    """加载项目根目录的 .env 文件到 os.environ。"""
+    env_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env")
+    if not os.path.isfile(env_path):
+        # 尝试当前工作目录
+        env_path = ".env"
+    if not os.path.isfile(env_path):
+        return
+    with open(env_path, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, _, value = line.partition("=")
+            key = key.strip()
+            value = value.strip().strip('"').strip("'")
+            if key and key not in os.environ:
+                os.environ[key] = value
+
+
+# 模块加载时自动执行
+_load_dotenv()
 
 
 @dataclass

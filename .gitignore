@@ -32,3 +32,4 @@ reports/.claudian/
 .env
 .env.local
 run.bat
+check.bat
