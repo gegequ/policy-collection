@@ -13,7 +13,7 @@ class CEIFetcher(BaseFetcher):
     category = "政策研究"
 
     async def fetch(self, client: httpx.AsyncClient) -> List[Article]:
-        html = await self.fetch_html(client, CEI_URL)
+        html = await self.fetch_html(client, CEI_URL, timeout=45)
         soup = self.parse_html(html)
         articles = []
 
