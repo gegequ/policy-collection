@@ -150,12 +150,15 @@ def print_summary(stats: Dict, ai_analysis: str) -> None:
 
             for ch in stats["sector_changes"]:
                 label = ch.get("change_label", f"{ch['change_pct']:+.1f}%")
-                if ch["change_pct"] > 0:
+                pct = ch.get("change_pct")
+                if pct is None:
+                    change_style = "cyan"
+                elif pct > 0:
                     change_style = "green"
-                elif ch["change_pct"] < 0:
+                elif pct < 0:
                     change_style = "red"
                 else:
-                    change_style = "cyan" if label == "🆕" else "white"
+                    change_style = "white"
 
                 table.add_row(
                     ch["sector"],
