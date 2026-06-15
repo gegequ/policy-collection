@@ -139,11 +139,12 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
     timeout = httpx.Timeout(config.fetch.timeout_sec)
 
     # 中国官网域名直连，不走系统代理（否则 Clash 等代理会导致这些网站不可达）
+    # 中国官网域名直连（后缀匹配，不用 glob）
     gov_domains = [
-        "*.gov.cn", "*.pbc.gov.cn", "*.ndrc.gov.cn", "*.miit.gov.cn",
-        "*.most.gov.cn", "*.csrc.gov.cn", "*.nfra.gov.cn", "*.stats.gov.cn",
-        "*.customs.gov.cn", "*.nea.gov.cn", "*.mof.gov.cn", "*.mofcom.gov.cn",
-        "*.cei.cn", "*.news.cn", "*.people.com.cn", "*.people.cn",
+        "gov.cn", "pbc.gov.cn", "ndrc.gov.cn", "miit.gov.cn",
+        "most.gov.cn", "csrc.gov.cn", "nfra.gov.cn", "stats.gov.cn",
+        "customs.gov.cn", "nea.gov.cn", "mof.gov.cn", "mofcom.gov.cn",
+        "cei.cn", "news.cn", "people.com.cn", "people.cn",
     ]
     os.environ.setdefault("no_proxy", "")
     existing = os.environ["no_proxy"]
@@ -197,10 +198,10 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
         # 增量模式：仅基于新增文章生成补充修正
         print(f"📝 检测到今日已有报告，进入增量补充模式（+{new_count}篇新文章）")
 
-        new_only = [a for a in today_articles
-                    if a.id and a.fetched_at and a.fetched_at > existing_report.created_at] if existing_report.created_at else today_articles
+        # today_articles 已由 get_unanalyzed_articles() 过滤，无需二次判断
+        new_only = today_articles
 
-        correction_prompt = f"""以下是今日新增采集的 {len(new_only)} 篇文章。请基于这些新信息，对已有报告进行补充和修正。已有报告摘要如下（如有）：{existing_report.report_md[:500] if existing_report else '无'}
+        correction_prompt = f"""以下是今日新增采集的 {len(new_only)} 篇文章。请基于这些新信息，对已有报告进行补充和修正。已有报告末尾摘要：{existing_report.report_md[-1000:] if existing_report else '无'}
 
 更新要求：
 1. 指出新信息是否支持/削弱/推翻之前报告中的任何结论
@@ -268,8 +269,11 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
         with open(report_path, "a", encoding="utf-8") as f:
             f.write("\n\n---\n\n")
             f.write(ai_analysis)
-        # 拼接完整报告存入 DB，避免后续增量查询时丢失上下文
+        # 拼接完整报告，限制总长防止无限膨胀（保留最近部分）
+        MAX_REPORT_LENGTH = 25000
         report_md = existing_report.report_md + "\n\n---\n\n" + ai_analysis
+        if len(report_md) > MAX_REPORT_LENGTH:
+            report_md = report_md[-MAX_REPORT_LENGTH:]
     else:
         report_md = generate_markdown_report(stats, ai_analysis, today_articles, trends)
         report_path = save_report(report_md, config.output.report_dir, today)

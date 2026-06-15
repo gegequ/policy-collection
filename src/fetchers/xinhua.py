@@ -11,6 +11,7 @@ XINHUA_BASE = "https://www.news.cn"
 class XinhuaFetcher(BaseFetcher):
     name = "xinhua"
     category = "媒体舆论"
+    tier = "二手"
 
     async def fetch(self, client: httpx.AsyncClient) -> List[Article]:
         html = await self.fetch_html(client, XINHUA_URL)

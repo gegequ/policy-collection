@@ -11,6 +11,7 @@ PEOPLE_BASE = "http://finance.people.com.cn"
 class PeopleDailyFetcher(BaseFetcher):
     name = "people_daily"
     category = "媒体舆论"
+    tier = "二手"
 
     async def fetch(self, client: httpx.AsyncClient) -> List[Article]:
         html = await self.fetch_html(client, PEOPLE_URL)
