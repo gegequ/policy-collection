@@ -163,8 +163,6 @@ def print_summary(stats: Dict, ai_analysis: str) -> None:
                     str(ch["yesterday"]),
                     f"[{change_style}]{label}[/{change_style}]",
                 )
-                    f"[{change_style}]{arrow} {ch['change_pct']:+.1f}%[/{change_style}]",
-                )
             console.print(table)
 
         if ai_analysis:
