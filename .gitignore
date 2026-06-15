@@ -33,3 +33,6 @@ reports/.claudian/
 .env.local
 run.bat
 check.bat
+
+# Reasonix internal
+.reasonix/truncated-results/
