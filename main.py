@@ -226,6 +226,9 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
             )
             print("⚠️ AI 分析跳过（需配置 DEEPSEEK_API_KEY 环境变量）")
 
+    # 标记已分析，避免下次运行时重复统计
+    db.mark_analyzed([a.id for a in today_articles if a.id])
+
     # 7. 生成 / 更新报告
     if is_update:
         # 追加到已有报告末尾
@@ -233,7 +236,8 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
         with open(report_path, "a", encoding="utf-8") as f:
             f.write("\n\n---\n\n")
             f.write(ai_analysis)
-        report_md = ai_analysis
+        # 拼接完整报告存入 DB，避免后续增量查询时丢失上下文
+        report_md = existing_report.report_md + "\n\n---\n\n" + ai_analysis
     else:
         report_md = generate_markdown_report(stats, ai_analysis, today_articles, trends)
         report_path = save_report(report_md, config.output.report_dir, today)

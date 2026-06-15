@@ -55,10 +55,10 @@ def generate_markdown_report(
         lines.append("| 板块 | 今日提及 | 昨日 | 变化 |")
         lines.append("|------|---------|------|------|")
         for ch in stats["sector_changes"]:
-            arrow = "🔺" if ch["change_pct"] > 0 else "🔻" if ch["change_pct"] < 0 else "➖"
+            label = ch.get("change_label", f"{ch['change_pct']:+.1f}%")
             lines.append(
                 f"| {ch['sector']} | {ch['today']} | {ch['yesterday']} "
-                f"| {arrow} {ch['change_pct']:+.1f}% |"
+                f"| {label} |"
             )
         lines.append("")
 
@@ -149,20 +149,20 @@ def print_summary(stats: Dict, ai_analysis: str) -> None:
             table.add_column("变化", justify="right")
 
             for ch in stats["sector_changes"]:
+                label = ch.get("change_label", f"{ch['change_pct']:+.1f}%")
                 if ch["change_pct"] > 0:
                     change_style = "green"
-                    arrow = "↑"
                 elif ch["change_pct"] < 0:
                     change_style = "red"
-                    arrow = "↓"
                 else:
-                    change_style = "white"
-                    arrow = "→"
+                    change_style = "cyan" if label == "🆕" else "white"
 
                 table.add_row(
                     ch["sector"],
                     str(ch["today"]),
                     str(ch["yesterday"]),
+                    f"[{change_style}]{label}[/{change_style}]",
+                )
                     f"[{change_style}]{arrow} {ch['change_pct']:+.1f}%[/{change_style}]",
                 )
             console.print(table)

@@ -21,7 +21,7 @@ async def test_pbc_parses_html_correctly(httpx_mock):
     </body></html>
     """
     httpx_mock.add_response(
-        url="http://www.pbc.gov.cn/goutongjiaoliu/113456/113469/11040/index1.html",
+        url="http://www.pbc.gov.cn/zhengcehuobisi/125207/125217/index.html",
         html=html,
     )
 

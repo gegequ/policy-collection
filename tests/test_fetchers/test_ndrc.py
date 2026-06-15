@@ -19,7 +19,7 @@ async def test_ndrc_parses(httpx_mock):
       </ul>
     </body></html>
     """
-    httpx_mock.add_response(url="https://www.ndrc.gov.cn/xwzx/xwtt/", html=html)
+    httpx_mock.add_response(url="https://www.ndrc.gov.cn/xwdt/xwfb/", html=html)
 
     async with httpx.AsyncClient() as client:
         articles = await NDRCFetcher().fetch(client)

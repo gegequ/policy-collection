@@ -173,15 +173,19 @@ def compute_stats(
         prev = yesterday_sectors.get(sector, 0)
         if prev > 0:
             change_pct = round((count - prev) / prev * 100, 1)
+            change_label = f"{change_pct:+.1f}%"
         elif count > 0:
-            change_pct = 100.0
+            change_pct = 0.0
+            change_label = "🆕"
         else:
             change_pct = 0.0
+            change_label = "—"
         changes.append({
             "sector": sector,
             "today": count,
             "yesterday": prev,
             "change_pct": change_pct,
+            "change_label": change_label,
         })
 
     return {
