@@ -19,6 +19,7 @@ import argparse
 import asyncio
 import json
 import logging
+import os
 import sys
 from datetime import datetime
 
@@ -143,13 +144,12 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
         "*.customs.gov.cn", "*.nea.gov.cn", "*.mof.gov.cn", "*.mofcom.gov.cn",
         "*.cei.cn", "*.news.cn", "*.people.com.cn", "*.people.cn",
     ]
-    import os as _os
-    _os.environ.setdefault("no_proxy", "")
-    existing = _os.environ["no_proxy"]
+    os.environ.setdefault("no_proxy", "")
+    existing = os.environ["no_proxy"]
     if existing:
-        _os.environ["no_proxy"] = existing + "," + ",".join(gov_domains)
+        os.environ["no_proxy"] = existing + "," + ",".join(gov_domains)
     else:
-        _os.environ["no_proxy"] = ",".join(gov_domains)
+        os.environ["no_proxy"] = ",".join(gov_domains)
 
     async with httpx.AsyncClient(limits=limits, timeout=timeout, trust_env=True) as client:
         tasks = [f.fetch_with_retry(client) for f in fetchers]
@@ -180,7 +180,7 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
         print("ℹ️ 没有新文章，跳过分析")
         return
 
-    # 4. 统计（取本轮新采集且未分析的文章）
+    # 4. 统计
     today_articles = db.get_unanalyzed_articles()
     stats = compute_stats(today_articles, db, today)
 
@@ -188,26 +188,60 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
     trends = compute_trends(db, days=7)
     trend_text = format_trends_for_ai(trends) if trends["top_sectors"] else ""
 
-    # 6. AI 分析
-    ai_prompt = format_stats_for_ai(stats, today_articles)
-    if trend_text:
-        ai_prompt += "\n\n" + trend_text
-    ai_analysis = await analyze_with_deepseek(ai_prompt, config)
+    # 6. 检查是否已有今日报告 → 增量模式 vs 全量模式
+    existing_report = db.get_daily_report(today)
+    is_update = existing_report is not None
 
-    if ai_analysis is None:
-        ai_analysis = (
-            "⚠️ AI 分析暂不可用（API key 未配置或调用失败），以下仅为统计数据。"
-        )
-        print("⚠️ AI 分析跳过（需配置 DEEPSEEK_API_KEY 环境变量）")
+    if is_update:
+        # 增量模式：仅基于新增文章生成补充修正
+        print(f"📝 检测到今日已有报告，进入增量补充模式（+{new_count}篇新文章）")
 
-    # 6. 生成 + 保存报告
-    report_md = generate_markdown_report(stats, ai_analysis, today_articles, trends)
-    report_path = save_report(report_md, config.output.report_dir, today)
+        new_only = [a for a in today_articles
+                    if a.id and a.fetched_at and a.fetched_at > existing_report.created_at] if existing_report.created_at else today_articles
 
-    # 7. 存储报告到数据库
+        correction_prompt = f"""以下是今日新增采集的 {len(new_only)} 篇文章。请基于这些新信息，对已有报告进行补充和修正。已有报告摘要如下（如有）：{existing_report.report_md[:500] if existing_report else '无'}
+
+更新要求：
+1. 指出新信息是否支持/削弱/推翻之前报告中的任何结论
+2. 如果板块热度排名发生变化，说明变动原因
+3. 如有新的重要政策信号，补充进来
+4. 对于被新数据修正的判断，标注「修正原因」
+5. 格式简洁，只写变化部分，不要重复已有内容
+
+新增文章：
+{format_stats_for_ai(stats, new_only[:20])}
+"""
+        correction = await analyze_with_deepseek(correction_prompt, config)
+        ai_analysis = f"## 🔄 补充与修正（{datetime.now().strftime('%H:%M')} 更新）\n\n*本轮新增 {new_count} 篇文章*\n\n{correction if correction else '（AI 分析暂不可用）'}"
+    else:
+        # 全量模式：首次生成完整报告
+        ai_prompt = format_stats_for_ai(stats, today_articles)
+        if trend_text:
+            ai_prompt += "\n\n" + trend_text
+        ai_analysis = await analyze_with_deepseek(ai_prompt, config)
+
+        if ai_analysis is None:
+            ai_analysis = (
+                "⚠️ AI 分析暂不可用（API key 未配置或调用失败），以下仅为统计数据。"
+            )
+            print("⚠️ AI 分析跳过（需配置 DEEPSEEK_API_KEY 环境变量）")
+
+    # 7. 生成 / 更新报告
+    if is_update:
+        # 追加到已有报告末尾
+        report_path = os.path.join(config.output.report_dir, f"{today}.md")
+        with open(report_path, "a", encoding="utf-8") as f:
+            f.write("\n\n---\n\n")
+            f.write(ai_analysis)
+        report_md = ai_analysis
+    else:
+        report_md = generate_markdown_report(stats, ai_analysis, today_articles, trends)
+        report_path = save_report(report_md, config.output.report_dir, today)
+
+    # 8. 存储报告到数据库
     db.insert_daily_report(
         date=today,
-        article_count=new_count,
+        article_count=new_count + (existing_report.article_count if existing_report else 0),
         stats_json=json.dumps(stats, ensure_ascii=False),
         ai_analysis=ai_analysis,
         report_md=report_md,
