@@ -210,7 +210,7 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
 5. 格式简洁，只写变化部分，不要重复已有内容
 
 新增文章：
-{format_stats_for_ai(stats, new_only[:20])}
+{format_stats_for_ai(stats, new_only[:12])}
 """
         correction = await analyze_with_deepseek(correction_prompt, config)
         ai_analysis = f"## 🔄 补充与修正（{datetime.now().strftime('%H:%M')} 更新）\n\n*本轮新增 {new_count} 篇文章*\n\n{correction if correction else '（AI 分析暂不可用）'}"
@@ -239,8 +239,8 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
 3. 不允许在没有新证据支持的情况下随意改变配置方向
 4. 金融板块等重点板块如果方向改变，必须给出清晰的逻辑对比
 
-昨日报告核心结论：
-{yesterday_report.report_md[:1500]}
+昨日完整报告（以此为连续性基准，今日分析需严格对照）：
+{yesterday_report.report_md[:5000]}
 """
 
         ai_prompt = format_stats_for_ai(stats, today_articles)
