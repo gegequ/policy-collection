@@ -29,7 +29,7 @@ from src.config import load_config
 from src.db import Database
 from src.fetchers.registry import FetcherRegistry
 from src.analyzer import compute_stats, compute_trends, format_stats_for_ai, format_trends_for_ai, analyze_with_deepseek
-from src.market_data import get_market_snapshot, format_market_for_ai
+from src.market_data import get_market_snapshot, format_market_for_ai, get_index_snapshot, format_index_for_ai
 from src.funds import get_fund_names_for_prompt, get_all_sectors
 from src.reporter import (
     generate_markdown_report,
@@ -219,11 +219,12 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
     else:
         # 全量模式：首次生成完整报告
         # 获取实时行情数据
-        print("📊 获取黄金行情数据...")
+        print("📊 获取行情数据...")
         try:
             market_data = await get_market_snapshot()
-            market_text = format_market_for_ai()
-            print(f"   行情更新（{len(market_data.get('quotes', {}))} 个品种）")
+            indices = await get_index_snapshot()
+            market_text = format_market_for_ai() + "\n\n" + format_index_for_ai(indices)
+            print(f"   行情更新（COMEX + {len(indices)} 个指数）")
         except Exception as e:
             logger.warning("行情获取失败: %s", e)
             market_text = "（行情数据暂不可用）"

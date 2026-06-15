@@ -17,16 +17,28 @@ import httpx
 
 logger = logging.getLogger(__name__)
 
-CACHE_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "gold_history.json")
+CACHE_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "market_history.json")
 
 # 新浪财经行情接口（免费，无需认证）
 SINA_QUOTES = {
     "comex_gold": "hf_GC",  # COMEX 黄金期货（主力合约，可正常获取）
 }
 
-# 备用：其他品种通过不同前缀
-EXTRA_QUOTES = {
-    "sh_index": "s_sh000001",  # 上证指数（非黄金，但可验证接口）
+# 板块指数（新浪股票接口）
+SECTOR_INDICES = {
+    "沪深300": "s_sh000300",
+    "中证500": "s_sh000905",
+    "创业板指": "s_sz399006",
+    "科创50": "s_sh000688",
+    "中证银行": "s_sh399986",
+    "中证证券": "s_sh399975",
+    "中证军工": "s_sh399967",
+    "中证消费": "s_sh000932",
+    "中证医药": "s_sh000933",
+    "中证新能源": "s_sh399808",
+    "半导体": "s_sh990001",
+    "有色金属": "s_sh000819",
+    "房地产": "s_sh399393",
 }
 
 SINA_URL = "http://hq.sinajs.cn/list="
@@ -122,6 +134,63 @@ async def get_market_snapshot() -> Dict:
     save_history(history)
 
     return result
+
+
+async def fetch_index_quote(code: str) -> Optional[Dict]:
+    """抓取单只指数行情（新浪股票接口格式）。"""
+    url = SINA_URL + code
+    headers = {"User-Agent": "Mozilla/5.0", "Referer": "https://finance.sina.com.cn"}
+    try:
+        async with httpx.AsyncClient(timeout=10) as client:
+            resp = await client.get(url, headers=headers)
+            resp.raise_for_status()
+            text = resp.text
+            data = text.split('"')[1] if '"' in text else ""
+            if not data:
+                return None
+            parts = data.split(",")
+            # 股票/指数格式: 名称,现价,涨跌额,涨跌幅,成交量,成交额
+            if len(parts) < 4:
+                return None
+            price = float(parts[1]) if parts[1] else 0
+            change = float(parts[2]) if parts[2] else 0
+            return {
+                "name": parts[0],
+                "price": price,
+                "change": change,
+                "change_pct": float(parts[3]) if parts[3] and float(parts[3]) != 0 else (change / (price - change) * 100 if (price - change) != 0 else 0),
+                "prev_close": round(price - change, 2),
+            }
+    except Exception as e:
+        logger.warning("指数抓取失败 %s: %s", code, e)
+        return None
+
+
+async def get_index_snapshot() -> Dict:
+    """抓取所有板块指数快照。"""
+    result = {}
+    for name, code in SECTOR_INDICES.items():
+        q = await fetch_index_quote(code)
+        if q and q["price"] > 0:
+            result[name] = {
+                "price": q["price"],
+                "change": q.get("change", 0),
+                "change_pct": q.get("change_pct", 0),
+            }
+    return result
+
+
+def format_index_for_ai(indices: Dict) -> str:
+    """格式化指数行情为 AI 可读文本。"""
+    if not indices:
+        return ""
+    lines = ["## 📊 板块指数实时行情"]
+    for name, q in sorted(indices.items()):
+        arrow = "↑" if q["change"] >= 0 else "↓"
+        lines.append(
+            f"- {name}：{q['price']:.2f} ({arrow}{q['change_pct']:+.1f}%)"
+        )
+    return "\n".join(lines)
 
 
 def format_market_for_ai(quote: Optional[Dict] = None) -> str:
