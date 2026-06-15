@@ -372,12 +372,12 @@ def format_stats_for_ai(stats: Dict, articles: List[Article]) -> str:
         lines.append(f"  - {cat}: {cnt} 篇")
 
     lines.append("\n## 当日文章摘要")
-    for i, a in enumerate(articles[:50], 1):
+    for i, a in enumerate(articles[:30], 1):
         lines.append(f"{i}. [{a.source}] {a.title}")
         if a.summary:
-            lines.append(f"   摘要: {a.summary[:120]}")
+            lines.append(f"   {a.summary[:80]}")
         tag_str = ", ".join(a.tags) if a.tags else "无"
-        lines.append(f"   标签: {tag_str}")
+        lines.append(f"   #{tag_str}")
 
     return "\n".join(lines)
 
