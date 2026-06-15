@@ -55,7 +55,12 @@ def generate_markdown_report(
         lines.append("| 板块 | 今日提及 | 昨日 | 变化 |")
         lines.append("|------|---------|------|------|")
         for ch in stats["sector_changes"]:
-            label = ch.get("change_label", f"{ch['change_pct']:+.1f}%")
+            pct = ch.get("change_pct")
+            if pct is not None:
+                default_label = f"{pct:+.1f}%"
+            else:
+                default_label = "—"
+            label = ch.get("change_label", default_label)
             lines.append(
                 f"| {ch['sector']} | {ch['today']} | {ch['yesterday']} "
                 f"| {label} |"
@@ -149,8 +154,12 @@ def print_summary(stats: Dict, ai_analysis: str) -> None:
             table.add_column("变化", justify="right")
 
             for ch in stats["sector_changes"]:
-                label = ch.get("change_label", f"{ch['change_pct']:+.1f}%")
                 pct = ch.get("change_pct")
+                if pct is not None:
+                    default_label = f"{pct:+.1f}%"
+                else:
+                    default_label = "—"
+                label = ch.get("change_label", default_label)
                 if pct is None:
                     change_style = "cyan"
                 elif pct > 0:

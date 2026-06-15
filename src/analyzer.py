@@ -410,11 +410,9 @@ def format_stats_for_ai(stats: Dict, articles: List[Article]) -> str:
     if stats.get("sector_changes"):
         lines.append("\n- 板块热度环比变化：")
         for ch in stats["sector_changes"][:10]:
-            arrow = "↑" if ch["change_pct"] > 0 else "↓" if ch["change_pct"] < 0 else "→"
-            lines.append(
-                f"  - {ch['sector']}: {ch['today']}篇 "
-                f"({arrow}{abs(ch['change_pct'])}%)"
-            )
+            label = ch.get("change_label",
+                f"{'+' if ch['change_pct'] and ch['change_pct'] > 0 else ''}{ch['change_pct']:.1f}%" if ch.get('change_pct') is not None else '—')
+            lines.append(f"  - {ch['sector']}: {ch['today']}篇 ({label})")
 
     lines.append("\n- 按类别分布：")
     for cat, cnt in stats.get("categories", {}).items():
