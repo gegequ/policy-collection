@@ -21,7 +21,7 @@ import json
 import logging
 import os
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import httpx
 
@@ -226,7 +226,26 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
             logger.warning("行情获取失败: %s", e)
             market_text = "（行情数据暂不可用）"
 
+        # 读昨日报告作为连续性参考
+        yesterday = (datetime.strptime(today, "%Y-%m-%d") - timedelta(days=1)).strftime("%Y-%m-%d")
+        yesterday_report = db.get_daily_report(yesterday)
+        continuity_note = ""
+        if yesterday_report:
+            continuity_note = f"""
+## ⚠️ 连续性要求（极其重要）
+以下是昨日的分析结论摘要，你今天生成的报告必须：
+1. 如果今日数据支持昨日判断，明确标注「延续昨日判断」
+2. 如果今日数据与昨日矛盾或有重大变化，标注「调整原因：XXX」并说明为什么改变了判断
+3. 不允许在没有新证据支持的情况下随意改变配置方向
+4. 金融板块等重点板块如果方向改变，必须给出清晰的逻辑对比
+
+昨日报告核心结论：
+{yesterday_report.report_md[:1500]}
+"""
+
         ai_prompt = format_stats_for_ai(stats, today_articles)
+        if continuity_note:
+            ai_prompt = continuity_note + "\n\n" + ai_prompt
         if market_text:
             ai_prompt = market_text + "\n\n" + ai_prompt
         if trend_text:
