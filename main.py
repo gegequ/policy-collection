@@ -31,6 +31,7 @@ from src.fetchers.registry import FetcherRegistry
 from src.analyzer import compute_stats, compute_trends, format_stats_for_ai, format_trends_for_ai, analyze_with_deepseek
 from src.market_data import get_market_snapshot, format_market_for_ai, get_index_snapshot, format_index_for_ai
 from src.funds import get_fund_names_for_prompt, get_all_sectors
+from src.backtest import extract_predictions, save_predictions, get_backtest_summary
 from src.reporter import (
     generate_markdown_report,
     print_summary,
@@ -268,6 +269,15 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
 
     # 标记已分析，避免下次运行时重复统计
     db.mark_analyzed([a.id for a in today_articles if a.id])
+
+    # 回测：从报告中提取预测并保存
+    try:
+        predictions = extract_predictions(ai_analysis, today)
+        if predictions:
+            save_predictions(predictions)
+            logger.info("回测记录：%d 条预测已保存", len(predictions))
+    except Exception as e:
+        logger.debug("回测记录失败: %s", e)
 
     # 7. 生成 / 更新报告
     if is_update:
