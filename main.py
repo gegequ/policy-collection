@@ -30,6 +30,7 @@ from src.db import Database
 from src.fetchers.registry import FetcherRegistry
 from src.analyzer import compute_stats, compute_trends, format_stats_for_ai, format_trends_for_ai, analyze_with_deepseek
 from src.market_data import get_market_snapshot, format_market_for_ai
+from src.funds import get_fund_names_for_prompt, get_all_sectors
 from src.reporter import (
     generate_markdown_report,
     print_summary,
@@ -244,6 +245,9 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
 {yesterday_report.report_md[:5000]}
 """
 
+        # 真实基金数据库的板块覆盖
+        fund_ref = get_fund_names_for_prompt(get_all_sectors())
+
         ai_prompt = format_stats_for_ai(stats, today_articles)
         if continuity_note:
             ai_prompt = continuity_note + "\n\n" + ai_prompt
@@ -251,6 +255,8 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
             ai_prompt = market_text + "\n\n" + ai_prompt
         if trend_text:
             ai_prompt += "\n\n" + trend_text
+        if fund_ref:
+            ai_prompt += "\n\n" + fund_ref
         ai_analysis = await analyze_with_deepseek(ai_prompt, config)
 
         if ai_analysis is None:
