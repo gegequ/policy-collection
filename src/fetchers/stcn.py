@@ -13,6 +13,7 @@ STCN_BASE = "https://www.stcn.com"
 class STCNFetcher(BaseFetcher):
     name = "stcn"
     category = "财经媒体"
+    tier = "二手"
 
     async def fetch(self, client: httpx.AsyncClient) -> List[Article]:
         html = await self.fetch_html(client, STCN_URL)

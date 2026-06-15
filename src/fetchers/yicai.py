@@ -13,6 +13,7 @@ YICAI_BASE = "https://www.yicai.com"
 class YicaiFetcher(BaseFetcher):
     name = "yicai"
     category = "财经媒体"
+    tier = "二手"
 
     async def fetch(self, client: httpx.AsyncClient) -> List[Article]:
         html = await self.fetch_html(client, YICAI_URL)

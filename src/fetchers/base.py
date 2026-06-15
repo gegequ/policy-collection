@@ -50,6 +50,7 @@ class BaseFetcher(ABC):
 
     name: str = ""
     category: str = ""
+    tier: str = "一手"  # 一手=政府官方来源, 二手=媒体/研究机构
 
     @abstractmethod
     async def fetch(self, client: httpx.AsyncClient) -> List[Article]:

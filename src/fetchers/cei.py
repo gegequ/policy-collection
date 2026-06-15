@@ -11,6 +11,7 @@ CEI_BASE = "https://www.cei.cn"
 class CEIFetcher(BaseFetcher):
     name = "cei"
     category = "政策研究"
+    tier = "二手"
 
     async def fetch(self, client: httpx.AsyncClient) -> List[Article]:
         html = await self.fetch_html(client, CEI_URL, timeout=45)
