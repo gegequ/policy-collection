@@ -144,12 +144,77 @@ class BaseFetcher(ABC):
 
     @staticmethod
     def parse_html(html: str) -> BeautifulSoup:
-        """使用 lxml 解析 HTML。
+        """使用 lxml 解析 HTML。"""
+        return BeautifulSoup(html, "lxml")
+
+    @staticmethod
+    async def fetch_article_body(
+        client: httpx.AsyncClient, url: str, max_chars: int = 500
+    ) -> str:
+        """抓取文章详情页并提取正文摘要。
+
+        尝试多种常见选择器定位正文容器，提取纯文本。
 
         Args:
-            html: HTML 文本。
+            client: httpx 客户端。
+            url: 文章详情页 URL。
+            max_chars: 最大提取字符数。
 
         Returns:
-            BeautifulSoup 对象。
+            正文摘要文本，抓取失败返回空字符串。
         """
-        return BeautifulSoup(html, "lxml")
+        try:
+            resp = await client.get(
+                url, timeout=15, follow_redirects=True,
+                headers=BaseFetcher.DEFAULT_HEADERS,
+            )
+            resp.raise_for_status()
+            soup = BeautifulSoup(resp.text, "lxml")
+
+            # 去除脚本、样式、注释
+            for tag in soup(["script", "style", "nav", "footer", "header"]):
+                tag.decompose()
+
+            # 尝试常见正文选择器（政府网站 + 新闻网站）
+            selectors = [
+                "#UCAP-CONTENT", ".article-con", ".TRS_Editor",
+                ".Custom_UnionStyle", ".article-content", ".news-content",
+                ".content", "article", ".article", ".post-body",
+                ".entry-content", ".main-content",
+            ]
+            body = None
+            for sel in selectors:
+                body = soup.select_one(sel)
+                if body:
+                    break
+
+            if body is None:
+                body = soup  # fallback: 全文
+
+            text = body.get_text(separator="\n", strip=True)
+            # 清理多余空行
+            lines = [l.strip() for l in text.split("\n") if l.strip() and len(l.strip()) > 10]
+            return "\n".join(lines)[:max_chars]
+        except Exception:
+            return ""
+
+    @staticmethod
+    def extract_body_sync(html: str, max_chars: int = 500) -> str:
+        """同步版正文提取（用于测试或已有 HTML）。"""
+        soup = BeautifulSoup(html, "lxml")
+        for tag in soup(["script", "style", "nav", "footer", "header"]):
+            tag.decompose()
+        selectors = [
+            "#UCAP-CONTENT", ".article-con", ".TRS_Editor",
+            ".Custom_UnionStyle", ".article-content", ".news-content",
+            ".content", "article", ".article",
+        ]
+        for sel in selectors:
+            body = soup.select_one(sel)
+            if body:
+                text = body.get_text(separator="\n", strip=True)
+                lines = [l.strip() for l in text.split("\n") if l.strip() and len(l.strip()) > 10]
+                return "\n".join(lines)[:max_chars]
+        text = soup.get_text(separator="\n", strip=True)
+        lines = [l.strip() for l in text.split("\n") if l.strip() and len(l.strip()) > 10]
+        return "\n".join(lines)[:max_chars]
