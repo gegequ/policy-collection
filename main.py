@@ -197,30 +197,45 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
     is_update = existing_report is not None
 
     if is_update:
-        # 校准模式：在原报告基础上直接修改，而非追加
+        # 校准模式：统计部分全量刷新，分析部分仅输出变化
         print(f"📝 检测到今日已有报告，进入校准模式（+{new_count}篇新文章）")
 
-        calibration_prompt = f"""你已有今日的初版报告如下。现在采集到了 {new_count} 篇新增文章。
+        # 先重新生成统计部分
+        stats_section = f"""## 📌 核心政策信号
+（基于本轮新增 {new_count} 篇文章更新）
 
-## ⚠️ 校准规则（极其重要）
-1. 在原报告基础上直接修改，不要追加新章节。输出完整的修改后报告。
-2. 新增的事实/数据 → 直接更新原文，不标注原因。
-3. 结论（利好/利空/增配/减配）改变 → 在原文标注简短修正原因，如 [修正：新政策XXX]。
-4. 结论未变 → 不添加任何注释，直接沿用原文。
-5. 板块热度排名变化 → 更新数字即可。
-6. 保持原有报告结构和格式不变。
+{format_stats_for_ai(stats, today_articles[:15])}
 
-## 初版报告
-{existing_report.report_md[:10000]}
+"""
+        if trend_text:
+            stats_section += f"\n{trend_text}\n"
+
+        calibration_prompt = f"""你已有今日的初版报告分析部分如下。现在统计数据和板块热度已经更新（见上方新数据），另外采集到 {new_count} 篇新增文章。
+
+## ⚠️ 输出规则（极其重要）
+1. 只输出分析部分有变化的内容，不要输出统计部分。
+2. 新增事实 → 简洁补充，格式「补充：XXX」。
+3. 结论改变 → 格式「修正：原结论XXX → 新结论XXX。原因：XXX」。
+4. 结论未变 → 不输出。
+5. 输出格式示例：
+   ## 🔄 校准（{datetime.now().strftime('%H:%M')}）
+   - 修正：金融板块从增配→中性。原因：新增证监会监管文件显示收紧。
+   - 补充：黄金利多因素增加一条——美伊协议破裂风险上升。
+   - 修正：医药短期走势从「震荡」→「偏弱」。原因：新增集采文件。
+
+## 初版报告分析部分
+{existing_report.report_md[existing_report.report_md.find('📊'):][:8000] if '📊' in existing_report.report_md else existing_report.report_md[:8000]}
 
 ## 新增文章
 {format_stats_for_ai(stats, today_articles[:12])}
 
-请输出修改后的完整报告。
+请输出校准内容。
 """
-        ai_analysis = await analyze_with_deepseek(calibration_prompt, config)
-        if ai_analysis is None:
-            ai_analysis = existing_report.report_md  # 保持原版
+        correction = await analyze_with_deepseek(calibration_prompt, config)
+        if correction:
+            ai_analysis = existing_report.report_md + "\n\n---\n\n" + correction
+        else:
+            ai_analysis = existing_report.report_md
     else:
         # 全量模式：首次生成完整报告
         # 获取实时行情数据
@@ -285,11 +300,18 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
 
     # 7. 生成 / 更新报告
     if is_update:
-        # 校准模式：覆盖原文件
+        # 校准模式：统计刷新 + 分析追加修正
         report_path = os.path.join(config.output.report_dir, f"{today}.md")
+        # 拼接：重新生成的统计 + 原报告分析 + AI校准
+        stats_header = f"# 📡 政策雷达日报 · {today}\n\n"
+        original_analysis = existing_report.report_md[existing_report.report_md.find('📊'):] if '📊' in existing_report.report_md else existing_report.report_md
+        full_report = stats_header + stats_section + "\n" + original_analysis
+        # 如果 AI 有校准内容，追加
+        if correction:
+            full_report = full_report.rstrip() + "\n\n---\n\n" + correction
         with open(report_path, "w", encoding="utf-8") as f:
-            f.write(ai_analysis)
-        report_md = ai_analysis
+            f.write(full_report)
+        report_md = full_report
     else:
         report_md = generate_markdown_report(stats, ai_analysis, today_articles, trends)
         report_path = save_report(report_md, config.output.report_dir, today)
