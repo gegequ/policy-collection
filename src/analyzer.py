@@ -425,13 +425,13 @@ def format_stats_for_ai(stats: Dict, articles: List[Article]) -> str:
 
     lines.append(f"\n## 📋 一手政策来源（政府官网）— {len(tier1)} 篇，分析以这些为准")
     for i, a in enumerate(tier1[:12], 1):
-        lines.append(f"{i}. [{a.source}] {a.title}")
+        lines.append(f"{i}. [{a.source}]({a.url}) {a.title}")
         tag_str = ", ".join(a.tags) if a.tags else "—"
         lines.append(f"   #{tag_str}")
 
     lines.append(f"\n## 📰 二手参考来源（媒体/研究）— {len(tier2)} 篇，仅作背景补充")
     for i, a in enumerate(tier2[:8], 1):
-        lines.append(f"{i}. [{a.source}] {a.title}")
+        lines.append(f"{i}. [{a.source}]({a.url}) {a.title}")
         tag_str = ", ".join(a.tags) if a.tags else "—"
         lines.append(f"   #{tag_str}")
 
