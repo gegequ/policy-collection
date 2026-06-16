@@ -29,12 +29,42 @@ SECTOR_TO_INDEX = {
 def extract_predictions(report_md: str, date: str) -> List[Dict]:
     """从报告中提取板块方向预测。
 
+    优先解析结构化 [预测标记] 格式（精确），
+    旧报告无标记时回退到关键词匹配（兼容）。
+
     Returns:
         [{sector, direction, confidence, index}]
     """
     predictions = []
+    seen_sectors = set()
+
+    # ── 方式 1：结构化标记解析（精确） ──
+    # 格式: [预测标记] 板块名 | 方向:利好/利空/中性 | 强度:强/中/弱 | 置信度:高/中/低
+    marker_pattern = re.compile(
+        r"\[预测标记\]\s*(\S+?)\s*\|\s*方向\s*:\s*(利好|利空|中性)\s*"
+        r"\|\s*强度\s*:\s*(强|中|弱)\s*"
+        r"(?:\|\s*置信度\s*:\s*(高|中|低))?"
+    )
+    for m in marker_pattern.finditer(report_md):
+        sector = m.group(1)
+        direction = m.group(2)
+        confidence = m.group(3)  # 强度即 confidence
+        index = SECTOR_TO_INDEX.get(sector, sector)
+
+        predictions.append({
+            "date": date,
+            "sector": sector,
+            "index": index,
+            "direction": direction,
+            "confidence": confidence,
+        })
+        seen_sectors.add(sector)
+
+    # ── 方式 2：关键词回退（兼容旧报告） ──
     for sector, index in SECTOR_TO_INDEX.items():
-        # 搜索报告中对该板块的判断
+        if sector in seen_sectors:
+            continue
+
         section = _find_sector_section(report_md, sector)
         if not section:
             continue

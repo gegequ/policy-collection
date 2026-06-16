@@ -32,6 +32,7 @@ from src.analyzer import compute_stats, compute_trends, format_stats_for_ai, for
 from src.market_data import get_market_snapshot, format_market_for_ai, get_index_snapshot, format_index_for_ai
 from src.funds import get_fund_names_for_prompt, get_all_sectors
 from src.backtest import extract_predictions, save_predictions, get_backtest_summary
+from src.validator import validate_ai_output
 from src.reporter import (
     generate_markdown_report,
     print_summary,
@@ -196,6 +197,12 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
     existing_report = db.get_daily_report(today)
     is_update = existing_report is not None
 
+    # 准备验证所需数据（跨分支共用）
+    market_data = None
+    indices = None
+    yesterday = (datetime.strptime(today, "%Y-%m-%d") - timedelta(days=1)).strftime("%Y-%m-%d")
+    yesterday_report = db.get_daily_report(yesterday)
+
     if is_update:
         # 校准模式：统计部分全量刷新，分析部分仅输出变化
         print(f"📝 检测到今日已有报告，进入校准模式（+{new_count}篇新文章）")
@@ -249,9 +256,7 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
             logger.warning("行情获取失败: %s", e)
             market_text = "（行情数据暂不可用）"
 
-        # 读昨日报告作为连续性参考
-        yesterday = (datetime.strptime(today, "%Y-%m-%d") - timedelta(days=1)).strftime("%Y-%m-%d")
-        yesterday_report = db.get_daily_report(yesterday)
+        # 读昨日报告作为连续性参考（已在上面获取）
         continuity_note = ""
         if yesterday_report:
             continuity_note = f"""
@@ -297,6 +302,27 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
             logger.info("回测记录：%d 条预测已保存", len(predictions))
     except Exception as e:
         logger.debug("回测记录失败: %s", e)
+
+    # 🔍 事后校验：检测 AI 杜撰（基金代码/URL/价格/板块一致性等）
+    try:
+        real_urls = {a.url for a in today_articles}
+        yday_preds = extract_predictions(yesterday_report.report_md, yesterday) if yesterday_report else []
+        old_analysis_for_check = existing_report.report_md if is_update else None
+
+        validation_warnings = validate_ai_output(
+            ai_analysis,
+            real_urls=real_urls,
+            stats=stats,
+            market_data=market_data if market_data and market_data.get("quotes") else None,
+            index_data=indices if indices else None,
+            yesterday_predictions=yday_preds,
+            old_analysis=old_analysis_for_check,
+        )
+        if validation_warnings:
+            ai_analysis = ai_analysis.rstrip() + "\n" + validation_warnings
+            logger.info("校验完成：发现 %d 条疑似问题", validation_warnings.count("- "))
+    except Exception as e:
+        logger.warning("校验异常（跳过，不影响报告生成）: %s", e)
 
     # 7. 生成 / 更新报告
     if is_update:
