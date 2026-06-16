@@ -197,26 +197,30 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
     is_update = existing_report is not None
 
     if is_update:
-        # 增量模式：仅基于新增文章生成补充修正
-        print(f"📝 检测到今日已有报告，进入增量补充模式（+{new_count}篇新文章）")
+        # 校准模式：在原报告基础上直接修改，而非追加
+        print(f"📝 检测到今日已有报告，进入校准模式（+{new_count}篇新文章）")
 
-        # today_articles 已由 get_unanalyzed_articles() 过滤，无需二次判断
-        new_only = today_articles
+        calibration_prompt = f"""你已有今日的初版报告如下。现在采集到了 {new_count} 篇新增文章。
 
-        correction_prompt = f"""以下是今日新增采集的 {len(new_only)} 篇文章。请基于这些新信息，对已有报告进行补充和修正。已有报告末尾摘要：{existing_report.report_md[-1000:] if existing_report else '无'}
+## ⚠️ 校准规则（极其重要）
+1. 在原报告基础上直接修改，不要追加新章节。输出完整的修改后报告。
+2. 新增的事实/数据 → 直接更新原文，不标注原因。
+3. 结论（利好/利空/增配/减配）改变 → 在原文标注简短修正原因，如 [修正：新政策XXX]。
+4. 结论未变 → 不添加任何注释，直接沿用原文。
+5. 板块热度排名变化 → 更新数字即可。
+6. 保持原有报告结构和格式不变。
 
-更新要求：
-1. 指出新信息是否支持/削弱/推翻之前报告中的任何结论
-2. 如果板块热度排名发生变化，说明变动原因
-3. 如有新的重要政策信号，补充进来
-4. 对于被新数据修正的判断，标注「修正原因」
-5. 格式简洁，只写变化部分，不要重复已有内容
+## 初版报告
+{existing_report.report_md[:10000]}
 
-新增文章：
-{format_stats_for_ai(stats, new_only[:12])}
+## 新增文章
+{format_stats_for_ai(stats, today_articles[:12])}
+
+请输出修改后的完整报告。
 """
-        correction = await analyze_with_deepseek(correction_prompt, config)
-        ai_analysis = f"## 🔄 补充与修正（{datetime.now().strftime('%H:%M')} 更新）\n\n*本轮新增 {new_count} 篇文章*\n\n{correction if correction else '（AI 分析暂不可用）'}"
+        ai_analysis = await analyze_with_deepseek(calibration_prompt, config)
+        if ai_analysis is None:
+            ai_analysis = existing_report.report_md  # 保持原版
     else:
         # 全量模式：首次生成完整报告
         # 获取实时行情数据
@@ -281,16 +285,11 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
 
     # 7. 生成 / 更新报告
     if is_update:
-        # 追加到已有报告末尾
+        # 校准模式：覆盖原文件
         report_path = os.path.join(config.output.report_dir, f"{today}.md")
-        with open(report_path, "a", encoding="utf-8") as f:
-            f.write("\n\n---\n\n")
+        with open(report_path, "w", encoding="utf-8") as f:
             f.write(ai_analysis)
-        # 拼接完整报告，限制总长防止无限膨胀（保留最近部分）
-        MAX_REPORT_LENGTH = 25000
-        report_md = existing_report.report_md + "\n\n---\n\n" + ai_analysis
-        if len(report_md) > MAX_REPORT_LENGTH:
-            report_md = report_md[-MAX_REPORT_LENGTH:]
+        report_md = ai_analysis
     else:
         report_md = generate_markdown_report(stats, ai_analysis, today_articles, trends)
         report_path = save_report(report_md, config.output.report_dir, today)
