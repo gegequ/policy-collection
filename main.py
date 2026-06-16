@@ -33,6 +33,7 @@ from src.market_data import get_market_snapshot, format_market_for_ai, get_index
 from src.funds import get_fund_names_for_prompt, get_all_sectors
 from src.backtest import extract_predictions, save_predictions, get_backtest_summary
 from src.validator import validate_ai_output
+from src.validator import validate_ai_output
 from src.reporter import (
     generate_markdown_report,
     print_summary,
@@ -193,6 +194,10 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
     trends = compute_trends(db, days=7)
     trend_text = format_trends_for_ai(trends) if trends["top_sectors"] else ""
 
+    # 初始化行情变量（校准模式下可能不获取）
+    market_data = None
+    indices = None
+
     # 6. 检查是否已有今日报告 → 增量模式 vs 全量模式
     existing_report = db.get_daily_report(today)
     is_update = existing_report is not None
@@ -290,6 +295,22 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
                 "⚠️ AI 分析暂不可用（API key 未配置或调用失败），以下仅为统计数据。"
             )
             print("⚠️ AI 分析跳过（需配置 DEEPSEEK_API_KEY 环境变量）")
+
+    # 事后校验：检测 AI 是否编造基金代码/URL/价格等
+    try:
+        all_urls = {a.url for a in all_articles if a.url}
+        validation_warnings = validate_ai_output(
+            ai_analysis,
+            real_urls=all_urls,
+            stats=stats,
+            market_data=market_data,
+            index_data=indices,
+            old_analysis=existing_report.report_md if is_update and existing_report else None,
+        )
+        if validation_warnings:
+            ai_analysis += "\n" + validation_warnings
+    except Exception as e:
+        logger.debug("校验模块执行失败: %s", e)
 
     # 标记已分析，避免下次运行时重复统计
     db.mark_analyzed([a.id for a in today_articles if a.id])
