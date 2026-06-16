@@ -39,4 +39,10 @@ class MOFFetcher(BaseFetcher):
                     summary="",
                     tags=[],
                 ))
+
+        # 为前5篇抓正文
+        for a in articles[:5]:
+            if a.url:
+                a.summary = await self.fetch_article_body(client, a.url)
+
         return articles

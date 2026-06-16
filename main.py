@@ -171,22 +171,6 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
     print(f"✅ 采集完成：共 {len(all_articles)} 篇文章 "
           f"（{success_count}/{len(fetchers)} 个信息源成功）")
 
-    # 2.5 批量抓取正文摘要（在入库前，并发20篇）
-    from src.fetchers.base import BaseFetcher as BF
-    articles_to_enrich = [a for a in all_articles if not a.summary][:20]
-    if articles_to_enrich:
-        print(f"📝 采集正文摘要（{len(articles_to_enrich)}篇）...")
-        # trust_env=True 让 httpx 读取已设置的 no_proxy 环境变量
-        async with httpx.AsyncClient(timeout=20, follow_redirects=True, trust_env=True) as body_client:
-            tasks = [BF.fetch_article_body(body_client, a.url) for a in articles_to_enrich]
-            bodies = await asyncio.gather(*tasks, return_exceptions=True)
-            enriched = 0
-            for a, body in zip(articles_to_enrich, bodies):
-                if isinstance(body, str) and body:
-                    a.summary = body
-                    enriched += 1
-            print(f"   成功提取 {enriched}/{len(articles_to_enrich)} 篇正文")
-
     # 3. 存储（去重）
     new_count = 0
     for article in all_articles:
