@@ -42,6 +42,11 @@ SECTOR_INDICES = {
     "CS新能车": "s_sz399976",
     "中证基建": "s_sz399995",
     "中证环保": "s_sz399970",
+    "数字经济": "sh560800",
+    "机器人": "sh562500",
+    "光伏": "sh515790",
+    "建材": "sh516750",
+    "电力": "sh561560",
 }
 
 SINA_URL = "http://hq.sinajs.cn/list="
@@ -140,7 +145,7 @@ async def get_market_snapshot() -> Dict:
 
 
 async def fetch_index_quote(code: str) -> Optional[Dict]:
-    """抓取单只指数行情（新浪股票接口格式）。"""
+    """抓取单只指数/ETF行情。支持指数(s_前缀)和ETF(sh/sz前缀)两种格式。"""
     url = SINA_URL + code
     headers = {"User-Agent": "Mozilla/5.0", "Referer": "https://finance.sina.com.cn"}
     try:
@@ -152,18 +157,36 @@ async def fetch_index_quote(code: str) -> Optional[Dict]:
             if not data:
                 return None
             parts = data.split(",")
-            # 股票/指数格式: 名称,现价,涨跌额,涨跌幅,成交量,成交额
             if len(parts) < 4:
                 return None
-            price = float(parts[1]) if parts[1] else 0
-            change = float(parts[2]) if parts[2] else 0
-            return {
-                "name": parts[0],
-                "price": price,
-                "change": change,
-                "change_pct": float(parts[3]) if parts[3] and float(parts[3]) != 0 else (change / (price - change) * 100 if (price - change) != 0 else 0),
-                "prev_close": round(price - change, 2),
-            }
+
+            if code.startswith("s_"):
+                # 指数格式: 名称,现价,涨跌额,涨跌幅,成交量,成交额
+                price = float(parts[1]) if parts[1] else 0
+                change = float(parts[2]) if parts[2] else 0
+                return {
+                    "name": parts[0],
+                    "price": price,
+                    "change": change,
+                    "change_pct": float(parts[3]) if parts[3] and float(parts[3]) != 0 else (change / (price - change) * 100 if (price - change) != 0 else 0),
+                    "prev_close": round(price - change, 2),
+                }
+            else:
+                # ETF/股票格式: 名称,今开,昨收,现价,最高,最低,...
+                price = float(parts[3]) if parts[3] else 0
+                prev_close = float(parts[2]) if parts[2] else 0
+                # 未开盘时 price=0，用昨收
+                if price == 0 and prev_close > 0:
+                    price = prev_close
+                change = price - prev_close if prev_close else 0
+                change_pct = (change / prev_close * 100) if prev_close else 0
+                return {
+                    "name": parts[0],
+                    "price": price,
+                    "change": round(change, 4),
+                    "change_pct": round(change_pct, 2),
+                    "prev_close": prev_close,
+                }
     except Exception as e:
         logger.warning("指数抓取失败 %s: %s", code, e)
         return None
