@@ -254,15 +254,28 @@ async def get_index_snapshot() -> Dict:
 
 
 def format_index_for_ai(indices: Dict) -> str:
-    """格式化指数行情为 AI 可读文本。"""
+    """格式化指数行情为 AI 可读文本。区分指数点位和ETF价格。"""
     if not indices:
         return ""
     lines = ["## 📊 板块指数实时行情"]
-    for name, q in sorted(indices.items()):
-        arrow = "↑" if q["change"] >= 0 else "↓"
-        lines.append(
-            f"- {name}：{q['price']:.2f} ({arrow}{q['change_pct']:+.1f}%)"
-        )
+    lines.append("（⚠️ ETF类显示基金净值，非指数点位。引用时写数字+单位）")
+
+    index_names = ["沪深300", "中证500", "创业板指", "科创50", "中证银行", "中证证券",
+                   "中证军工", "中证消费", "中证医药", "中证新能源", "半导体",
+                   "有色金属", "房地产", "CS新能车", "中证基建", "中证环保"]
+    for name in index_names:
+        q = indices.get(name)
+        if q:
+            arrow = "↑" if q["change"] >= 0 else "↓"
+            lines.append(f"- {name}：{q['price']:.2f} 点 ({arrow}{q['change_pct']:+.1f}%)")
+
+    etf_present = [n for n in ["数字经济", "机器人", "光伏", "建材", "电力"] if n in indices]
+    if etf_present:
+        lines.append("")
+        for name in etf_present:
+            q = indices[name]
+            arrow = "↑" if q["change"] >= 0 else "↓"
+            lines.append(f"- {name}ETF：¥{q['price']:.3f} ({arrow}{q['change_pct']:+.1f}%)")
     return "\n".join(lines)
 
 
