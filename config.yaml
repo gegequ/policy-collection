@@ -17,6 +17,7 @@ sources:
   媒体舆论: true
   医药卫生: true
   财经媒体: true
+  新闻联播: true
 
 database:
   path: "./data/policy_radar.db"

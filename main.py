@@ -61,6 +61,7 @@ from src.fetchers.nhc import NHCFetcher
 from src.fetchers.nmpa import NMPAFetcher
 from src.fetchers.stcn import STCNFetcher
 from src.fetchers.yicai import YicaiFetcher
+from src.fetchers.xwlb import XWLBFetcher
 
 # ── 日志配置 ────────────────────────────────────────────────
 
@@ -100,6 +101,7 @@ def build_registry() -> FetcherRegistry:
     # registry.register(NMPAFetcher())        # 国家药监局 — 412 反爬
     registry.register(STCNFetcher())            # 证券时报
     registry.register(YicaiFetcher())           # 第一财经
+    registry.register(XWLBFetcher())            # 新闻联播文字稿
     return registry
 
 
@@ -172,6 +174,21 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
 
     print(f"✅ 采集完成：共 {len(all_articles)} 篇文章 "
           f"（{success_count}/{len(fetchers)} 个信息源成功）")
+
+    # 2.5 提取新闻联播 + 生成独立新闻稿
+    xwlb_articles = [a for a in all_articles if a.source == "新闻联播"]
+    if xwlb_articles:
+        xwlb_dir = os.path.join(config.output.report_dir, "xwlb")
+        os.makedirs(xwlb_dir, exist_ok=True)
+        xwlb_path = os.path.join(xwlb_dir, f"{today}.md")
+        with open(xwlb_path, "w", encoding="utf-8") as f:
+            f.write(f"# 📺 新闻联播 · {today}\n\n")
+            for i, a in enumerate(xwlb_articles, 1):
+                f.write(f"## {i}. {a.title}\n\n")
+                if a.summary:
+                    f.write(f"{a.summary}\n\n")
+                f.write(f"---\n\n")
+        print(f"📺 新闻联播：{len(xwlb_articles)} 条 → {xwlb_path}")
 
     # 3. 存储（去重）
     new_count = 0
@@ -288,6 +305,14 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
             ai_prompt += "\n\n" + trend_text
         if fund_ref:
             ai_prompt += "\n\n" + fund_ref
+
+        # 新闻联播要目（仅标题+首句，控制长度）
+        if xwlb_articles:
+            xwlb_text = "\n## 📺 新闻联播今日要目\n"
+            for i, a in enumerate(xwlb_articles[:12], 1):
+                xwlb_text += f"{i}. {a.title}\n"
+            ai_prompt = xwlb_text + "\n" + ai_prompt
+
         ai_analysis = await analyze_with_deepseek(ai_prompt, config)
 
         if ai_analysis is None:
