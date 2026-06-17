@@ -1,23 +1,18 @@
 {
   "updated": "2026-06-17",
-  "source": "公开数据综合（中证指数/东方财富/雪球）",
-  "note": "每周更新一次即可，PE分位变化缓慢",
+  "source": "乐咕乐股网 https://www.legulegu.com/stockdata/market_pe",
+  "note": "大盘PE来自交易所实时数据。行业PE分位暂缺可靠免费源，留空=无数据",
   "indices": {
-    "沪深300": {"pe": 14.4, "pe_pct_5y": 92, "pe_pct_10y": 88, "pb": 1.45, "level": "高位"},
-    "中证500": {"pe": 28.5, "pe_pct_5y": 65, "pe_pct_10y": 55, "pb": 1.95, "level": "中位"},
-    "创业板指": {"pe": 35.2, "pe_pct_5y": 45, "pe_pct_10y": 38, "pb": 4.80, "level": "中位"},
-    "科创50": {"pe": 85.0, "pe_pct_5y": 78, "pe_pct_10y": 78, "pb": 5.20, "level": "高位"},
-    "中证银行": {"pe": 6.2, "pe_pct_5y": 72, "pe_pct_10y": 55, "pb": 0.62, "level": "中位"},
-    "中证证券": {"pe": 25.0, "pe_pct_5y": 60, "pe_pct_10y": 50, "pb": 1.45, "level": "中位"},
-    "中证消费": {"pe": 28.0, "pe_pct_5y": 40, "pe_pct_10y": 55, "pb": 5.80, "level": "中位"},
-    "中证医药": {"pe": 32.0, "pe_pct_5y": 22, "pe_pct_10y": 18, "pb": 3.90, "level": "低位"},
-    "中证军工": {"pe": 65.0, "pe_pct_5y": 48, "pe_pct_10y": 42, "pb": 3.20, "level": "中位"},
-    "中证新能源": {"pe": 22.0, "pe_pct_5y": 35, "pe_pct_10y": 32, "pb": 2.80, "level": "低位"},
-    "中证基建": {"pe": 12.0, "pe_pct_5y": 55, "pe_pct_10y": 48, "pb": 1.10, "level": "中位"},
-    "半导体": {"pe": 85.0, "pe_pct_5y": 72, "pe_pct_10y": 70, "pb": 5.50, "level": "高位"},
-    "有色金属": {"pe": 18.0, "pe_pct_5y": 42, "pe_pct_10y": 38, "pb": 2.10, "level": "中位"},
-    "房地产": {"pe": -15.0, "pe_pct_5y": 95, "pe_pct_10y": 85, "pb": 0.75, "level": "高位(亏损)"},
-    "CS新能车": {"pe": 28.0, "pe_pct_5y": 40, "pe_pct_10y": 38, "pb": 3.50, "level": "中位"},
-    "中证环保": {"pe": 20.0, "pe_pct_5y": 35, "pe_pct_10y": 30, "pb": 1.80, "level": "低位"}
+    "上证": {"pe": 16.83, "level": "中位"},
+    "深证": {"pe": 34.10, "level": "中位"},
+    "创业板": {"pe": 53.34, "level": "中位"},
+    "科创板": {"pe": 102.59, "level": "高位"},
+    "沪深300": {"pe": null, "level": null},
+    "中证500": {"pe": null, "level": null},
+    "中证银行": {"pe": null, "level": null},
+    "中证消费": {"pe": null, "level": null},
+    "中证医药": {"pe": null, "level": null},
+    "中证军工": {"pe": null, "level": null},
+    "半导体": {"pe": null, "level": null}
   }
 }

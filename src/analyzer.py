@@ -533,7 +533,14 @@ def format_stats_for_ai(stats: Dict, articles: List[Article]) -> str:
     # ⚠️ 强制覆盖板块的热度数据（AI 不准写"N/A"）
     required_sectors = ["金融", "科技", "数字经济", "制造", "消费", "贵金属", "医药",
                         "半导体", "军工航天", "光伏", "新能源", "电力", "建材", "机器人", "基建", "环保"]
-    all_heat = {s: sector_counter.get(s, 0) for s in required_sectors}
+    # 重新统计板块热度（format_stats_for_ai 中没有 sector_counter，需要自己算）
+    heat_counter: Counter[str] = Counter()
+    for a in articles:
+        if not a.tags:
+            a.tags = extract_sectors(a.title + " " + a.summary)
+        for tag in a.tags:
+            heat_counter[tag] += 1
+    all_heat = {s: heat_counter.get(s, 0) for s in required_sectors}
     lines.append("\n## ⚠️ 以下板块的热度数据（必须引用这些数字，不准写 N/A）")
     for s, h in sorted(all_heat.items(), key=lambda x: -x[1]):
         lines.append(f"  - {s}：{h} 次")
