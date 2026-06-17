@@ -175,19 +175,30 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
     print(f"✅ 采集完成：共 {len(all_articles)} 篇文章 "
           f"（{success_count}/{len(fetchers)} 个信息源成功）")
 
-    # 2.5 日期过滤：只保留今天发布的文章
-    today_date_prefix = today  # YYYY-MM-DD
+    # 2.5 日期过滤：保留今天+昨天的文章，丢弃无日期/过旧的
+    today_date = today
+    yesterday_date = (datetime.strptime(today, "%Y-%m-%d") - timedelta(days=1)).strftime("%Y-%m-%d")
     filtered = []
     for a in all_articles:
         pub = a.published_at or ""
-        # 匹配各种日期格式中的 YYYY-MM-DD
-        if today_date_prefix in pub or pub.startswith(today_date_prefix):
+        # 保留今天或昨天的文章
+        if today_date in pub or yesterday_date in pub:
             filtered.append(a)
-        # 无日期的一律丢弃（多数是采集器没抓到日期，非今天文章）
+        elif pub and len(pub) >= 8:
+            # 尝试解析任何日期格式
+            try:
+                import re as _re2
+                m = _re2.search(r'(\d{4}-\d{1,2}-\d{1,2})', pub)
+                if m:
+                    art_date = m.group(1)
+                    if art_date >= yesterday_date:
+                        filtered.append(a)
+                        continue
+            except:
+                pass
     skipped = len(all_articles) - len(filtered)
     all_articles = filtered
-    if skipped > 0 or not filtered:
-        print(f"📅 日期过滤：{len(filtered)} 篇今日文章，{skipped} 篇跳过（{len(filtered)} 保留）")
+    print(f"📅 日期过滤：{len(filtered)} 篇（今天/昨天），{skipped} 篇跳过")
 
     # 2.6 提取新闻联播 + 生成独立新闻稿
     xwlb_articles = [a for a in all_articles if a.source == "新闻联播"]
