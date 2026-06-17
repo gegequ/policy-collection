@@ -238,23 +238,10 @@ async def fetch_em_index(secid: str) -> Optional[Dict]:
 
 
 async def get_index_snapshot() -> Dict:
-    """抓取所有板块指数快照。优先东方财富，失败回退新浪。"""
+    """抓取所有板块指数快照。"""
     result = {}
 
-    # 先试东方财富
-    for name, secid in EM_INDICES.items():
-        q = await fetch_em_index(secid)
-        if q and q["price"] > 0:
-            result[name] = {
-                "price": q["price"],
-                "change": q["change"],
-                "change_pct": q["change_pct"],
-            }
-
-    # 新浪回退（ETF + 未覆盖的指数）
     for name, code in SECTOR_INDICES.items():
-        if name in result:
-            continue  # 东方财富已经拿到了
         q = await fetch_index_quote(code)
         q = await fetch_index_quote(code)
         if q and q["price"] > 0:
