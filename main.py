@@ -29,7 +29,7 @@ from src.config import load_config
 from src.db import Database
 from src.fetchers.registry import FetcherRegistry
 from src.analyzer import compute_stats, compute_trends, format_stats_for_ai, format_trends_for_ai, analyze_with_deepseek
-from src.market_data import get_market_snapshot, format_market_for_ai, get_index_snapshot, format_index_for_ai
+from src.market_data import get_market_snapshot, format_market_for_ai, get_index_snapshot, format_index_for_ai, format_pe_for_ai
 from src.funds import get_fund_names_for_prompt, get_all_sectors
 from src.backtest import extract_predictions, save_predictions, get_backtest_summary
 from src.validator import validate_ai_output
@@ -301,6 +301,10 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
             ai_prompt = continuity_note + "\n\n" + ai_prompt
         if market_text:
             ai_prompt = market_text + "\n\n" + ai_prompt
+        # PE 估值数据
+        pe_text = format_pe_for_ai()
+        if pe_text:
+            ai_prompt += "\n\n" + pe_text
         if trend_text:
             ai_prompt += "\n\n" + trend_text
         if fund_ref:

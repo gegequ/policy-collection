@@ -279,6 +279,34 @@ def format_index_for_ai(indices: Dict) -> str:
     return "\n".join(lines)
 
 
+def load_pe_data() -> Optional[Dict]:
+    """加载 PE 估值数据。"""
+    import json as _json
+    pe_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "pe_data.json")
+    try:
+        with open(pe_path, "r", encoding="utf-8") as f:
+            return _json.load(f)
+    except Exception:
+        return None
+
+
+def format_pe_for_ai() -> str:
+    """格式化 PE 估值数据为 AI 可读文本。"""
+    pe = load_pe_data()
+    if not pe:
+        return ""
+    lines = [
+        f"\n## 📊 指数PE估值参考（{pe.get('updated', '?')}，{pe.get('source', '?')}）",
+        f"⚠️ 以下PE/分位数据来自公开数据源，{pe.get('note', '每周更新')}",
+        "",
+        "| 指数 | PE | 近5年分位 | 估值水平 |",
+        "|------|----|----------|---------|",
+    ]
+    for name, d in pe.get("indices", {}).items():
+        lines.append(f"| {name} | {d['pe']} | {d['pe_pct_5y']}% | {d['level']} |")
+    return "\n".join(lines)
+
+
 def format_market_for_ai(quote: Optional[Dict] = None) -> str:
     """将行情数据格式化为 AI 可读文本。"""
     history = load_history()
