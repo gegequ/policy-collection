@@ -1,0 +1,1666 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - link "全面牛市来临 扫码开户不排队" [ref=e3] [cursor=pointer]:
+      - /url: https://finance.sina.com.cn/mobile/comfinanceweb.shtml?source=gegu03
+      - emphasis [ref=e4]: 全面牛市来临
+      - img [ref=e5]
+      - text: 扫码开户不排队
+    - link "关闭" [ref=e6] [cursor=pointer]:
+      - /url: javascript:;
+  - generic [ref=e9]:
+    - generic [ref=e11]:
+      - link "新浪网" [ref=e12] [cursor=pointer]:
+        - /url: http://finance.sina.com.cn/
+        - img "新浪网" [ref=e13]
+      - link "新浪财经" [ref=e14] [cursor=pointer]:
+        - /url: http://finance.sina.com.cn/
+        - img "新浪财经" [ref=e15]
+    - generic [ref=e16]:
+      - link "财经首页" [ref=e17] [cursor=pointer]:
+        - /url: http://finance.sina.com.cn/
+      - text: "|"
+      - link "新浪首页" [ref=e18] [cursor=pointer]:
+        - /url: http://www.sina.com.cn/
+      - text: "|"
+      - link "新浪导航" [ref=e19] [cursor=pointer]:
+        - /url: http://news.sina.com.cn/guide/
+  - insertion [ref=e23]:
+    - insertion [ref=e24]:
+      - link "广告" [ref=e25] [cursor=pointer]:
+        - /url: http://saxn.sina.com.cn/click?type=bottom&t=UERQUzAwMDAwMDAwNTQ3NA%3D%3D&url=https%3A%2F%2Ftousu.sina.com.cn%2F&sign=16d38efc27ad3629
+        - img "广告" [ref=e26]
+      - link:
+        - /url: http://sax.sina.com.cn/click?type=7&t=UERQUzAwMDAwMDA0NjE1NA%3D%3D&url=http%3A%2F%2Fwww.sina.com.cn%2F%23a-register&sign=a70e1db1ea57de4f&id=10&pdps=PDPS000000005474&csits=1781713389025
+  - generic [ref=e29]:
+    - link "意见反馈" [ref=e31] [cursor=pointer]:
+      - /url: https://gu.sina.cn/pc/feedback/
+    - generic [ref=e32] [cursor=pointer]: 精选股票池
+    - link "财经首页" [ref=e33] [cursor=pointer]:
+      - /url: http://finance.sina.com.cn/
+    - link "股票" [ref=e34] [cursor=pointer]:
+      - /url: http://finance.sina.com.cn/stock/index.shtml
+    - link "基金" [ref=e35] [cursor=pointer]:
+      - /url: http://finance.sina.com.cn/fund/index.shtml
+    - link "港股" [ref=e36] [cursor=pointer]:
+      - /url: http://finance.sina.com.cn/stock/hkstock/index.shtml
+    - link "美股" [ref=e37] [cursor=pointer]:
+      - /url: http://finance.sina.com.cn/stock/usstock/index.shtml
+    - link "期货" [ref=e38] [cursor=pointer]:
+      - /url: http://finance.sina.com.cn/futuremarket/
+    - link "外汇" [ref=e39] [cursor=pointer]:
+      - /url: http://finance.sina.com.cn/forex/
+    - link "贵金属" [ref=e40] [cursor=pointer]:
+      - /url: http://finance.sina.com.cn/nmetal/
+    - link "债券" [ref=e41] [cursor=pointer]:
+      - /url: http://finance.sina.com.cn/bond/
+    - link "大盘" [ref=e43] [cursor=pointer]:
+      - /url: http://finance.sina.com.cn/column/jsy.html
+    - link "个股" [ref=e44] [cursor=pointer]:
+      - /url: http://finance.sina.com.cn/column/ggdp.html
+    - link "新股" [ref=e45] [cursor=pointer]:
+      - /url: http://finance.sina.com.cn/stock/newstock/index.shtml
+    - link "数据" [ref=e46] [cursor=pointer]:
+      - /url: http://vip.stock.finance.sina.com.cn/q/go.php/vIR_CustomSearch/index.phtml
+    - link "博客" [ref=e48] [cursor=pointer]:
+      - /url: http://blog.sina.com.cn/lm/stock/
+    - link "股市汇" [ref=e49] [cursor=pointer]:
+      - /url: http://guba.sina.com.cn/
+    - link "自选股" [ref=e51] [cursor=pointer]:
+      - /url: https://i.finance.sina.com.cn/zixuan,all
+  - generic [ref=e54]:
+    - generic [ref=e55]:
+      - list [ref=e56]:
+        - listitem [ref=e57]:
+          - generic [ref=e58]:
+            - link "上证指数" [ref=e59] [cursor=pointer]:
+              - /url: http://biz.finance.sina.com.cn/suggest/lookup_n.php?q=sh000001&country=stock
+            - text: ：4108.08 +0.40% 14031.46亿元
+        - listitem [ref=e60]:
+          - generic [ref=e61]:
+            - link "深证成指" [ref=e62] [cursor=pointer]:
+              - /url: http://biz.finance.sina.com.cn/suggest/lookup_n.php?q=sz399001&country=stock
+            - text: ：15880.95 +1.31% 16886.18亿元
+        - listitem [ref=e63]:
+          - generic [ref=e64]:
+            - link "期指IF0" [ref=e65] [cursor=pointer]:
+              - /url: http://finance.sina.com.cn/money/cffex/quotes/IF0/nc.shtml
+            - text: ：4823.00 +1.04%
+        - listitem [ref=e66]:
+          - generic [ref=e67]:
+            - link "恒生指数" [ref=e68] [cursor=pointer]:
+              - /url: http://biz.finance.sina.com.cn/suggest/lookup_n.php?q=HSI&country=hkstock
+            - text: ：24312.16 -0.74%
+      - list [ref=e69]:
+        - listitem [ref=e70]:
+          - generic [ref=e71]:
+            - link "道琼斯" [ref=e72] [cursor=pointer]:
+              - /url: http://biz.finance.sina.com.cn/suggest/lookup_n.php?q=.dji&country=usstock
+            - text: ：52220.45 +0.42%
+        - listitem [ref=e73]:
+          - generic [ref=e74]:
+            - link "纳斯达克" [ref=e75] [cursor=pointer]:
+              - /url: http://biz.finance.sina.com.cn/suggest/lookup_n.php?q=ixic&country=usstock
+            - text: ：26415.58 +0.15%
+        - listitem [ref=e76]:
+          - generic [ref=e77]: 斯托克50：6297.42 +0.64%
+        - listitem [ref=e78]:
+          - generic [ref=e79]: 英国富时100：10508.61 +0.14%
+        - listitem [ref=e80]:
+          - generic [ref=e81]: 日经指数：69902.03 +0.72%
+      - list [ref=e82]:
+        - listitem [ref=e83]:
+          - generic [ref=e84]:
+            - link "NYMEX原油" [ref=e85] [cursor=pointer]:
+              - /url: http://finance.sina.com.cn/money/future/CL/quote.shtml
+            - text: ：75.80 +0.70%
+        - listitem [ref=e86]:
+          - generic [ref=e87]:
+            - link "COMEX黄金" [ref=e88] [cursor=pointer]:
+              - /url: http://finance.sina.com.cn/money/future/quote_hf.html?GC
+            - text: ：4385.88 +0.72%
+        - listitem [ref=e89]:
+          - generic [ref=e90]:
+            - link "COMEX白银" [ref=e91] [cursor=pointer]:
+              - /url: http://finance.sina.com.cn/money/future/quote_hf.html?SI
+            - text: ：71.38 +1.19%
+        - listitem [ref=e92]:
+          - generic [ref=e93]:
+            - link "LME铜" [ref=e94] [cursor=pointer]:
+              - /url: http://finance.sina.com.cn/money/future/quote_hf.html?CAD
+            - text: ：13821.04 +0.05%
+    - generic [ref=e95]:
+      - link [ref=e96] [cursor=pointer]:
+        - /url: javascript:void(0)
+      - link [ref=e97] [cursor=pointer]:
+        - /url: javascript:void(0)
+      - link "环球市场" [ref=e98] [cursor=pointer]:
+        - /url: http://finance.sina.com.cn/money/globalindex/
+  - generic [ref=e100]:
+    - generic [ref=e101]:
+      - link "新浪财经" [ref=e102] [cursor=pointer]:
+        - /url: http://finance.sina.com.cn/
+      - text: ">"
+      - link "行情中心" [ref=e103] [cursor=pointer]:
+        - /url: http://vip.stock.finance.sina.com.cn/mkt/
+      - text: ">"
+      - link "沪深300" [ref=e104] [cursor=pointer]:
+        - /url: http://finance.sina.com.cn/realstock/company/sh000300/nc.shtml
+      - text: "> 行情"
+    - generic [ref=e105]:
+      - generic:
+        - textbox [ref=e106]: 拼音/代码/名称
+        - button "Submit" [ref=e107] [cursor=pointer]
+  - insertion
+  - generic [ref=e109]:
+    - generic [ref=e110]:
+      - generic [ref=e111]:
+        - generic [ref=e112]:
+          - generic [ref=e113]: 最近访问股
+          - link "自选股" [ref=e115] [cursor=pointer]:
+            - /url: https://i.finance.sina.com.cn/zixuan,all
+        - table [ref=e117]:
+          - rowgroup [ref=e118]:
+            - row "名称 价格(元) 涨跌幅" [ref=e119]:
+              - columnheader "名称" [ref=e120]
+              - columnheader "价格(元)" [ref=e121]
+              - columnheader "涨跌幅" [ref=e122]:
+                - link "涨跌幅" [ref=e123] [cursor=pointer]:
+                  - /url: javascript:void(0)
+          - rowgroup
+          - rowgroup [ref=e124]:
+            - row "以下为热门股票" [ref=e125]:
+              - cell "以下为热门股票" [ref=e126]
+            - row "三峡能源 4.13 0.24%" [ref=e127]:
+              - rowheader "三峡能源" [ref=e128]:
+                - link "三峡能源" [ref=e129] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/realstock/company/sh600905/nc.shtml
+              - cell "4.13" [ref=e130]
+              - cell "0.24%" [ref=e131]
+            - row "京东方Ａ 6.71 10.00%" [ref=e132]:
+              - rowheader "京东方Ａ" [ref=e133]:
+                - link "京东方Ａ" [ref=e134] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/realstock/company/sz000725/nc.shtml
+              - cell "6.71" [ref=e135]
+              - cell "10.00%" [ref=e136]
+            - row "TCL科技 5.12 10.11%" [ref=e137]:
+              - rowheader "TCL科技" [ref=e138]:
+                - link "TCL科技" [ref=e139] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/realstock/company/sz000100/nc.shtml
+              - cell "5.12" [ref=e140]
+              - cell "10.11%" [ref=e141]
+            - row "中远海控 14.04 -1.40%" [ref=e142]:
+              - rowheader "中远海控" [ref=e143]:
+                - link "中远海控" [ref=e144] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/realstock/company/sh601919/nc.shtml
+              - cell "14.04" [ref=e145]
+              - cell "-1.40%" [ref=e146]
+            - row "格力电器 37.15 -0.38%" [ref=e147]:
+              - rowheader "格力电器" [ref=e148]:
+                - link "格力电器" [ref=e149] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/realstock/company/sz000651/nc.shtml
+              - cell "37.15" [ref=e150]
+              - cell "-0.38%" [ref=e151]
+            - row "比亚迪 87.47 -2.42%" [ref=e152]:
+              - rowheader "比亚迪" [ref=e153]:
+                - link "比亚迪" [ref=e154] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/realstock/company/sz002594/nc.shtml
+              - cell "87.47" [ref=e155]
+              - cell "-2.42%" [ref=e156]
+            - row "*ST美谷 3.39 -1.45%" [ref=e157]:
+              - rowheader "*ST美谷" [ref=e158]:
+                - link "*ST美谷" [ref=e159] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/realstock/company/sz000615/nc.shtml
+              - cell "3.39" [ref=e160]
+              - cell "-1.45%" [ref=e161]
+            - row "中国平安 52.76 -0.43%" [ref=e162]:
+              - rowheader "中国平安" [ref=e163]:
+                - link "中国平安" [ref=e164] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/realstock/company/sh601318/nc.shtml
+              - cell "52.76" [ref=e165]
+              - cell "-0.43%" [ref=e166]
+            - row "贵州茅台 1240.00 -1.25%" [ref=e167]:
+              - rowheader "贵州茅台" [ref=e168]:
+                - link "贵州茅台" [ref=e169] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/realstock/company/sh600519/nc.shtml
+              - cell "1240.00" [ref=e170]
+              - cell "-1.25%" [ref=e171]
+            - row "XD上海贝 27.97 2.42%" [ref=e172]:
+              - rowheader "XD上海贝" [ref=e173]:
+                - link "XD上海贝" [ref=e174] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/realstock/company/sh600171/nc.shtml
+              - cell "27.97" [ref=e175]
+              - cell "2.42%" [ref=e176]
+            - row "立讯精密 67.32 0.09%" [ref=e177]:
+              - rowheader "立讯精密" [ref=e178]:
+                - link "立讯精密" [ref=e179] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/realstock/company/sz002475/nc.shtml
+              - cell "67.32" [ref=e180]
+              - cell "0.09%" [ref=e181]
+            - row "东方财富 19.04 -0.42%" [ref=e182]:
+              - rowheader "东方财富" [ref=e183]:
+                - link "东方财富" [ref=e184] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/realstock/company/sz300059/nc.shtml
+              - cell "19.04" [ref=e185]
+              - cell "-0.42%" [ref=e186]
+            - row "科蓝软件 7.24 -3.47%" [ref=e187]:
+              - rowheader "科蓝软件" [ref=e188]:
+                - link "科蓝软件" [ref=e189] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/realstock/company/sz300663/nc.shtml
+              - cell "7.24" [ref=e190]
+              - cell "-3.47%" [ref=e191]
+      - heading "热点栏目" [level=2] [ref=e194]
+      - list [ref=e196]:
+        - listitem [ref=e197]:
+          - link "交易提示" [ref=e198] [cursor=pointer]:
+            - /url: http://finance.sina.com.cn/focus/jyts/index.shtml
+        - listitem [ref=e199]:
+          - link "操盘必读" [ref=e200] [cursor=pointer]:
+            - /url: http://finance.sina.com.cn/stock/cpbd/
+        - listitem [ref=e201]:
+          - link "证券报" [ref=e202] [cursor=pointer]:
+            - /url: http://finance.sina.com.cn/focus/zqbjh/
+        - listitem [ref=e203]:
+          - link "公司公告" [ref=e204] [cursor=pointer]:
+            - /url: http://vip.stock.finance.sina.com.cn/corp/view/vCB_BulletinGather.php
+        - listitem [ref=e205]:
+          - link "千股千评" [ref=e206] [cursor=pointer]:
+            - /url: http://vip.stock.finance.sina.com.cn/q/go.php/vInvestConsult/kind/qgqp/index.phtml
+        - listitem [ref=e207]:
+          - link "新股申购" [ref=e208] [cursor=pointer]:
+            - /url: http://vip.stock.finance.sina.com.cn/corp/go.php/vRPD_NewStockIssue/page/1.phtml
+        - listitem [ref=e209]:
+          - link "指数成分" [ref=e210] [cursor=pointer]:
+            - /url: http://vip.stock.finance.sina.com.cn/corp/go.php/vII_NewestComponent/indexid/000300.phtml
+        - listitem [ref=e211]:
+          - link "资金流向" [ref=e212] [cursor=pointer]:
+            - /url: http://vip.stock.finance.sina.com.cn/moneyflow/
+      - generic [ref=e214]:
+        - link "更多" [ref=e215] [cursor=pointer]:
+          - /url: http://vip.stock.finance.sina.com.cn/mkt/#stock_hs_up
+        - heading "个股涨幅榜" [level=2] [ref=e216]:
+          - link "个股涨幅榜" [ref=e217] [cursor=pointer]:
+            - /url: http://vip.stock.finance.sina.com.cn/mkt/#stock_hs_up
+      - table [ref=e219]:
+        - rowgroup [ref=e220]:
+          - row "名称 价格(元) 涨跌幅" [ref=e221]:
+            - columnheader "名称" [ref=e222]
+            - columnheader "价格(元)" [ref=e223]
+            - columnheader "涨跌幅" [ref=e224]:
+              - link "涨跌幅" [ref=e225] [cursor=pointer]:
+                - /url: javascript:void(0)
+        - rowgroup [ref=e226]:
+          - row "中纺标 26.50 +29.97%" [ref=e227]:
+            - rowheader "中纺标" [ref=e228]:
+              - link "中纺标" [ref=e229] [cursor=pointer]:
+                - /url: http://finance.sina.com.cn/realstock/company/bj920122/nc.shtml
+            - cell "26.50" [ref=e230]
+            - cell "+29.97%" [ref=e231]
+          - row "天纺标 19.19 +29.05%" [ref=e232]:
+            - rowheader "天纺标" [ref=e233]:
+              - link "天纺标" [ref=e234] [cursor=pointer]:
+                - /url: http://finance.sina.com.cn/realstock/company/bj920753/nc.shtml
+            - cell "19.19" [ref=e235]
+            - cell "+29.05%" [ref=e236]
+          - row "N锐翔 150.20 +25.52%" [ref=e237]:
+            - rowheader "N锐翔" [ref=e238]:
+              - link "N锐翔" [ref=e239] [cursor=pointer]:
+                - /url: http://finance.sina.com.cn/realstock/company/bj920178/nc.shtml
+            - cell "150.20" [ref=e240]
+            - cell "+25.52%" [ref=e241]
+          - row "世名科技 16.01 +20.02%" [ref=e242]:
+            - rowheader "世名科技" [ref=e243]:
+              - link "世名科技" [ref=e244] [cursor=pointer]:
+                - /url: http://finance.sina.com.cn/realstock/company/sz300522/nc.shtml
+            - cell "16.01" [ref=e245]
+            - cell "+20.02%" [ref=e246]
+          - row "金博股份 49.79 +20.01%" [ref=e247]:
+            - rowheader "金博股份" [ref=e248]:
+              - link "金博股份" [ref=e249] [cursor=pointer]:
+                - /url: http://finance.sina.com.cn/realstock/company/sh688598/nc.shtml
+            - cell "49.79" [ref=e250]
+            - cell "+20.01%" [ref=e251]
+          - row "海辰药业 38.22 +20.00%" [ref=e252]:
+            - rowheader "海辰药业" [ref=e253]:
+              - link "海辰药业" [ref=e254] [cursor=pointer]:
+                - /url: http://finance.sina.com.cn/realstock/company/sz300584/nc.shtml
+            - cell "38.22" [ref=e255]
+            - cell "+20.00%" [ref=e256]
+          - row "科顺股份 8.16 +20.00%" [ref=e257]:
+            - rowheader "科顺股份" [ref=e258]:
+              - link "科顺股份" [ref=e259] [cursor=pointer]:
+                - /url: http://finance.sina.com.cn/realstock/company/sz300737/nc.shtml
+            - cell "8.16" [ref=e260]
+            - cell "+20.00%" [ref=e261]
+          - row "一博科技 58.20 +20.00%" [ref=e262]:
+            - rowheader "一博科技" [ref=e263]:
+              - link "一博科技" [ref=e264] [cursor=pointer]:
+                - /url: http://finance.sina.com.cn/realstock/company/sz301366/nc.shtml
+            - cell "58.20" [ref=e265]
+            - cell "+20.00%" [ref=e266]
+          - row "盛美上海 361.20 +20.00%" [ref=e267]:
+            - rowheader "盛美上海" [ref=e268]:
+              - link "盛美上海" [ref=e269] [cursor=pointer]:
+                - /url: http://finance.sina.com.cn/realstock/company/sh688082/nc.shtml
+            - cell "361.20" [ref=e270]
+            - cell "+20.00%" [ref=e271]
+          - row "科翔股份 98.16 +20.00%" [ref=e272]:
+            - rowheader "科翔股份" [ref=e273]:
+              - link "科翔股份" [ref=e274] [cursor=pointer]:
+                - /url: http://finance.sina.com.cn/realstock/company/sz300903/nc.shtml
+            - cell "98.16" [ref=e275]
+            - cell "+20.00%" [ref=e276]
+    - link [ref=e278] [cursor=pointer]:
+      - /url: https://finance.sina.com.cn/desktopapp/download/index.shtml?source=pc_hq_default_banner
+      - img [ref=e279]
+    - generic [ref=e280]:
+      - generic [ref=e281]:
+        - link "加入" [ref=e282] [cursor=pointer]:
+          - /url: http://i.finance.sina.com.cn/zixuan,all
+        - link "在APP中查看" [ref=e283] [cursor=pointer]:
+          - /url: javascript:;
+        - link "智能交易工具" [ref=e284] [cursor=pointer]:
+          - /url: https://www.citics.com/newsite/channel/account/202502/xlcj/index.html
+        - heading "沪深300指数(000300.SH)" [level=1] [ref=e285]
+        - generic [ref=e286]:
+          - generic "股指期货标的":
+            - link [ref=e287] [cursor=pointer]:
+              - /url: http://finance.sina.com.cn/data/#futures
+      - generic [ref=e288]:
+        - generic [ref=e289]:
+          - generic [ref=e290]:
+            - generic [ref=e291]:
+              - generic [ref=e292]: "+47.15"
+              - generic [ref=e293]: +0.97%
+            - generic [ref=e295]: "4931.39"
+          - generic [ref=e296]: 2026-06-17 15:35:33
+        - table [ref=e298]:
+          - rowgroup [ref=e304]:
+            - row "今 开： 4859.70 最 高： 4933.93" [ref=e305]:
+              - rowheader "今 开：" [ref=e306]
+              - cell "4859.70" [ref=e307]
+              - rowheader "最 高：" [ref=e308]
+              - cell "4933.93" [ref=e309]
+            - row "昨 收： 4884.23 最 低： 4859.70" [ref=e310]:
+              - rowheader "昨 收：" [ref=e311]
+              - cell "4884.23" [ref=e312]
+              - rowheader "最 低：" [ref=e313]
+              - cell "4859.70" [ref=e314]
+            - row "成交量： 2.76亿手 振 幅： 1.52%" [ref=e315]:
+              - rowheader "成交量：" [ref=e316]
+              - cell "2.76亿手" [ref=e317]
+              - rowheader "振 幅：" [ref=e318]
+              - cell "1.52%" [ref=e319]
+            - row "成交额： 8503.68亿元" [ref=e320]:
+              - rowheader "成交额：" [ref=e321]
+              - cell "8503.68亿元" [ref=e322]
+              - rowheader [ref=e323]
+              - cell [ref=e324]
+      - generic [ref=e326]:
+        - generic [ref=e329]:
+          - generic [ref=e331]:
+            - generic [ref=e332] [cursor=pointer]: 分时
+            - generic [ref=e333] [cursor=pointer]: 5日
+            - generic [ref=e334] [cursor=pointer]: 年线
+            - generic [ref=e335] [cursor=pointer]: 日K
+            - generic [ref=e336] [cursor=pointer]: 周K
+            - generic [ref=e337] [cursor=pointer]: 月K
+            - generic [ref=e338] [cursor=pointer]: 年K
+            - generic [ref=e339] [cursor=pointer]: 5分
+            - generic [ref=e340] [cursor=pointer]: 15分
+            - generic [ref=e341] [cursor=pointer]: 30分
+            - generic [ref=e342] [cursor=pointer]: 60分
+          - generic [ref=e356]:
+            - generic [ref=e358]:
+              - generic [ref=e359]: ▲▼
+              - generic [ref=e362] [cursor=pointer]: 成交
+            - generic [ref=e368]:
+              - generic [ref=e369]: ▲▼
+              - generic [ref=e372] [cursor=pointer]: 量比
+            - generic [ref=e377]:
+              - generic [ref=e378]:
+                - generic [ref=e379] [cursor=pointer]: ▲
+                - generic [ref=e380] [cursor=pointer]: ▼
+              - generic:
+                - list:
+                  - listitem [ref=e381] [cursor=pointer]: 无
+                  - listitem [ref=e382] [cursor=pointer]: 量比
+                  - listitem [ref=e383] [cursor=pointer]: MACD
+                  - listitem [ref=e384] [cursor=pointer]: BOLL
+                  - listitem [ref=e385] [cursor=pointer]: RSI
+                  - listitem [ref=e386] [cursor=pointer]: BBIBOLL
+          - generic [ref=e394]:
+            - generic "全屏查看" [ref=e395] [cursor=pointer]
+            - generic "更多" [ref=e396] [cursor=pointer]
+        - generic [ref=e398]:
+          - generic [ref=e399]: 弹幕
+          - generic [ref=e402]:
+            - textbox "市场风云变幻，弹幕实时开聊" [disabled] [ref=e403]
+            - generic [ref=e404]: 发送
+        - generic [ref=e406]:
+          - generic [ref=e407]: 走势对比：
+          - generic [ref=e408]:
+            - generic [ref=e409] [cursor=pointer]: 大盘指数
+            - textbox [ref=e410]: 拼音/代码/名称
+            - link "比较" [ref=e411] [cursor=pointer]:
+              - /url: javascript:void(0)
+      - generic [ref=e412]:
+        - generic [ref=e413]: 同时被关注：
+        - generic [ref=e414]:
+          - list:
+            - listitem [ref=e415]:
+              - link "上证50" [ref=e416] [cursor=pointer]:
+                - /url: http://finance.sina.com.cn/realstock/company/sh000016/nc.shtml
+              - text: (2934.47 0.70% )
+            - listitem [ref=e417]:
+              - link "科创50" [ref=e418] [cursor=pointer]:
+                - /url: http://finance.sina.com.cn/realstock/company/sh000688/nc.shtml
+              - text: (1840.82 4.69% )
+            - listitem [ref=e419]:
+              - link "中证1000" [ref=e420] [cursor=pointer]:
+                - /url: http://finance.sina.com.cn/realstock/company/sh000852/nc.shtml
+              - text: (8704.47 0.67% )
+            - listitem [ref=e421]:
+              - link "中证500" [ref=e422] [cursor=pointer]:
+                - /url: http://finance.sina.com.cn/realstock/company/sh000905/nc.shtml
+              - text: (8627.09 1.40% )
+            - listitem [ref=e423]:
+              - link "有色金属" [ref=e424] [cursor=pointer]:
+                - /url: http://finance.sina.com.cn/realstock/company/sh000819/nc.shtml
+              - text: (9874.13 -0.25% )
+            - listitem [ref=e425]:
+              - link "沪深300" [ref=e426] [cursor=pointer]:
+                - /url: http://finance.sina.com.cn/realstock/company/sz159919/nc.shtml
+              - text: (5.17 1.08% )
+            - listitem [ref=e427]:
+              - link "科创100" [ref=e428] [cursor=pointer]:
+                - /url: http://finance.sina.com.cn/realstock/company/sh000698/nc.shtml
+              - text: (2107.55 3.39% )
+            - listitem [ref=e429]:
+              - link "同花顺" [ref=e430] [cursor=pointer]:
+                - /url: http://finance.sina.com.cn/realstock/company/sz300033/nc.shtml
+              - text: (217.35 -0.58% )
+            - listitem [ref=e431]:
+              - link "电力ETF" [ref=e432] [cursor=pointer]:
+                - /url: http://finance.sina.com.cn/realstock/company/sz159611/nc.shtml
+              - text: (1.13 -1.05% )
+    - generic [ref=e433]:
+      - heading "沪深股市概况" [level=2] [ref=e435]:
+        - link "沪深股市概况" [ref=e436] [cursor=pointer]:
+          - /url: http://vip.stock.finance.sina.com.cn/mkt/
+      - generic [ref=e437]:
+        - generic [ref=e438]:
+          - link "沪A" [ref=e439] [cursor=pointer]:
+            - /url: http://vip.stock.finance.sina.com.cn/mkt/#stock_sh_up
+          - generic [ref=e440]:
+            - link "723" [ref=e441] [cursor=pointer]:
+              - /url: http://vip.stock.finance.sina.com.cn/mkt/#stock_sh_up
+            - generic [ref=e442]: "26"
+            - link "1426" [ref=e443] [cursor=pointer]:
+              - /url: http://vip.stock.finance.sina.com.cn/mkt/#stock_sh_down
+        - generic [ref=e444]:
+          - link "深A" [ref=e445] [cursor=pointer]:
+            - /url: http://vip.stock.finance.sina.com.cn/mkt/#stock_sz_up
+          - generic [ref=e446]:
+            - link "826" [ref=e447] [cursor=pointer]:
+              - /url: http://vip.stock.finance.sina.com.cn/mkt/#stock_sz_up
+            - generic [ref=e448]: "29"
+            - link "2037" [ref=e449] [cursor=pointer]:
+              - /url: http://vip.stock.finance.sina.com.cn/mkt/#stock_sz_down
+        - generic [ref=e450]:
+          - link "全B" [ref=e451] [cursor=pointer]:
+            - /url: " http://vip.stock.finance.sina.com.cn/mkt/#hs_b"
+          - generic [ref=e452]:
+            - link "30" [ref=e453] [cursor=pointer]:
+              - /url: " http://vip.stock.finance.sina.com.cn/mkt/#hs_b"
+            - generic [ref=e454]: "10"
+            - link "38" [ref=e455] [cursor=pointer]:
+              - /url: " http://vip.stock.finance.sina.com.cn/mkt/#hs_b"
+        - generic [ref=e456]:
+          - link "创业" [ref=e457] [cursor=pointer]:
+            - /url: http://vip.stock.finance.sina.com.cn/mkt/#cyb
+          - generic [ref=e458]:
+            - link "466" [ref=e459] [cursor=pointer]:
+              - /url: http://vip.stock.finance.sina.com.cn/mkt/#cyb
+            - generic [ref=e460]: "8"
+            - link "872" [ref=e461] [cursor=pointer]:
+              - /url: http://vip.stock.finance.sina.com.cn/mkt/#cyb
+        - generic [ref=e462]:
+          - generic [ref=e463]:
+            - emphasis [ref=e464]
+            - text: 上涨
+          - generic [ref=e465]:
+            - emphasis [ref=e466]
+            - text: 持平
+          - generic [ref=e467]:
+            - emphasis [ref=e468]
+            - text: 下跌
+      - generic [ref=e471]:
+        - link "更多" [ref=e472] [cursor=pointer]:
+          - /url: http://finance.sina.com.cn/stock/sl/#sinaindustry_1
+        - heading "板块涨幅榜" [level=2] [ref=e473]:
+          - link "板块涨幅榜" [ref=e474] [cursor=pointer]:
+            - /url: http://finance.sina.com.cn/stock/sl/#sinaindustry_1
+      - table [ref=e476]:
+        - rowgroup [ref=e477]:
+          - row "板块名称 涨跌幅 领涨股票" [ref=e478]:
+            - columnheader "板块名称" [ref=e479]
+            - columnheader "涨跌幅" [ref=e480]:
+              - link "涨跌幅" [ref=e481] [cursor=pointer]:
+                - /url: javascript:void(0)
+            - columnheader "领涨股票" [ref=e482]
+        - rowgroup [ref=e483]:
+          - row "玻璃行业 +4.12% 长海股份" [ref=e484]:
+            - rowheader "玻璃行业" [ref=e485]:
+              - link "玻璃行业" [ref=e486] [cursor=pointer]:
+                - /url: http://vip.stock.finance.sina.com.cn/mkt/#new_blhy
+            - cell "+4.12%" [ref=e487]
+            - rowheader "长海股份" [ref=e488]:
+              - link "长海股份" [ref=e489] [cursor=pointer]:
+                - /url: http://finance.sina.com.cn/realstock/company/sz300196/nc.shtml
+          - row "电子器件 +3.00% 永贵电器" [ref=e490]:
+            - rowheader "电子器件" [ref=e491]:
+              - link "电子器件" [ref=e492] [cursor=pointer]:
+                - /url: http://vip.stock.finance.sina.com.cn/mkt/#new_dzqj
+            - cell "+3.00%" [ref=e493]
+            - rowheader "永贵电器" [ref=e494]:
+              - link "永贵电器" [ref=e495] [cursor=pointer]:
+                - /url: http://finance.sina.com.cn/realstock/company/sz300351/nc.shtml
+          - row "化纤行业 +2.95% 泰和新材" [ref=e496]:
+            - rowheader "化纤行业" [ref=e497]:
+              - link "化纤行业" [ref=e498] [cursor=pointer]:
+                - /url: http://vip.stock.finance.sina.com.cn/mkt/#new_hqhy
+            - cell "+2.95%" [ref=e499]
+            - rowheader "泰和新材" [ref=e500]:
+              - link "泰和新材" [ref=e501] [cursor=pointer]:
+                - /url: http://finance.sina.com.cn/realstock/company/sz002254/nc.shtml
+          - row "次新股 +2.60% 锐翔智能" [ref=e502]:
+            - rowheader "次新股" [ref=e503]:
+              - link "次新股" [ref=e504] [cursor=pointer]:
+                - /url: http://vip.stock.finance.sina.com.cn/mkt/#new_stock
+            - cell "+2.60%" [ref=e505]
+            - rowheader "锐翔智能" [ref=e506]:
+              - link "锐翔智能" [ref=e507] [cursor=pointer]:
+                - /url: http://finance.sina.com.cn/realstock/company/bj920178/nc.shtml
+          - row "化工行业 +1.84% 国瓷材料" [ref=e508]:
+            - rowheader "化工行业" [ref=e509]:
+              - link "化工行业" [ref=e510] [cursor=pointer]:
+                - /url: http://vip.stock.finance.sina.com.cn/mkt/#new_hghy
+            - cell "+1.84%" [ref=e511]
+            - rowheader "国瓷材料" [ref=e512]:
+              - link "国瓷材料" [ref=e513] [cursor=pointer]:
+                - /url: http://finance.sina.com.cn/realstock/company/sz300285/nc.shtml
+      - generic [ref=e515]:
+        - link "更多" [ref=e516] [cursor=pointer]:
+          - /url: http://vip.stock.finance.sina.com.cn/moneyflow/#blocktol_sina
+        - heading "板块资金流向" [level=2] [ref=e517]:
+          - link "板块资金流向" [ref=e518] [cursor=pointer]:
+            - /url: http://vip.stock.finance.sina.com.cn/moneyflow/#blocktol_sina
+      - table [ref=e520]:
+        - rowgroup [ref=e521]:
+          - row "板块名称 流入率 流入额" [ref=e522]:
+            - columnheader "板块名称" [ref=e523]
+            - columnheader "流入率" [ref=e524]:
+              - link "流入率" [ref=e525] [cursor=pointer]:
+                - /url: javascript:void(0)
+            - columnheader "流入额" [ref=e526]:
+              - link "流入额" [ref=e527] [cursor=pointer]:
+                - /url: javascript:void(0)
+        - rowgroup [ref=e528]:
+          - row "玻璃行业 +23.30% 59.45亿" [ref=e529]:
+            - rowheader "玻璃行业" [ref=e530]:
+              - link "玻璃行业" [ref=e531] [cursor=pointer]:
+                - /url: http://vip.stock.finance.sina.com.cn/moneyflow/#!bk!0/new_blhy
+            - cell "+23.30%" [ref=e532]
+            - cell "59.45亿" [ref=e533]
+          - row "家电行业 +13.28% 27.30亿" [ref=e534]:
+            - rowheader "家电行业" [ref=e535]:
+              - link "家电行业" [ref=e536] [cursor=pointer]:
+                - /url: http://vip.stock.finance.sina.com.cn/moneyflow/#!bk!0/new_jdhy
+            - cell "+13.28%" [ref=e537]
+            - cell "27.30亿" [ref=e538]
+          - row "化纤行业 +13.09% 23.17亿" [ref=e539]:
+            - rowheader "化纤行业" [ref=e540]:
+              - link "化纤行业" [ref=e541] [cursor=pointer]:
+                - /url: http://vip.stock.finance.sina.com.cn/moneyflow/#!bk!0/new_hqhy
+            - cell "+13.09%" [ref=e542]
+            - cell "23.17亿" [ref=e543]
+          - row "食品行业 +11.09% 16.95亿" [ref=e544]:
+            - rowheader "食品行业" [ref=e545]:
+              - link "食品行业" [ref=e546] [cursor=pointer]:
+                - /url: http://vip.stock.finance.sina.com.cn/moneyflow/#!bk!0/new_sphy
+            - cell "+11.09%" [ref=e547]
+            - cell "16.95亿" [ref=e548]
+          - row "电子器件 +8.18% 270.57亿" [ref=e549]:
+            - rowheader "电子器件" [ref=e550]:
+              - link "电子器件" [ref=e551] [cursor=pointer]:
+                - /url: http://vip.stock.finance.sina.com.cn/moneyflow/#!bk!0/new_dzqj
+            - cell "+8.18%" [ref=e552]
+            - cell "270.57亿" [ref=e553]
+    - insertion [ref=e555]:
+      - insertion [ref=e556]:
+        - link "广告" [ref=e557] [cursor=pointer]:
+          - /url: http://saxn.sina.com.cn/click?type=bottom&t=UERQUzAwMDAwMDA1MTI1Nw%3D%3D&url=https%3A%2F%2Ffinance.sina.com.cn%2Fmobile%2Fcomfinanceweb.shtml%3Fsource%3Dgegu01&sign=667b1b8c2f6ced08
+          - img "广告" [ref=e558]
+  - generic [ref=e561]:
+    - heading "资讯" [level=1] [ref=e563]:
+      - link "资讯" [ref=e564] [cursor=pointer]:
+        - /url: http://finance.sina.com.cn/stock/hangqing/index.html
+    - generic [ref=e565]:
+      - generic [ref=e566]:
+        - generic [ref=e567]:
+          - link "更多" [ref=e568] [cursor=pointer]:
+            - /url: http://blog.sina.com.cn/lm/stock/index.html
+          - heading "博客看市" [level=2] [ref=e569]:
+            - link "博客看市" [ref=e570] [cursor=pointer]:
+              - /url: http://blog.sina.com.cn/lm/stock/index.html
+        - generic [ref=e571]:
+          - list [ref=e572]:
+            - listitem [ref=e573]:
+              - link "冯矿伟：周四操作策略" [ref=e574] [cursor=pointer]:
+                - /url: http://blog.sina.com.cn/s/blog_59b3f4ee0102zjqu.html
+            - listitem [ref=e575]:
+              - link "徐小明：周四操作策略" [ref=e576] [cursor=pointer]:
+                - /url: http://blog.sina.com.cn/s/blog_4d89b834010302c3.html
+            - listitem [ref=e577]:
+              - link "常长亭：当下阶段一定要回.." [ref=e578] [cursor=pointer]:
+                - /url: http://blog.sina.com.cn/s/blog_76ae3b080102z6ja.html
+            - listitem [ref=e579]:
+              - link "6月17日收评：半导体板.." [ref=e580] [cursor=pointer]:
+                - /url: http://blog.sina.com.cn/s/blog_5f2e58a70102zfvb.html
+            - listitem [ref=e581]:
+              - link "淘气天尊：变盘信号出现，.." [ref=e582] [cursor=pointer]:
+                - /url: http://blog.sina.com.cn/s/blog_606ca3a0010300ng.html
+            - listitem [ref=e583]:
+              - link "如何让公募基金真正实现从.." [ref=e584] [cursor=pointer]:
+                - /url: http://blog.sina.com.cn/s/blog_540eaf530102zd8u.html
+            - listitem [ref=e585]:
+              - link "徐小明：小波动" [ref=e586] [cursor=pointer]:
+                - /url: http://blog.sina.com.cn/s/blog_4d89b834010302c1.html
+            - listitem [ref=e587]:
+              - link "冯矿伟：动能背离又向下了" [ref=e588] [cursor=pointer]:
+                - /url: http://blog.sina.com.cn/s/blog_59b3f4ee0102zjqs.html
+            - listitem [ref=e589]:
+              - link "淘气天尊：双创冲不动了，.." [ref=e590] [cursor=pointer]:
+                - /url: http://blog.sina.com.cn/s/blog_606ca3a0010300nf.html
+          - list [ref=e592]:
+            - listitem [ref=e593]:
+              - link "站稳4100点还需做多努力" [ref=e594] [cursor=pointer]:
+                - /url: http://blog.sina.com.cn/s/blog_4ed8fd870102zveo.html
+            - listitem [ref=e595]:
+              - link "寂寞青山：不要追高！关注.." [ref=e596] [cursor=pointer]:
+                - /url: http://blog.sina.com.cn/s/blog_412390c80102z9bs.html
+            - listitem [ref=e597]:
+              - link "利好云集助力A股蓄势冲关" [ref=e598] [cursor=pointer]:
+                - /url: http://blog.sina.com.cn/s/blog_49548d34010308zf.html
+            - listitem [ref=e599]:
+              - link "小登老登越发冰火两重天" [ref=e600] [cursor=pointer]:
+                - /url: http://blog.sina.com.cn/s/blog_4c497d3a0102z41b.html
+            - listitem [ref=e601]:
+              - link "大盘冲高回落短期如何操作？" [ref=e602] [cursor=pointer]:
+                - /url: http://blog.sina.com.cn/s/blog_6a5779cf0102yvs7.html
+            - listitem [ref=e603]:
+              - link "杨德龙：我国宏观经济平稳.." [ref=e604] [cursor=pointer]:
+                - /url: http://blog.sina.com.cn/s/blog_63088ae30102zdnx.html
+            - listitem [ref=e605]:
+              - link "宗校立：黄金收复前跌势，.." [ref=e606] [cursor=pointer]:
+                - /url: http://blog.sina.com.cn/s/blog_51f8cd8d01033uyt.html
+            - listitem [ref=e607]:
+              - link "冯矿伟：周三操作策略" [ref=e608] [cursor=pointer]:
+                - /url: http://blog.sina.com.cn/s/blog_59b3f4ee0102zjqp.html
+            - listitem [ref=e609]:
+              - link "徐小明：周三操作策略" [ref=e610] [cursor=pointer]:
+                - /url: http://blog.sina.com.cn/s/blog_4d89b834010302c0.html
+      - generic [ref=e611]:
+        - generic [ref=e612]:
+          - link "更多" [ref=e613] [cursor=pointer]:
+            - /url: http://finance.sina.com.cn/stock/hangqing/index.html
+          - link [ref=e614] [cursor=pointer]:
+            - /url: ""
+          - heading "证券要闻" [level=2] [ref=e615]:
+            - link "证券要闻" [ref=e616] [cursor=pointer]:
+              - /url: http://finance.sina.com.cn/stock/hangqing/index.html
+        - generic [ref=e617]:
+          - list [ref=e618]:
+            - listitem [ref=e619]:
+              - generic [ref=e620]: (06-17 23:18)
+              - link "“超级场景+超级IP”双轮驱动 儒意电影发布超级娱乐空间战.." [ref=e621] [cursor=pointer]:
+                - /url: https://finance.sina.com.cn/stock/marketresearch/2026-06-17/doc-inicttar2688502.shtml
+            - listitem [ref=e622]:
+              - generic [ref=e623]: (06-17 23:03)
+              - link "12天扫描1263人：联想集团世界杯数字人极限交付实录" [ref=e624] [cursor=pointer]:
+                - /url: https://finance.sina.com.cn/stock/marketresearch/2026-06-17/doc-inicttam3713004.shtml
+            - listitem [ref=e625]:
+              - generic [ref=e626]: (06-17 22:30)
+              - link "方星海：可编制覆盖沪深港的“中国指数”，建议香港吸引内地量.." [ref=e627] [cursor=pointer]:
+                - /url: https://finance.sina.com.cn/stock/marketresearch/2026-06-17/doc-inicttap5897459.shtml
+            - listitem [ref=e628]:
+              - generic [ref=e629]: (06-17 22:24)
+              - link "6月17日增减持汇总：永兴股份、润丰股份披露增持情况，名臣.." [ref=e630] [cursor=pointer]:
+                - /url: https://finance.sina.com.cn/stock/marketresearch/2026-06-17/doc-inicttam3698245.shtml
+            - listitem [ref=e631]:
+              - generic [ref=e632]: (06-17 21:40)
+              - link "A股4000点之上，投资如何布网？" [ref=e633] [cursor=pointer]:
+                - /url: https://finance.sina.com.cn/jjxw/2026-06-17/doc-inicttai6905286.shtml
+            - listitem [ref=e634]:
+              - generic [ref=e635]: (06-17 21:32)
+              - link "中信建投证券董事长刘成：投研、投资、投行、投顾“四投联动”.." [ref=e636] [cursor=pointer]:
+                - /url: https://finance.sina.com.cn/stock/marketresearch/2026-06-17/doc-inicttai6897468.shtml
+            - listitem [ref=e637]:
+              - generic [ref=e638]: (06-17 20:59)
+              - link "伊方消息人士：彭博社所刊美伊备忘录内容不准确" [ref=e639] [cursor=pointer]:
+                - /url: https://finance.sina.com.cn/stock/marketresearch/2026-06-17/doc-inictnup3790865.shtml
+            - listitem [ref=e640]:
+              - generic [ref=e641]: (06-17 20:45)
+              - link "AI正在填平足球鸿沟：联想如何参与打造“首届AI世界杯”？" [ref=e642] [cursor=pointer]:
+                - /url: https://finance.sina.com.cn/stock/marketresearch/2026-06-17/doc-inictnup3783856.shtml
+            - listitem [ref=e643]:
+              - generic [ref=e644]: (06-17 20:37)
+              - link "农银汇理员工惊爆“自购”血泪史！总经理孙建坤知道吗？" [ref=e645] [cursor=pointer]:
+                - /url: https://finance.sina.com.cn/stock/marketresearch/2026-06-17/doc-inictnut2756857.shtml
+          - list [ref=e647]:
+            - listitem [ref=e648]:
+              - generic [ref=e649]: (06-17 20:30)
+              - link "视频 | 证监会主席吴清：目前A股科技板块市值占比超过3成" [ref=e650] [cursor=pointer]:
+                - /url: https://finance.sina.com.cn/stock/marketresearch/2026-06-17/doc-inictnut2745471.shtml
+            - listitem [ref=e651]:
+              - generic [ref=e652]: (06-17 20:28)
+              - link "视频 | 特朗普G7峰会迟到后，向全场宣告：“我是老大”" [ref=e653] [cursor=pointer]:
+                - /url: https://finance.sina.com.cn/stock/marketresearch/2026-06-17/doc-inictnut2744420.shtml
+            - listitem [ref=e654]:
+              - generic [ref=e655]: (06-17 20:25)
+              - link "视频 | 证监会主席吴清：进一步丰富投资产品和工具 支持在.." [ref=e656] [cursor=pointer]:
+                - /url: https://finance.sina.com.cn/stock/marketresearch/2026-06-17/doc-inictnum6999098.shtml
+            - listitem [ref=e657]:
+              - generic [ref=e658]: (06-17 19:51)
+              - link "最新修订！上交所：新增量子、机器人、氢能、脑机接口......" [ref=e659] [cursor=pointer]:
+                - /url: https://finance.sina.com.cn/stock/marketresearch/2026-06-17/doc-inictnum6984564.shtml
+            - listitem [ref=e660]:
+              - generic [ref=e661]: (06-17 19:34)
+              - link "继产品出海后，华帝向西班牙赠“非遗青瓷”，迈向文化出海" [ref=e662] [cursor=pointer]:
+                - /url: https://finance.sina.com.cn/stock/marketresearch/2026-06-17/doc-inictnum6974714.shtml
+            - listitem [ref=e663]:
+              - generic [ref=e664]: (06-17 19:06)
+              - link "站上4100点！指数走强个股却大范围回调，分化行情为哪般？" [ref=e665] [cursor=pointer]:
+                - /url: https://finance.sina.com.cn/stock/marketresearch/2026-06-17/doc-inictnum6962821.shtml
+            - listitem [ref=e666]:
+              - generic [ref=e667]: (06-17 18:41)
+              - link "提车仅一个月，血亏9800元？ 智己LS8“背刺”首批车主.." [ref=e668] [cursor=pointer]:
+                - /url: https://finance.sina.com.cn/stock/marketresearch/2026-06-17/doc-inicthnt6043241.shtml
+            - listitem [ref=e669]:
+              - generic [ref=e670]: (06-17 18:39)
+              - link "100万股东狂喜！之前六年没涨停过，最近一个月涨停4次" [ref=e671] [cursor=pointer]:
+                - /url: https://finance.sina.com.cn/stock/marketresearch/2026-06-17/doc-inicthnr3859208.shtml
+            - listitem [ref=e672]:
+              - generic [ref=e673]: (06-17 18:14)
+              - link "SK海力士再创新高！A股存储芯片概念再掀涨停潮：挖掘翻倍股" [ref=e674] [cursor=pointer]:
+                - /url: https://finance.sina.com.cn/roll/2026-06-17/doc-inicthnt6029781.shtml
+      - generic [ref=e675]:
+        - generic [ref=e676]:
+          - link "更多" [ref=e677] [cursor=pointer]:
+            - /url: http://roll.finance.sina.com.cn/finance/zq1/gsjsy/index.shtml
+          - heading "大市评论" [level=2] [ref=e678]:
+            - link "大市评论" [ref=e679] [cursor=pointer]:
+              - /url: http://roll.finance.sina.com.cn/finance/zq1/gsjsy/index.shtml
+        - list [ref=e681]:
+          - listitem [ref=e682]:
+            - link "SK海力士再创新高！A股存储芯片.." [ref=e683] [cursor=pointer]:
+              - /url: https://finance.sina.com.cn/roll/2026-06-17/doc-inicthnt6029781.shtml
+          - listitem [ref=e684]:
+            - link "6月17日沪深两市涨停分析：旗滨.." [ref=e685] [cursor=pointer]:
+              - /url: https://finance.sina.cn/stock/dpps/2026-06-17/detail-inictaen8920646.d.html
+          - listitem [ref=e686]:
+            - link "收评：沪指重回4100点 科创5.." [ref=e687] [cursor=pointer]:
+              - /url: https://finance.sina.cn/stock/dpps/2026-06-17/detail-inictaet3818345.d.html
+          - listitem [ref=e688]:
+            - link "快讯：科创50涨近4% 存储芯片.." [ref=e689] [cursor=pointer]:
+              - /url: https://finance.sina.cn/stock/dpps/2026-06-17/detail-inicsvwt7139153.d.html
+          - listitem [ref=e690]:
+            - link "短缺局面或至少持续至2028年！.." [ref=e691] [cursor=pointer]:
+              - /url: https://finance.sina.cn/stock/dpps/2026-06-17/detail-inicsvwt7123308.d.html
+          - listitem [ref=e692]:
+            - link "午评：科创50指数半日涨1.01.." [ref=e693] [cursor=pointer]:
+              - /url: https://finance.sina.cn/stock/dpps/2026-06-17/detail-inicsrqs9010486.d.html
+          - listitem [ref=e694]:
+            - link "快讯：沪指翻红，PCB概念火热" [ref=e695] [cursor=pointer]:
+              - /url: https://finance.sina.cn/stock/dpps/2026-06-17/detail-inicsrqs8920367.d.html
+          - listitem [ref=e696]:
+            - link "快讯：PCB龙头股深南电路封涨停.." [ref=e697] [cursor=pointer]:
+              - /url: https://finance.sina.cn/stock/dpps/2026-06-17/detail-inicsrqv7144809.d.html
+          - listitem [ref=e698]:
+            - link "开盘：三大指数集体低开，沪指跌0.." [ref=e699] [cursor=pointer]:
+              - /url: https://finance.sina.cn/stock/dpps/2026-06-17/detail-inicsmhz3947567.d.html
+          - listitem [ref=e700]:
+            - link "操盘必读：影响股市利好或利空消息.." [ref=e701] [cursor=pointer]:
+              - /url: https://finance.sina.com.cn/stock/cpbd/2026-06-17/doc-inicseyy5812128.shtml
+          - listitem [ref=e702]:
+            - link "股海导航_2026年6月17日_.." [ref=e703] [cursor=pointer]:
+              - /url: https://finance.sina.com.cn/stock/s/2026-06-17/doc-inicseyz7217339.shtml
+          - listitem [ref=e704]:
+            - link "四大证券报头版头条内容精华摘要_.." [ref=e705] [cursor=pointer]:
+              - /url: https://finance.sina.com.cn/stock/y/2026-06-17/doc-inicseyw9028497.shtml
+          - listitem [ref=e706]:
+            - link "电子布概念成为PCB板块领涨主线.." [ref=e707] [cursor=pointer]:
+              - /url: https://finance.sina.com.cn/roll/2026-06-16/doc-inicrivm7514344.shtml
+          - listitem [ref=e708]:
+            - link "6月16日沪深两市涨停分析：深桑.." [ref=e709] [cursor=pointer]:
+              - /url: https://finance.sina.cn/stock/dpps/2026-06-16/detail-inicqsxq9525247.d.html
+          - listitem [ref=e710]:
+            - link "收评：创业板指点数再超沪指 PC.." [ref=e711] [cursor=pointer]:
+              - /url: https://finance.sina.cn/stock/dpps/2026-06-16/detail-inicqsxq9483894.d.html
+          - listitem [ref=e712]:
+            - link "快讯：指数震荡整理，PET铜箔板.." [ref=e713] [cursor=pointer]:
+              - /url: https://finance.sina.cn/stock/dpps/2026-06-16/detail-inicqsxq9448313.d.html
+          - listitem [ref=e714]:
+            - link "午评：创业板指半日涨2.05% .." [ref=e715] [cursor=pointer]:
+              - /url: https://finance.sina.cn/stock/dpps/2026-06-16/detail-inicqnru6264985.d.html
+          - listitem [ref=e716]:
+            - link "快讯：创业板指涨超2% 算力硬件.." [ref=e717] [cursor=pointer]:
+              - /url: https://finance.sina.cn/stock/dpps/2026-06-16/detail-inicqhiz4577797.d.html
+          - listitem [ref=e718]:
+            - link "快讯：创业板指涨超1% 非金属材.." [ref=e719] [cursor=pointer]:
+              - /url: https://finance.sina.cn/stock/dpps/2026-06-16/detail-inicqhix7752747.d.html
+  - generic [ref=e721]:
+    - heading "互动" [level=1] [ref=e723]
+    - generic [ref=e724]:
+      - generic [ref=e725]:
+        - generic [ref=e726]:
+          - link "更多" [ref=e727] [cursor=pointer]:
+            - /url: http://guba.sina.com.cn
+          - heading "近期热门贴" [level=2] [ref=e728]:
+            - link "近期热门贴" [ref=e729] [cursor=pointer]:
+              - /url: http://guba.sina.com.cn/
+        - generic [ref=e730]:
+          - paragraph [ref=e731]: 今日热门贴
+          - list [ref=e732]:
+            - listitem [ref=e733]:
+              - link "河北省积极搭建数字金融平台" [ref=e734] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=95&tid=1059668&pid=1&dpc=1
+            - listitem [ref=e735]:
+              - link "围绕事件和新科技去构思26..." [ref=e736] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=20408&tid=141408&pid=1&dpc=1
+            - listitem [ref=e737]:
+              - link "周日晚间A股利好速递：三大..." [ref=e738] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=45655&tid=206040&pid=1&dpc=1
+            - listitem [ref=e739]:
+              - link "《商业帝国英伟达简史》19..." [ref=e740] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=20408&tid=141403&pid=1&dpc=1
+            - listitem [ref=e741]:
+              - link "果然" [ref=e742] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=24113&tid=5008&pid=1&dpc=1
+            - listitem [ref=e743]:
+              - link "运气来了挡都挡不住呀8.5..." [ref=e744] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=39010&tid=22798&pid=1&dpc=1
+            - listitem [ref=e745]:
+              - link "1月5号A股策略：下周成交..." [ref=e746] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=25298&tid=955&pid=1&dpc=1
+            - listitem [ref=e747]:
+              - link "牛散徐开东" [ref=e748] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=132475&tid=33936&pid=1&dpc=1
+          - paragraph [ref=e749]: 一周热门贴
+          - list [ref=e750]:
+            - listitem [ref=e751]:
+              - link "明天，从节奏来看，我们首选..." [ref=e752] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=627&tid=223452&pid=1&dpc=1
+            - listitem [ref=e753]:
+              - link "今晚睡不着觉了！你知道是为..." [ref=e754] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=9396&tid=194509&pid=1&dpc=1
+            - listitem [ref=e755]:
+              - link "一、开盘15分钟：看穿主力..." [ref=e756] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=42389&tid=64909&pid=1&dpc=1
+            - listitem [ref=e757]:
+              - link "贯穿2026年的市场主线：..." [ref=e758] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=3&tid=499152&pid=1&dpc=1
+            - listitem [ref=e759]:
+              - link "A股明天开盘" [ref=e760] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=9279&tid=5183702&pid=1&dpc=1
+            - listitem [ref=e761]:
+              - link "#上证指数##黄金白银将迎..." [ref=e762] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=9279&tid=5183698&pid=1&dpc=1
+            - listitem [ref=e763]:
+              - link "重仓白银的赶紧看！大顶信号..." [ref=e764] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=21373&tid=324&pid=1&dpc=1
+            - listitem [ref=e765]:
+              - link "放大招！放大招了！就在刚刚..." [ref=e766] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=9342&tid=2440&pid=1&dpc=1
+      - generic [ref=e767]:
+        - generic [ref=e768]:
+          - link "更多" [ref=e769] [cursor=pointer]:
+            - /url: http://guba.sina.com.cn/?s=bar&name=sh000300
+          - link "发表帖子" [ref=e770] [cursor=pointer]:
+            - /url: http://guba.sina.com.cn/?s=bar&name=sh000300
+          - heading "沪深300吧最新贴" [level=2] [ref=e771]:
+            - link "沪深300吧最新贴" [ref=e772] [cursor=pointer]:
+              - /url: http://guba.sina.com.cn/?s=bar&name=sh000300
+        - generic [ref=e773]:
+          - generic [ref=e774]:
+            - generic [ref=e775]: 标题
+            - generic [ref=e776]: 点击
+            - generic [ref=e777]: 回复
+            - generic [ref=e778]: 最后回复
+          - list [ref=e779]:
+            - listitem [ref=e780]:
+              - link "科技泡沫太大了！" [ref=e781] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=9376&tid=974148
+              - generic [ref=e782]: "12"
+              - generic [ref=e783]: "0"
+              - generic [ref=e784]: 06-17 21:04
+            - listitem [ref=e785]:
+              - link "今天可能卖飞了[泪]" [ref=e786] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=9376&tid=974147
+              - generic [ref=e787]: "6"
+              - generic [ref=e788]: "0"
+              - generic [ref=e789]: 06-17 20:44
+            - listitem [ref=e790]:
+              - link "哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇哇塞" [ref=e791] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=9376&tid=974146
+              - generic [ref=e792]: "6"
+              - generic [ref=e793]: "0"
+              - generic [ref=e794]: 06-17 20:39
+            - listitem [ref=e795]:
+              - link "明天估计就跌回去了" [ref=e796] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=9376&tid=974145
+              - generic [ref=e797]: "6"
+              - generic [ref=e798]: "0"
+              - generic [ref=e799]: 06-17 20:23
+            - listitem [ref=e800]:
+              - link "你可以去死了" [ref=e801] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=9376&tid=974144
+              - generic [ref=e802]: "1"
+              - generic [ref=e803]: "0"
+              - generic [ref=e804]: 06-17 20:08
+            - listitem [ref=e805]:
+              - link "肥料不足" [ref=e806] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=9376&tid=974143
+              - generic [ref=e807]: "25"
+              - generic [ref=e808]: "0"
+              - generic [ref=e809]: 06-17 19:56
+            - listitem [ref=e810]:
+              - link "没钱买肥料，韭菜还没长大就要割了" [ref=e811] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=9376&tid=974142
+              - generic [ref=e812]: "31"
+              - generic [ref=e813]: "0"
+              - generic [ref=e814]: 06-17 19:52
+            - listitem [ref=e815]:
+              - link "拥抱科技，AI替换自己" [ref=e816] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=9376&tid=974141
+              - generic [ref=e817]: "27"
+              - generic [ref=e818]: "0"
+              - generic [ref=e819]: 06-17 19:44
+          - list [ref=e821]:
+            - listitem [ref=e822]:
+              - link "二十年大顶16166" [ref=e823] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=9376&tid=974140
+              - generic [ref=e824]: "33"
+              - generic [ref=e825]: "0"
+              - generic [ref=e826]: 06-17 19:38
+            - listitem [ref=e827]:
+              - link "涨就对了" [ref=e828] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=9376&tid=974139
+              - generic [ref=e829]: "0"
+              - generic [ref=e830]: "0"
+              - generic [ref=e831]: 06-17 19:36
+            - listitem [ref=e832]:
+              - link "齐心协力超越纳斯达克" [ref=e833] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=9376&tid=974138
+              - generic [ref=e834]: "0"
+              - generic [ref=e835]: "0"
+              - generic [ref=e836]: 06-17 19:25
+            - listitem [ref=e837]:
+              - link "你看房地产跌了，还要人托底" [ref=e838] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=9376&tid=974137
+              - generic [ref=e839]: "32"
+              - generic [ref=e840]: "0"
+              - generic [ref=e841]: 06-17 19:25
+            - listitem [ref=e842]:
+              - link "收盘了就去干点别的吧" [ref=e843] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=9376&tid=974136
+              - generic [ref=e844]: "31"
+              - generic [ref=e845]: "0"
+              - generic [ref=e846]: 06-17 19:21
+            - listitem [ref=e847]:
+              - link "今晚c罗" [ref=e848] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=9376&tid=974134
+              - generic [ref=e849]: "28"
+              - generic [ref=e850]: "0"
+              - generic [ref=e851]: 06-17 19:16
+            - listitem [ref=e852]:
+              - link "明天白酒涨停" [ref=e853] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=9376&tid=974133
+              - generic [ref=e854]: "0"
+              - generic [ref=e855]: "0"
+              - generic [ref=e856]: 06-17 18:52
+            - listitem [ref=e857]:
+              - link "尾盘拉升" [ref=e858] [cursor=pointer]:
+                - /url: http://guba.sina.com.cn/?s=thread&bid=9376&tid=974132
+              - generic [ref=e859]: "0"
+              - generic [ref=e860]: "0"
+              - generic [ref=e861]: 06-17 18:38
+      - generic [ref=e862]:
+        - heading "股市直播" [level=2] [ref=e863]:
+          - link "股市直播" [ref=e864] [cursor=pointer]:
+            - /url: http://live.finance.sina.com.cn
+        - generic [ref=e865]:
+          - list [ref=e866]:
+            - listitem [ref=e867]:
+              - link "趋势领涨" [ref=e868] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/1658605145
+                - img "趋势领涨" [ref=e869]
+              - link "关注" [ref=e870] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/1658605145
+              - link "趋势领涨 2026-06-17 21:15:13 美国太空探索技术公司的货运“龙”飞船携带大量科研物资和设备返回地球，17日溅落在美加利福尼亚州附近海域。据美国航空航天局介绍，“龙”飞船于美国东部时间16日12时25分许（北京时间17日0时25分许）脱离国际空间站，启程返回地球。“龙”飞船于美国西部时间17日5时11分许（北京时间17日20时11分许），溅落在加利福尼亚州附近海域。美航空航天局表示，“龙”飞船带回的科研物资包括生物打印的器官和软骨组织，有关改进未来太空任务低温燃料储存技术的数据，以及用于开发新型癌症疗法的DNA仿生材料。返航携带的设备还包括监测宇航员眼部健康的眼部成像设备，过滤舱内微量污染物的空气净化装置，以及处理废弃物与卫生用品的分离泵。" [ref=e871] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/1658605145
+                - heading "趋势领涨" [level=3] [ref=e872]
+                - paragraph [ref=e873]: 2026-06-17 21:15:13
+                - paragraph [ref=e875]: 美国太空探索技术公司的货运“龙”飞船携带大量科研物资和设备返回地球，17日溅落在美加利福尼亚州附近海域。据美国航空航天局介绍，“龙”飞船于美国东部时间16日12时25分许（北京时间17日0时25分许）脱离国际空间站，启程返回地球。“龙”飞船于美国西部时间17日5时11分许（北京时间17日20时11分许），溅落在加利福尼亚州附近海域。美航空航天局表示，“龙”飞船带回的科研物资包括生物打印的器官和软骨组织，有关改进未来太空任务低温燃料储存技术的数据，以及用于开发新型癌症疗法的DNA仿生材料。返航携带的设备还包括监测宇航员眼部健康的眼部成像设备，过滤舱内微量污染物的空气净化装置，以及处理废弃物与卫生用品的分离泵。
+            - listitem [ref=e876]:
+              - link "趋势领涨" [ref=e877] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/1658605145
+                - img "趋势领涨" [ref=e878]
+              - link "关注" [ref=e879] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/1658605145
+              - link "趋势领涨 2026-06-17 17:50:04 航运板块表现活跃，中远海能（sh600026）涨停，招商轮船（sh601872）、招商南油（sh601975）、中国船舶（sh600150）、国航远洋（bj920571）跟涨。消息面上，高盛发布研报称，随着霍尔木兹海峡重新开放，此前因海峡关闭导致的原油及成品油轮运输约9%至11%的供应过剩局面将迎来逆转。" [ref=e880] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/1658605145
+                - heading "趋势领涨" [level=3] [ref=e881]
+                - paragraph [ref=e882]: 2026-06-17 17:50:04
+                - paragraph [ref=e884]: 航运板块表现活跃，中远海能（sh600026）涨停，招商轮船（sh601872）、招商南油（sh601975）、中国船舶（sh600150）、国航远洋（bj920571）跟涨。消息面上，高盛发布研报称，随着霍尔木兹海峡重新开放，此前因海峡关闭导致的原油及成品油轮运输约9%至11%的供应过剩局面将迎来逆转。
+            - listitem [ref=e885]:
+              - link "趋势领涨" [ref=e886] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/1658605145
+                - img "趋势领涨" [ref=e887]
+              - link "关注" [ref=e888] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/1658605145
+              - link "趋势领涨 2026-06-17 17:50:03 【今日投资舆情热点】<br />1）半导体芯片：SK海力士计划到2034年将晶圆产能提高两倍，以满足人工智能推动下不断增长的存储芯片需求。<br />2）PCB：机构预计，2025年至2028年，全球AI光模块PCB市场规模将从6.2亿美元增长至37.7亿美元，三年增长超过5倍。<br />3）玻璃基板：台积电近期向供应链发布“CoWoS玻璃基板开发计划”，确定携手ABF载板厂商Ibiden与面板厂商群创，共同验证玻璃基板导入CoWoS先进封装的可行性，玻璃基板正式跨入产业化验证阶段。<br />4）存储材料与设备：由于AI需求爆发，存储芯片正式进入扩产周期，上游设备与材料进入配套备货阶段。" [ref=e889] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/1658605145
+                - heading "趋势领涨" [level=3] [ref=e890]
+                - paragraph [ref=e891]: 2026-06-17 17:50:03
+                - paragraph [ref=e893]: 【今日投资舆情热点】<br />1）半导体芯片：SK海力士计划到2034年将晶圆产能提高两倍，以满足人工智能推动下不断增长的存储芯片需求。<br />2）PCB：机构预计，2025年至2028年，全球AI光模块PCB市场规模将从6.2亿美元增长至37.7亿美元，三年增长超过5倍。<br />3）玻璃基板：台积电近期向供应链发布“CoWoS玻璃基板开发计划”，确定携手ABF载板厂商Ibiden与面板厂商群创，共同验证玻璃基板导入CoWoS先进封装的可行性，玻璃基板正式跨入产业化验证阶段。<br />4）存储材料与设备：由于AI需求爆发，存储芯片正式进入扩产周期，上游设备与材料进入配套备货阶段。
+            - listitem [ref=e894]:
+              - link "弦论交易派" [ref=e895] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/7645515828
+                - img "弦论交易派" [ref=e896]
+              - link "关注" [ref=e897] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/7645515828
+              - link "弦论交易派 2026-06-17 16:28:09 明日各大指数或延续区间震荡、分化格局，单边大涨的条件仍不充分，盘面涨跌个股依旧分化，高位板块获利兑现压力加大，行情以板块内部轮动为主。板块上，PCB、光通信、半导体设备、仍有资金反复博弈，低位材料与先进封装存在补涨机会，白酒、地产、煤炭、贵金属持续承压，资金持续流出传统权重，短期市场难出现风格全面切换，应对上规避高位拥挤细分，逢分歧布局科技低位细分，观望金融板块修复力度，不宜盲目追涨短期加速题材，静待主线充分换手后再把握低吸机会。<br /><br />风险提示：以上内容仅供参考，不构成投资决策依据。投资有风险，入市需谨慎。" [ref=e898] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/7645515828
+                - heading "弦论交易派" [level=3] [ref=e899]
+                - paragraph [ref=e900]: 2026-06-17 16:28:09
+                - paragraph [ref=e902]: 明日各大指数或延续区间震荡、分化格局，单边大涨的条件仍不充分，盘面涨跌个股依旧分化，高位板块获利兑现压力加大，行情以板块内部轮动为主。板块上，PCB、光通信、半导体设备、仍有资金反复博弈，低位材料与先进封装存在补涨机会，白酒、地产、煤炭、贵金属持续承压，资金持续流出传统权重，短期市场难出现风格全面切换，应对上规避高位拥挤细分，逢分歧布局科技低位细分，观望金融板块修复力度，不宜盲目追涨短期加速题材，静待主线充分换手后再把握低吸机会。<br /><br />风险提示：以上内容仅供参考，不构成投资决策依据。投资有风险，入市需谨慎。
+            - listitem [ref=e903]:
+              - link "弦论交易派" [ref=e904] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/7645515828
+                - img "弦论交易派" [ref=e905]
+              - link "关注" [ref=e906] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/7645515828
+              - link "弦论交易派 2026-06-17 16:27:49 今日A股主要指数低开后震荡回升，深市相关指数表现优于沪市，两市成交维持高位存量博弈，盘面结构性分化突出，个股跌多涨少，赚钱效应集中在科技主线。板块方面，电子化学品、半导体、存储芯片PCB领涨；旅游酒店、煤炭板块持续调整，资金从传统权重向硬科技赛道转移，短期行情以科技成长轮动为主，权重板块暂未出现同步修复。<br /><br />风险提示：以上内容仅供参考，不构成投资决策依据。投资有风险，入市需谨慎。" [ref=e907] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/7645515828
+                - heading "弦论交易派" [level=3] [ref=e908]
+                - paragraph [ref=e909]: 2026-06-17 16:27:49
+                - paragraph [ref=e911]: 今日A股主要指数低开后震荡回升，深市相关指数表现优于沪市，两市成交维持高位存量博弈，盘面结构性分化突出，个股跌多涨少，赚钱效应集中在科技主线。板块方面，电子化学品、半导体、存储芯片PCB领涨；旅游酒店、煤炭板块持续调整，资金从传统权重向硬科技赛道转移，短期行情以科技成长轮动为主，权重板块暂未出现同步修复。<br /><br />风险提示：以上内容仅供参考，不构成投资决策依据。投资有风险，入市需谨慎。
+            - listitem [ref=e912]:
+              - link "张馨元" [ref=e913] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/2060480585
+                - img "张馨元" [ref=e914]
+              - link "关注" [ref=e915] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/2060480585
+              - link "张馨元 2026-06-17 16:24:41 市场低开高走，创业板指、深成指均涨超1%，科创50指数涨4.69%。沪深两市成交额3.09万亿，较上一个交易日放量271亿。盘面上，全市场超3700只个股下跌。从板块来看，PCB概念爆发，十余只成分股涨停，宏昌电子（sh603002）7天5板，华正新材（sh603186）3连板，深南电路（sz002916）涨停，股价创历史新高。半导体产业链表现活跃，存储芯片、半导体设备方向领涨，盛美上海（sh688082）、香农芯创（sz300475）、普冉股份（sh688766）20cm涨停，亚翔集成（sh603929）、兆易创新（sh603986）涨停。玻璃基板概念延续强势，旗滨集团（sh601636）3连板，京东方A（sz000725）、彩虹股份（sh600707）涨停。超级电容概念盘中异动拉升，海星股份（sh603115）3连板，艾华集团（sh603989）、铜峰电子（sh600237）涨停。下跌方面，煤炭板块震荡调整，云煤能源（sh600792）、大有能源（sh600403）、宝泰隆（sh601011）纷纷下挫。" [ref=e916] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/2060480585
+                - heading "张馨元" [level=3] [ref=e917]
+                - paragraph [ref=e918]: 2026-06-17 16:24:41
+                - paragraph [ref=e920]: 市场低开高走，创业板指、深成指均涨超1%，科创50指数涨4.69%。沪深两市成交额3.09万亿，较上一个交易日放量271亿。盘面上，全市场超3700只个股下跌。从板块来看，PCB概念爆发，十余只成分股涨停，宏昌电子（sh603002）7天5板，华正新材（sh603186）3连板，深南电路（sz002916）涨停，股价创历史新高。半导体产业链表现活跃，存储芯片、半导体设备方向领涨，盛美上海（sh688082）、香农芯创（sz300475）、普冉股份（sh688766）20cm涨停，亚翔集成（sh603929）、兆易创新（sh603986）涨停。玻璃基板概念延续强势，旗滨集团（sh601636）3连板，京东方A（sz000725）、彩虹股份（sh600707）涨停。超级电容概念盘中异动拉升，海星股份（sh603115）3连板，艾华集团（sh603989）、铜峰电子（sh600237）涨停。下跌方面，煤炭板块震荡调整，云煤能源（sh600792）、大有能源（sh600403）、宝泰隆（sh601011）纷纷下挫。
+            - listitem [ref=e921]:
+              - link "北京红竹" [ref=e922] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/2910812187
+                - img "北京红竹" [ref=e923]
+              - link "关注" [ref=e924] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/2910812187
+              - link "北京红竹 2026-06-17 15:59:41 5、防守线上移<br /><br /><br /><br />从结构上看：<br /><br /><br /><br />沪指防守线上移至4073点，<br /><br /><br /><br />科创50 防守线上移至1725点。<br /><br /><br /><br />不破防守线。<br /><br /><br /><br />趋势还在。" [ref=e925] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/2910812187
+                - heading "北京红竹" [level=3] [ref=e926]
+                - paragraph [ref=e927]: 2026-06-17 15:59:41
+                - paragraph [ref=e929]: 5、防守线上移<br /><br /><br /><br />从结构上看：<br /><br /><br /><br />沪指防守线上移至4073点，<br /><br /><br /><br />科创50 防守线上移至1725点。<br /><br /><br /><br />不破防守线。<br /><br /><br /><br />趋势还在。
+            - listitem [ref=e930]:
+              - link "北京红竹" [ref=e931] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/2910812187
+                - img "北京红竹" [ref=e932]
+              - link "关注" [ref=e933] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/2910812187
+              - link "北京红竹 2026-06-17 15:59:37 4、最强还是它<br /><br /><br /><br />今天最强的还是AI算力：<br /><br /><br /><br />光模块、CPO、PCB、高速连接、数据中心。<br /><br /><br /><br />这些还在走。<br /><br /><br /><br />说明一句话：<br /><br /><br /><br />主线还在。<br /><br /><br /><br />但问题也很明显。<br /><br /><br /><br />龙头还能涨，<br /><br /><br /><br />但跟风已经掉队。<br /><br /><br /><br />不是一起涨了，是开始分人了。<br /><br /><br /><br />这个阶段其实很关键：<br /><br /><br /><br />以前是买对方向就行。<br /><br /><br /><br />现在是：<br /><br /><br /><br />同一个方向里，也开始分输赢。<br /><br /><br /><br />所以市场还在，但已经不好做了。" [ref=e934] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/2910812187
+                - heading "北京红竹" [level=3] [ref=e935]
+                - paragraph [ref=e936]: 2026-06-17 15:59:37
+                - paragraph [ref=e938]: 4、最强还是它<br /><br /><br /><br />今天最强的还是AI算力：<br /><br /><br /><br />光模块、CPO、PCB、高速连接、数据中心。<br /><br /><br /><br />这些还在走。<br /><br /><br /><br />说明一句话：<br /><br /><br /><br />主线还在。<br /><br /><br /><br />但问题也很明显。<br /><br /><br /><br />龙头还能涨，<br /><br /><br /><br />但跟风已经掉队。<br /><br /><br /><br />不是一起涨了，是开始分人了。<br /><br /><br /><br />这个阶段其实很关键：<br /><br /><br /><br />以前是买对方向就行。<br /><br /><br /><br />现在是：<br /><br /><br /><br />同一个方向里，也开始分输赢。<br /><br /><br /><br />所以市场还在，但已经不好做了。
+            - listitem [ref=e939]:
+              - link "北京红竹" [ref=e940] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/2910812187
+                - img "北京红竹" [ref=e941]
+              - link "关注" [ref=e942] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/2910812187
+              - link "北京红竹 2026-06-17 15:59:31 3、割裂<br /><br /><br /><br />今天市场其实很简单。<br /><br /><br /><br />但体感是两个字：<br /><br /><br /><br />割裂。<br /><br /><br /><br />全天成交额31140亿。<br /><br /><br /><br />3734家上涨，1723家下跌。<br /><br /><br /><br />数据看着还行，但市场不是一个方向。<br /><br /><br /><br />是两边在走。<br /><br /><br /><br />我上午其实有个错觉：<br /><br /><br /><br />觉得今天赚钱效应不错。<br /><br /><br /><br />但收盘一看，我判断错了。<br /><br /><br /><br />因为自选股几乎都在科技，看起来一片红。<br /><br /><br /><br />但另一边，其实一直在阴跌。<br /><br /><br /><br />一句话：<br /><br /><br /><br />不是市场好，是你看到的市场在涨。" [ref=e943] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/2910812187
+                - heading "北京红竹" [level=3] [ref=e944]
+                - paragraph [ref=e945]: 2026-06-17 15:59:31
+                - paragraph [ref=e947]: 3、割裂<br /><br /><br /><br />今天市场其实很简单。<br /><br /><br /><br />但体感是两个字：<br /><br /><br /><br />割裂。<br /><br /><br /><br />全天成交额31140亿。<br /><br /><br /><br />3734家上涨，1723家下跌。<br /><br /><br /><br />数据看着还行，但市场不是一个方向。<br /><br /><br /><br />是两边在走。<br /><br /><br /><br />我上午其实有个错觉：<br /><br /><br /><br />觉得今天赚钱效应不错。<br /><br /><br /><br />但收盘一看，我判断错了。<br /><br /><br /><br />因为自选股几乎都在科技，看起来一片红。<br /><br /><br /><br />但另一边，其实一直在阴跌。<br /><br /><br /><br />一句话：<br /><br /><br /><br />不是市场好，是你看到的市场在涨。
+            - listitem [ref=e948]:
+              - link "北京红竹" [ref=e949] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/2910812187
+                - img "北京红竹" [ref=e950]
+              - link "关注" [ref=e951] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/2910812187
+              - link "北京红竹 2026-06-17 15:59:24 2、打的是假AI<br /><br /><br /><br />监管这次打的，不是AI，<br /><br /><br /><br />而是“假AI”。<br /><br /><br /><br />不是技术，<br /><br /><br /><br />而是包装。<br /><br /><br /><br />如果一家公司没有技术、没有产品，只靠蹭热点活着，<br /><br /><br /><br />那被挤出去，只是时间问题。<br /><br /><br /><br />留下来的，会是另一类公司：<br /><br /><br /><br />有技术，有订单，有利润。<br /><br /><br /><br />这让我想起新能源那一轮。<br /><br /><br /><br />PPT造车满天飞。<br /><br /><br /><br />后来补贴退坡，监管收紧。<br /><br /><br /><br />一大批公司消失。<br /><br /><br /><br />最后活下来的，不是讲故事的，<br /><br /><br /><br />而是能交付的。" [ref=e952] [cursor=pointer]:
+                - /url: http://live.finance.sina.com.cn/bozhu/2910812187
+                - heading "北京红竹" [level=3] [ref=e953]
+                - paragraph [ref=e954]: 2026-06-17 15:59:24
+                - paragraph [ref=e956]: 2、打的是假AI<br /><br /><br /><br />监管这次打的，不是AI，<br /><br /><br /><br />而是“假AI”。<br /><br /><br /><br />不是技术，<br /><br /><br /><br />而是包装。<br /><br /><br /><br />如果一家公司没有技术、没有产品，只靠蹭热点活着，<br /><br /><br /><br />那被挤出去，只是时间问题。<br /><br /><br /><br />留下来的，会是另一类公司：<br /><br /><br /><br />有技术，有订单，有利润。<br /><br /><br /><br />这让我想起新能源那一轮。<br /><br /><br /><br />PPT造车满天飞。<br /><br /><br /><br />后来补贴退坡，监管收紧。<br /><br /><br /><br />一大批公司消失。<br /><br /><br /><br />最后活下来的，不是讲故事的，<br /><br /><br /><br />而是能交付的。
+          - link "加载更多" [ref=e957] [cursor=pointer]:
+            - /url: http://live.finance.sina.com.cn/
+  - generic [ref=e959]:
+    - generic [ref=e960]:
+      - heading "A股行情摘要" [level=1] [ref=e961]:
+        - link "A股行情摘要" [ref=e962] [cursor=pointer]:
+          - /url: http://vip.stock.finance.sina.com.cn/mkt/
+      - generic [ref=e963]:
+        - link "指数行情汇总" [ref=e964] [cursor=pointer]:
+          - /url: http://vip.stock.finance.sina.com.cn/mkt/#dpzs
+        - link "板块行情汇总" [ref=e965] [cursor=pointer]:
+          - /url: http://vip.stock.finance.sina.com.cn/mkt/#bkhq
+        - link "股市必察" [ref=e966] [cursor=pointer]:
+          - /url: http://finance.sina.com.cn/realstock/
+    - generic [ref=e967]:
+      - generic [ref=e968]:
+        - heading "即时综合排名" [level=2] [ref=e970]:
+          - link "即时综合排名" [ref=e971] [cursor=pointer]:
+            - /url: http://vip.stock.finance.sina.com.cn/mkt/
+        - generic [ref=e973]:
+          - list [ref=e975]:
+            - listitem [ref=e976]: 涨幅
+            - listitem [ref=e977] [cursor=pointer]: 跌幅
+            - listitem [ref=e978] [cursor=pointer]: 换手率
+            - listitem [ref=e979] [cursor=pointer]: 五分钟涨幅
+            - listitem [ref=e980] [cursor=pointer]: 五分钟跌幅
+            - listitem [ref=e981] [cursor=pointer]: 成交额
+            - listitem [ref=e982] [cursor=pointer]: 振幅
+            - listitem [ref=e983] [cursor=pointer]: 委比
+            - listitem [ref=e984] [cursor=pointer]: 量比
+          - table [ref=e987]:
+            - rowgroup [ref=e988]:
+              - row "股票名称 涨跌幅" [ref=e989]:
+                - columnheader "股票名称" [ref=e990]
+                - columnheader "涨跌幅" [ref=e991]
+            - rowgroup [ref=e992]:
+              - row "中纺标 +29.97%" [ref=e993]:
+                - rowheader "中纺标" [ref=e994]:
+                  - link "中纺标" [ref=e995] [cursor=pointer]:
+                    - /url: http://finance.sina.com.cn/realstock/company/bj920122/nc.shtml
+                - cell "+29.97%" [ref=e996]
+              - row "天纺标 +29.05%" [ref=e997]:
+                - rowheader "天纺标" [ref=e998]:
+                  - link "天纺标" [ref=e999] [cursor=pointer]:
+                    - /url: http://finance.sina.com.cn/realstock/company/bj920753/nc.shtml
+                - cell "+29.05%" [ref=e1000]
+              - row "N锐翔 +25.52%" [ref=e1001]:
+                - rowheader "N锐翔" [ref=e1002]:
+                  - link "N锐翔" [ref=e1003] [cursor=pointer]:
+                    - /url: http://finance.sina.com.cn/realstock/company/bj920178/nc.shtml
+                - cell "+25.52%" [ref=e1004]
+              - row "世名科技 +20.02%" [ref=e1005]:
+                - rowheader "世名科技" [ref=e1006]:
+                  - link "世名科技" [ref=e1007] [cursor=pointer]:
+                    - /url: http://finance.sina.com.cn/realstock/company/sz300522/nc.shtml
+                - cell "+20.02%" [ref=e1008]
+              - row "金博股份 +20.01%" [ref=e1009]:
+                - rowheader "金博股份" [ref=e1010]:
+                  - link "金博股份" [ref=e1011] [cursor=pointer]:
+                    - /url: http://finance.sina.com.cn/realstock/company/sh688598/nc.shtml
+                - cell "+20.01%" [ref=e1012]
+              - row "海辰药业 +20.00%" [ref=e1013]:
+                - rowheader "海辰药业" [ref=e1014]:
+                  - link "海辰药业" [ref=e1015] [cursor=pointer]:
+                    - /url: http://finance.sina.com.cn/realstock/company/sz300584/nc.shtml
+                - cell "+20.00%" [ref=e1016]
+              - row "科顺股份 +20.00%" [ref=e1017]:
+                - rowheader "科顺股份" [ref=e1018]:
+                  - link "科顺股份" [ref=e1019] [cursor=pointer]:
+                    - /url: http://finance.sina.com.cn/realstock/company/sz300737/nc.shtml
+                - cell "+20.00%" [ref=e1020]
+              - row "一博科技 +20.00%" [ref=e1021]:
+                - rowheader "一博科技" [ref=e1022]:
+                  - link "一博科技" [ref=e1023] [cursor=pointer]:
+                    - /url: http://finance.sina.com.cn/realstock/company/sz301366/nc.shtml
+                - cell "+20.00%" [ref=e1024]
+              - row "盛美上海 +20.00%" [ref=e1025]:
+                - rowheader "盛美上海" [ref=e1026]:
+                  - link "盛美上海" [ref=e1027] [cursor=pointer]:
+                    - /url: http://finance.sina.com.cn/realstock/company/sh688082/nc.shtml
+                - cell "+20.00%" [ref=e1028]
+              - row "科翔股份 +20.00%" [ref=e1029]:
+                - rowheader "科翔股份" [ref=e1030]:
+                  - link "科翔股份" [ref=e1031] [cursor=pointer]:
+                    - /url: http://finance.sina.com.cn/realstock/company/sz300903/nc.shtml
+                - cell "+20.00%" [ref=e1032]
+      - generic [ref=e1033]:
+        - heading "资金流向" [level=2] [ref=e1035]:
+          - link "资金流向" [ref=e1036] [cursor=pointer]:
+            - /url: http://vip.stock.finance.sina.com.cn/moneyflow/
+        - generic [ref=e1038]:
+          - list [ref=e1040]:
+            - listitem [ref=e1041]: 净流入
+            - listitem [ref=e1042] [cursor=pointer]: 净流出
+            - listitem [ref=e1043] [cursor=pointer]: 主力流入
+            - listitem [ref=e1044] [cursor=pointer]: 主力流出
+            - listitem [ref=e1045] [cursor=pointer]: 连续流入
+            - listitem [ref=e1046] [cursor=pointer]: 连续流出
+            - listitem [ref=e1047] [cursor=pointer]: 行业流入
+            - listitem [ref=e1048] [cursor=pointer]: 行业流出
+          - table [ref=e1051]:
+            - rowgroup [ref=e1052]:
+              - row "股票名称 净流入率" [ref=e1053]:
+                - columnheader "股票名称" [ref=e1054]
+                - columnheader "净流入率" [ref=e1055]
+            - rowgroup [ref=e1056]:
+              - row "false +177.04%" [ref=e1057]:
+                - rowheader "false" [ref=e1058]:
+                  - link "false" [ref=e1059] [cursor=pointer]:
+                    - /url: http://vip.stock.finance.sina.com.cn/moneyflow/#!ssfx!sh515090
+                - cell "+177.04%" [ref=e1060]
+              - row "沪深300ETF方正富 +161.40%" [ref=e1061]:
+                - rowheader "沪深300ETF方正富" [ref=e1062]:
+                  - link "沪深300ETF方正富" [ref=e1063] [cursor=pointer]:
+                    - /url: http://vip.stock.finance.sina.com.cn/moneyflow/#!ssfx!sh515360
+                - cell "+161.40%" [ref=e1064]
+              - row "新能源ETF博时 +155.63%" [ref=e1065]:
+                - rowheader "新能源ETF博时" [ref=e1066]:
+                  - link "新能源ETF博时" [ref=e1067] [cursor=pointer]:
+                    - /url: http://vip.stock.finance.sina.com.cn/moneyflow/#!ssfx!sh516580
+                - cell "+155.63%" [ref=e1068]
+              - row "添利货币ETF广发 +114.83%" [ref=e1069]:
+                - rowheader "添利货币ETF广发" [ref=e1070]:
+                  - link "添利货币ETF广发" [ref=e1071] [cursor=pointer]:
+                    - /url: http://vip.stock.finance.sina.com.cn/moneyflow/#!ssfx!sh511950
+                - cell "+114.83%" [ref=e1072]
+              - row "ST海钦 +105.06%" [ref=e1073]:
+                - rowheader "ST海钦" [ref=e1074]:
+                  - link "ST海钦" [ref=e1075] [cursor=pointer]:
+                    - /url: http://vip.stock.finance.sina.com.cn/moneyflow/#!ssfx!sh600753
+                - cell "+105.06%" [ref=e1076]
+              - row "货币ETF博时 +100.86%" [ref=e1077]:
+                - rowheader "货币ETF博时" [ref=e1078]:
+                  - link "货币ETF博时" [ref=e1079] [cursor=pointer]:
+                    - /url: http://vip.stock.finance.sina.com.cn/moneyflow/#!ssfx!sh511860
+                - cell "+100.86%" [ref=e1080]
+              - row "货币ETF华夏 +93.81%" [ref=e1081]:
+                - rowheader "货币ETF华夏" [ref=e1082]:
+                  - link "货币ETF华夏" [ref=e1083] [cursor=pointer]:
+                    - /url: http://vip.stock.finance.sina.com.cn/moneyflow/#!ssfx!sh511650
+                - cell "+93.81%" [ref=e1084]
+              - row "大湾区ETF平安 +92.13%" [ref=e1085]:
+                - rowheader "大湾区ETF平安" [ref=e1086]:
+                  - link "大湾区ETF平安" [ref=e1087] [cursor=pointer]:
+                    - /url: http://vip.stock.finance.sina.com.cn/moneyflow/#!ssfx!sh512970
+                - cell "+92.13%" [ref=e1088]
+              - row "华安日日鑫ETF +90.07%" [ref=e1089]:
+                - rowheader "华安日日鑫ETF" [ref=e1090]:
+                  - link "华安日日鑫ETF" [ref=e1091] [cursor=pointer]:
+                    - /url: http://vip.stock.finance.sina.com.cn/moneyflow/#!ssfx!sh511600
+                - cell "+90.07%" [ref=e1092]
+              - row "凯盛新能 +88.68%" [ref=e1093]:
+                - rowheader "凯盛新能" [ref=e1094]:
+                  - link "凯盛新能" [ref=e1095] [cursor=pointer]:
+                    - /url: http://vip.stock.finance.sina.com.cn/moneyflow/#!ssfx!sh600876
+                - cell "+88.68%" [ref=e1096]
+      - generic [ref=e1097]:
+        - heading "价格阶段统计" [level=2] [ref=e1099]:
+          - link "价格阶段统计" [ref=e1100] [cursor=pointer]:
+            - /url: http://vip.stock.finance.sina.com.cn/datacenter/hqstat.html#jdgd
+        - generic [ref=e1102]:
+          - list [ref=e1104]:
+            - listitem [ref=e1105]: 短期涨幅榜
+            - listitem [ref=e1106] [cursor=pointer]: 短期跌幅榜
+            - listitem [ref=e1107] [cursor=pointer]: 长期涨幅榜
+            - listitem [ref=e1108] [cursor=pointer]: 长期跌幅榜
+            - listitem [ref=e1109] [cursor=pointer]: 持续上涨
+            - listitem [ref=e1110] [cursor=pointer]: 持续下跌
+            - listitem [ref=e1111] [cursor=pointer]: 30日盘中新高
+            - listitem [ref=e1112] [cursor=pointer]: 30日盘中新低
+          - generic [ref=e1114]:
+            - generic [ref=e1117] [cursor=pointer]: 最近2日
+            - table [ref=e1119]:
+              - rowgroup [ref=e1120]:
+                - row "股票名称 涨跌幅" [ref=e1121]:
+                  - columnheader "股票名称" [ref=e1122]
+                  - columnheader "涨跌幅" [ref=e1123]
+              - rowgroup [ref=e1124]:
+                - row "金戈新材 +52.36%" [ref=e1125]:
+                  - rowheader "金戈新材" [ref=e1126]:
+                    - link "金戈新材" [ref=e1127] [cursor=pointer]:
+                      - /url: http://finance.sina.com.cn/realstock/company/bj920083/nc.shtml
+                  - cell "+52.36%" [ref=e1128]
+                - row "长信科技 +34.82%" [ref=e1129]:
+                  - rowheader "长信科技" [ref=e1130]:
+                    - link "长信科技" [ref=e1131] [cursor=pointer]:
+                      - /url: http://finance.sina.com.cn/realstock/company/sz300088/nc.shtml
+                  - cell "+34.82%" [ref=e1132]
+                - row "世名科技 +30.80%" [ref=e1133]:
+                  - rowheader "世名科技" [ref=e1134]:
+                    - link "世名科技" [ref=e1135] [cursor=pointer]:
+                      - /url: http://finance.sina.com.cn/realstock/company/sz300522/nc.shtml
+                  - cell "+30.80%" [ref=e1136]
+                - row "锐翔智能 +29.00%" [ref=e1137]:
+                  - rowheader "锐翔智能" [ref=e1138]:
+                    - link "锐翔智能" [ref=e1139] [cursor=pointer]:
+                      - /url: http://finance.sina.com.cn/realstock/company/bj920178/nc.shtml
+                  - cell "+29.00%" [ref=e1140]
+                - row "昀冢科技 +28.33%" [ref=e1141]:
+                  - rowheader "昀冢科技" [ref=e1142]:
+                    - link "昀冢科技" [ref=e1143] [cursor=pointer]:
+                      - /url: http://finance.sina.com.cn/realstock/company/sh688260/nc.shtml
+                  - cell "+28.33%" [ref=e1144]
+                - row "中纺标 +28.08%" [ref=e1145]:
+                  - rowheader "中纺标" [ref=e1146]:
+                    - link "中纺标" [ref=e1147] [cursor=pointer]:
+                      - /url: http://finance.sina.com.cn/realstock/company/bj920122/nc.shtml
+                  - cell "+28.08%" [ref=e1148]
+                - row "天纺标 +27.51%" [ref=e1149]:
+                  - rowheader "天纺标" [ref=e1150]:
+                    - link "天纺标" [ref=e1151] [cursor=pointer]:
+                      - /url: http://finance.sina.com.cn/realstock/company/bj920753/nc.shtml
+                  - cell "+27.51%" [ref=e1152]
+                - row "普冉股份 +26.96%" [ref=e1153]:
+                  - rowheader "普冉股份" [ref=e1154]:
+                    - link "普冉股份" [ref=e1155] [cursor=pointer]:
+                      - /url: http://finance.sina.com.cn/realstock/company/sh688766/nc.shtml
+                  - cell "+26.96%" [ref=e1156]
+                - row "金博股份 +26.47%" [ref=e1157]:
+                  - rowheader "金博股份" [ref=e1158]:
+                    - link "金博股份" [ref=e1159] [cursor=pointer]:
+                      - /url: http://finance.sina.com.cn/realstock/company/sh688598/nc.shtml
+                  - cell "+26.47%" [ref=e1160]
+                - row "秋田微 +26.37%" [ref=e1161]:
+                  - rowheader "秋田微" [ref=e1162]:
+                    - link "秋田微" [ref=e1163] [cursor=pointer]:
+                      - /url: http://finance.sina.com.cn/realstock/company/sz300939/nc.shtml
+                  - cell "+26.37%" [ref=e1164]
+      - generic [ref=e1165]:
+        - heading "成交量阶段统计" [level=2] [ref=e1167]:
+          - link "成交量阶段统计" [ref=e1168] [cursor=pointer]:
+            - /url: http://vip.stock.finance.sina.com.cn/datacenter/hqstat.html#jdgd
+        - generic [ref=e1170]:
+          - list [ref=e1172]:
+            - listitem [ref=e1173]: 连续放量
+            - listitem [ref=e1174] [cursor=pointer]: 连续缩量
+            - listitem [ref=e1175] [cursor=pointer]: 成交量骤增
+            - listitem [ref=e1176] [cursor=pointer]: 成交量骤减
+          - table [ref=e1179]:
+            - rowgroup [ref=e1180]:
+              - row "股票名称 放量天数" [ref=e1181]:
+                - columnheader "股票名称" [ref=e1182]
+                - columnheader "放量天数" [ref=e1183]
+            - rowgroup [ref=e1184]:
+              - row "瑞丰新材 7" [ref=e1185]:
+                - rowheader "瑞丰新材" [ref=e1186]:
+                  - link "瑞丰新材" [ref=e1187] [cursor=pointer]:
+                    - /url: http://finance.sina.com.cn/realstock/company/sz300910/nc.shtml
+                - cell "7" [ref=e1188]
+              - row "花园生物 6" [ref=e1189]:
+                - rowheader "花园生物" [ref=e1190]:
+                  - link "花园生物" [ref=e1191] [cursor=pointer]:
+                    - /url: http://finance.sina.com.cn/realstock/company/sz300401/nc.shtml
+                - cell "6" [ref=e1192]
+              - row "三达膜 6" [ref=e1193]:
+                - rowheader "三达膜" [ref=e1194]:
+                  - link "三达膜" [ref=e1195] [cursor=pointer]:
+                    - /url: http://finance.sina.com.cn/realstock/company/sh688101/nc.shtml
+                - cell "6" [ref=e1196]
+              - row "铁科轨道 6" [ref=e1197]:
+                - rowheader "铁科轨道" [ref=e1198]:
+                  - link "铁科轨道" [ref=e1199] [cursor=pointer]:
+                    - /url: http://finance.sina.com.cn/realstock/company/sh688569/nc.shtml
+                - cell "6" [ref=e1200]
+              - row "瑞泰科技 6" [ref=e1201]:
+                - rowheader "瑞泰科技" [ref=e1202]:
+                  - link "瑞泰科技" [ref=e1203] [cursor=pointer]:
+                    - /url: http://finance.sina.com.cn/realstock/company/sz002066/nc.shtml
+                - cell "6" [ref=e1204]
+              - row "ST人福 6" [ref=e1205]:
+                - rowheader "ST人福" [ref=e1206]:
+                  - link "ST人福" [ref=e1207] [cursor=pointer]:
+                    - /url: http://finance.sina.com.cn/realstock/company/sh600079/nc.shtml
+                - cell "6" [ref=e1208]
+              - row "劲旅环境 6" [ref=e1209]:
+                - rowheader "劲旅环境" [ref=e1210]:
+                  - link "劲旅环境" [ref=e1211] [cursor=pointer]:
+                    - /url: http://finance.sina.com.cn/realstock/company/sz001230/nc.shtml
+                - cell "6" [ref=e1212]
+              - row "汇成真空 5" [ref=e1213]:
+                - rowheader "汇成真空" [ref=e1214]:
+                  - link "汇成真空" [ref=e1215] [cursor=pointer]:
+                    - /url: http://finance.sina.com.cn/realstock/company/sz301392/nc.shtml
+                - cell "5" [ref=e1216]
+              - row "丰元股份 5" [ref=e1217]:
+                - rowheader "丰元股份" [ref=e1218]:
+                  - link "丰元股份" [ref=e1219] [cursor=pointer]:
+                    - /url: http://finance.sina.com.cn/realstock/company/sz002805/nc.shtml
+                - cell "5" [ref=e1220]
+              - row "瑞泰新材 5" [ref=e1221]:
+                - rowheader "瑞泰新材" [ref=e1222]:
+                  - link "瑞泰新材" [ref=e1223] [cursor=pointer]:
+                    - /url: http://finance.sina.com.cn/realstock/company/sz301238/nc.shtml
+                - cell "5" [ref=e1224]
+      - generic [ref=e1227]:
+        - generic [ref=e1229] [cursor=pointer]: 沪深股票
+        - textbox [ref=e1230]: 拼音/代码/名称
+        - button "搜行情" [ref=e1231] [cursor=pointer]
+  - generic [ref=e1233]:
+    - heading "环球市场行情摘要" [level=1] [ref=e1235]:
+      - link "环球市场行情摘要" [ref=e1236] [cursor=pointer]:
+        - /url: http://finance.sina.com.cn/money/globalindex/index.shtml
+    - generic [ref=e1237]:
+      - generic [ref=e1238]:
+        - heading "环球股指" [level=2] [ref=e1240]:
+          - link "环球股指" [ref=e1241] [cursor=pointer]:
+            - /url: http://finance.sina.com.cn/money/globalindex/index.shtml
+        - table [ref=e1244]:
+          - rowgroup [ref=e1245]:
+            - row "道琼斯 52215.53 +0.42%" [ref=e1246]:
+              - rowheader "道琼斯" [ref=e1247]:
+                - link "道琼斯" [ref=e1248] [cursor=pointer]:
+                  - /url: http://biz.finance.sina.com.cn/suggest/lookup_n.php?q=.dji&country=usstock
+              - cell "52215.53" [ref=e1249]
+              - cell "+0.42%" [ref=e1250]
+            - row "纳斯达克 26415.58 +0.15%" [ref=e1251]:
+              - rowheader "纳斯达克" [ref=e1252]:
+                - link "纳斯达克" [ref=e1253] [cursor=pointer]:
+                  - /url: http://biz.finance.sina.com.cn/suggest/lookup_n.php?q=ixic&country=usstock
+              - cell "26415.58" [ref=e1254]
+              - cell "+0.15%" [ref=e1255]
+            - row "标普500 7519.53 +0.11%" [ref=e1256]:
+              - rowheader "标普500" [ref=e1257]:
+                - link "标普500" [ref=e1258] [cursor=pointer]:
+                  - /url: http://biz.finance.sina.com.cn/suggest/lookup_n.php?q=inx&country=usstock
+              - cell "7519.53" [ref=e1259]
+              - cell "+0.11%" [ref=e1260]
+            - row "斯托克50 6297.42 +0.64%" [ref=e1261]:
+              - rowheader "斯托克50" [ref=e1262]
+              - cell "6297.42" [ref=e1263]
+              - cell "+0.64%" [ref=e1264]
+            - row "英金融时报指数 10508.61 +0.14%" [ref=e1265]:
+              - rowheader "英金融时报指数" [ref=e1266]
+              - cell "10508.61" [ref=e1267]
+              - cell "+0.14%" [ref=e1268]
+            - row "日经指数 69902.03 +0.72%" [ref=e1269]:
+              - rowheader "日经指数" [ref=e1270]
+              - cell "69902.03" [ref=e1271]
+              - cell "+0.72%" [ref=e1272]
+            - row "恒生指数 24312.16 -0.74%" [ref=e1273]:
+              - rowheader "恒生指数" [ref=e1274]:
+                - link "恒生指数" [ref=e1275] [cursor=pointer]:
+                  - /url: http://biz.finance.sina.com.cn/suggest/lookup_n.php?country=hk&q=hsi
+              - cell "24312.16" [ref=e1276]
+              - cell "-0.74%" [ref=e1277]
+      - generic [ref=e1278]:
+        - heading "国际期货" [level=2] [ref=e1280]:
+          - link "国际期货" [ref=e1281] [cursor=pointer]:
+            - /url: http://finance.sina.com.cn/futuremarket/
+        - table [ref=e1284]:
+          - rowgroup [ref=e1285]:
+            - row "NYMEX原油 75.78 +0.68%" [ref=e1286]:
+              - rowheader "NYMEX原油" [ref=e1287]:
+                - link "NYMEX原油" [ref=e1288] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/money/future/CL/quote.shtml
+              - cell "75.78" [ref=e1289]
+              - cell "+0.68%" [ref=e1290]
+            - row "COMEX黄金 4385.88 +0.72%" [ref=e1291]:
+              - rowheader "COMEX黄金" [ref=e1292]:
+                - link "COMEX黄金" [ref=e1293] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/money/future/quote_hf.html?GC
+              - cell "4385.88" [ref=e1294]
+              - cell "+0.72%" [ref=e1295]
+            - row "COMEX白银 71.40 +1.22%" [ref=e1296]:
+              - rowheader "COMEX白银" [ref=e1297]:
+                - link "COMEX白银" [ref=e1298] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/money/future/quote_hf.html?SI
+              - cell "71.40" [ref=e1299]
+              - cell "+1.22%" [ref=e1300]
+            - row "LME铜 13821.04 +0.05%" [ref=e1301]:
+              - rowheader "LME铜" [ref=e1302]:
+                - link "LME铜" [ref=e1303] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/money/future/quote_hf.html?CAD
+              - cell "13821.04" [ref=e1304]
+              - cell "+0.05%" [ref=e1305]
+            - row "CBOT黄豆 1153.58 +0.62%" [ref=e1306]:
+              - rowheader "CBOT黄豆" [ref=e1307]:
+                - link "CBOT黄豆" [ref=e1308] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/money/future/quote_hf.html?S
+              - cell "1153.58" [ref=e1309]
+              - cell "+0.62%" [ref=e1310]
+      - generic [ref=e1311]:
+        - heading "国内期货" [level=2] [ref=e1313]:
+          - link "国内期货" [ref=e1314] [cursor=pointer]:
+            - /url: http://finance.sina.com.cn/futuremarket/
+        - table [ref=e1317]:
+          - rowgroup [ref=e1318]:
+            - row "期指IC0 8429.00 +1.75%" [ref=e1319]:
+              - rowheader "期指IC0" [ref=e1320]:
+                - link "期指IC0" [ref=e1321] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/money/cffex/quotes/IC0/nc.shtml
+              - cell "8429.00" [ref=e1322]
+              - cell "+1.75%" [ref=e1323]
+            - row "沪铜 78500.00 -1.08%" [ref=e1324]:
+              - rowheader "沪铜" [ref=e1325]:
+                - link "沪铜" [ref=e1326] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/money/future/quote.html?CU0
+              - cell "78500.00" [ref=e1327]
+              - cell "-1.08%" [ref=e1328]
+            - row "白糖 6128.00 -0.31%" [ref=e1329]:
+              - rowheader "白糖" [ref=e1330]:
+                - link "白糖" [ref=e1331] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/money/future/quote.html?SR0
+              - cell "6128.00" [ref=e1332]
+              - cell "-0.31%" [ref=e1333]
+            - row "螺纹钢 3487.00 -1.52%" [ref=e1334]:
+              - rowheader "螺纹钢" [ref=e1335]:
+                - link "螺纹钢" [ref=e1336] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/money/future/quote.html?RB0
+              - cell "3487.00" [ref=e1337]
+              - cell "-1.52%" [ref=e1338]
+      - generic [ref=e1339]:
+        - heading "外汇" [level=2] [ref=e1341]:
+          - link "外汇" [ref=e1342] [cursor=pointer]:
+            - /url: http://finance.sina.com.cn/forex/
+        - table [ref=e1345]:
+          - rowgroup [ref=e1346]:
+            - row "美元指数 99.6928 +0.1382%" [ref=e1347]:
+              - rowheader "美元指数" [ref=e1348]:
+                - link "美元指数" [ref=e1349] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/money/forex/hq/DINIW.shtml
+              - cell "99.6928" [ref=e1350]
+              - cell "+0.1382%" [ref=e1351]
+            - row "美元人民币 6.7577 +0.0148%" [ref=e1352]:
+              - rowheader "美元人民币" [ref=e1353]:
+                - link "美元人民币" [ref=e1354] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/money/forex/hq/USDCNY.shtml
+              - cell "6.7577" [ref=e1355]
+              - cell "+0.0148%" [ref=e1356]
+            - row "美元港元 7.8349 +0.0153%" [ref=e1357]:
+              - rowheader "美元港元" [ref=e1358]:
+                - link "美元港元" [ref=e1359] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/money/forex/hq/USDHKD.shtml
+              - cell "7.8349" [ref=e1360]
+              - cell "+0.0153%" [ref=e1361]
+            - row "欧元美元 1.1592 -0.1378%" [ref=e1362]:
+              - rowheader "欧元美元" [ref=e1363]:
+                - link "欧元美元" [ref=e1364] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/money/forex/hq/EURUSD.shtml
+              - cell "1.1592" [ref=e1365]
+              - cell "-0.1378%" [ref=e1366]
+            - row "英镑美元 1.3393 -0.2458%" [ref=e1367]:
+              - rowheader "英镑美元" [ref=e1368]:
+                - link "英镑美元" [ref=e1369] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/money/forex/hq/GBPUSD.shtml
+              - cell "1.3393" [ref=e1370]
+              - cell "-0.2458%" [ref=e1371]
+            - row "美元日元 160.2200 -0.1496%" [ref=e1372]:
+              - rowheader "美元日元" [ref=e1373]:
+                - link "美元日元" [ref=e1374] [cursor=pointer]:
+                  - /url: http://finance.sina.com.cn/money/forex/hq/USDJPY.shtml
+              - cell "160.2200" [ref=e1375]
+              - cell "-0.1496%" [ref=e1376]
+  - generic [ref=e1377]:
+    - generic [ref=e1378]:
+      - text: 新
+      - text: 浪
+      - text: 广
+      - text: 告
+    - generic [ref=e1379]:
+      - insertion
+  - generic [ref=e1380]:
+    - text: 客户服务热线：4001102288 欢迎批评指正
+    - link "常见问题解答" [ref=e1381] [cursor=pointer]:
+      - /url: http://tech.sina.com.cn/focus/sinahelp.shtml
+    - link "互联网违法和不良信息举报" [ref=e1382] [cursor=pointer]:
+      - /url: http://net.china.cn/chinese/index.htm
+    - link "新浪财经意见反馈留言板" [ref=e1383] [cursor=pointer]:
+      - /url: https://gu.sina.cn/pc/feedback/
+    - link "新浪简介" [ref=e1384] [cursor=pointer]:
+      - /url: http://corp.sina.com.cn/chn/
+    - text: "|"
+    - link "About Sina" [ref=e1385] [cursor=pointer]:
+      - /url: http://corp.sina.com.cn/eng/
+    - text: "|"
+    - link "广告服务" [ref=e1386] [cursor=pointer]:
+      - /url: http://emarketing.sina.com.cn/
+    - text: "|"
+    - link "联系我们" [ref=e1387] [cursor=pointer]:
+      - /url: http://www.sina.com.cn/contactus.html
+    - text: "|"
+    - link "招聘信息" [ref=e1388] [cursor=pointer]:
+      - /url: http://corp.sina.com.cn/chn/sina_job.html
+    - text: "|"
+    - link "网站律师" [ref=e1389] [cursor=pointer]:
+      - /url: http://www.sina.com.cn/intro/lawfirm.shtml
+    - text: "|"
+    - link "SINA English" [ref=e1390] [cursor=pointer]:
+      - /url: http://english.sina.com
+    - text: "|"
+    - link "通行证注册" [ref=e1391] [cursor=pointer]:
+      - /url: http://members.sina.com.cn/apply/
+    - text: "|"
+    - link "产品答疑" [ref=e1392] [cursor=pointer]:
+      - /url: http://help.sina.com.cn/
+    - text: 新浪公司
+    - link "版权所有" [ref=e1393] [cursor=pointer]:
+      - /url: http://www.sina.com.cn/intro/copyright.shtml
+  - iframe [ref=e1394]: <SCRIPT LANGUAGE="JavaScript1.1" SRC="//578.adsina.allyes.com/main/adfshow?user=AFP6_for_SINA|test1|gupiaozuizhong&db=sina&local=yes&js=on"></SCRIPT> <NOSCRIPT><A HREF="http://578.adsina.allyes.com/main/adfclick?user=AFP6_for_SINA|test1|gupiaozuizhong&db=sina"><IMG SRC="//578.adsina.allyes.com/main/adfshow?user=AFP6_for_SINA|test1|gupiaozuizhong&db=sina" WIDTH=1 HEIGHT=1 BORDER=0></a></NOSCRIPT>:
+    
+  - generic [ref=e1396]:
+    - generic [ref=e1397]:
+      - heading "发现新版本" [level=4] [ref=e1398]
+      - generic [ref=e1399]: V10.3.0
+      - generic [ref=e1401]:
+        - generic [ref=e1402]: 1.基金首页新增热门风口，抓热点优选重仓基金；
+        - generic [ref=e1403]: 2.美股营收构成全面升级，直观查看营收结构及历年变动；
+        - generic [ref=e1404]: 3.美股夜盘新增分价表，精准追踪夜盘成交分布；
+    - generic [ref=e1405]:
+      - img [ref=e1406]
+      - generic [ref=e1407]: 扫码立即体验
+    - link "关闭" [ref=e1408] [cursor=pointer]:
+      - /url: javascript:;

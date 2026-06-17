@@ -1,0 +1,286 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - link [ref=e6] [cursor=pointer]:
+            - /url: /
+          - text: 
+        - generic [ref=e7]:
+          - list [ref=e8]:
+            - listitem [ref=e9]:
+              - button "PE/PB" [ref=e10] [cursor=pointer]: PE/PB
+            - listitem [ref=e12]:
+              - button "综合" [ref=e13] [cursor=pointer]: 综合
+            - listitem [ref=e15]:
+              - button "底部研究" [ref=e16] [cursor=pointer]: 底部研究
+            - listitem [ref=e18]:
+              - link "宏观数据" [ref=e19] [cursor=pointer]:
+                - /url: /stockdata/macro-nav
+            - listitem [ref=e20]:
+              - button "景气度/拥挤度" [ref=e21] [cursor=pointer]: 景气度/拥挤度
+            - listitem [ref=e23]:
+              - button "市场宽度" [ref=e24] [cursor=pointer]: 市场宽度
+            - listitem [ref=e26]:
+              - button "基金持仓研究" [ref=e27] [cursor=pointer]: 基金持仓研究
+          - list [ref=e29]:
+            - listitem [ref=e30]:
+              - link "登录" [ref=e31] [cursor=pointer]:
+                - /url: /login?redirect_url=/stockdata/market_pe
+            - listitem [ref=e32]:
+              - generic [ref=e33] [cursor=pointer]: 
+          - text: 
+      - text:  
+  - generic [ref=e34]:
+    - generic [ref=e38]:
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - list [ref=e43]:
+            - listitem [ref=e44]: 全部分类
+            - listitem [ref=e45] [cursor=pointer]: A股市盈率
+            - listitem [ref=e46] [cursor=pointer]: A股市净率
+            - listitem [ref=e47] [cursor=pointer]: 申万行业
+            - listitem [ref=e48] [cursor=pointer]: 规模指数/行业代表
+            - listitem [ref=e49] [cursor=pointer]: 沪深港通/融资融券
+            - listitem [ref=e50] [cursor=pointer]: 底部研究
+            - listitem [ref=e51] [cursor=pointer]: 市场宽度
+            - listitem [ref=e52] [cursor=pointer]: 景气度/拥挤度研究
+            - listitem [ref=e53] [cursor=pointer]: 宏观数据
+            - listitem [ref=e54] [cursor=pointer]: 券商十大金股
+            - listitem [ref=e55] [cursor=pointer]: 美股/港股
+            - listitem [ref=e56] [cursor=pointer]: 基金
+            - listitem [ref=e57] [cursor=pointer]: 综合
+          - insertion [ref=e59]:
+            - generic [ref=e62]:
+              - heading "这些是与文章相关且您可能感兴趣的主题" [level=2] [ref=e64]: 深入探索
+              - link "金融市场资讯" [ref=e65] [cursor=pointer]:
+                - generic "金融市场资讯" [ref=e66]
+                - img [ref=e68]
+              - link "股票和债券" [ref=e70] [cursor=pointer]:
+                - generic "股票和债券" [ref=e71]
+                - img [ref=e73]
+        - text:  / /
+        - generic [ref=e75]:
+          - generic [ref=e77]:
+            - generic [ref=e78]:
+              - generic [ref=e79]: 
+              - generic [ref=e80]: 当前位置：
+            - list [ref=e81]:
+              - listitem [ref=e82]:
+                - link "首页" [ref=e83] [cursor=pointer]:
+                  - /url: /
+              - listitem [ref=e84]:
+                - text: /
+                - link "数据导航" [ref=e85] [cursor=pointer]:
+                  - /url: /stockdata/box
+              - listitem [ref=e86]:
+                - text: /
+                - link "A股平均市盈率走势图" [ref=e87] [cursor=pointer]:
+                  - /url: ""
+          - generic [ref=e88]:
+            - generic [ref=e90]:
+              - heading "A股平均市盈率走势图" [level=1] [ref=e92]
+              - generic [ref=e93]:
+                - generic [ref=e94]: 2026-06-17
+                - button "收藏" [ref=e96] [cursor=pointer]:
+                  - generic [ref=e97]: 
+                  - generic [ref=e98]: 收藏
+            - generic [ref=e100]:
+              - generic [ref=e101]:
+                - generic [ref=e102]: 上证
+                - generic [ref=e103]: "16.83"
+              - generic [ref=e104]:
+                - generic [ref=e105]: 深证
+                - generic [ref=e106]: "34.1"
+              - generic [ref=e107]:
+                - generic [ref=e108]: 创业板
+                - generic [ref=e109]: "53.34"
+              - generic [ref=e110]:
+                - generic [ref=e111]: 科创板
+                - generic [ref=e112]: "102.59"
+          - generic [ref=e117]:
+            - text: 使用说明：符号
+            - img "点符号" [ref=e118]
+            - img "点符号" [ref=e119]
+            - text: 可点击消除
+          - button "下载数据" [ref=e120] [cursor=pointer]:
+            - generic [ref=e121]: 
+            - text: 下载数据
+          - generic [ref=e122]:
+            - table [ref=e124]:
+              - rowgroup [ref=e125]:
+                - row "- 上证平均市盈率 深证平均市盈率 中小板市盈率 创业板市盈率 科创板市盈率" [ref=e126]:
+                  - columnheader "-" [ref=e127]
+                  - columnheader "上证平均市盈率" [ref=e128]:
+                    - link "上证平均市盈率" [ref=e129] [cursor=pointer]:
+                      - /url: /stockdata/shanghaiPE
+                  - columnheader "深证平均市盈率" [ref=e130]:
+                    - link "深证平均市盈率" [ref=e131] [cursor=pointer]:
+                      - /url: /stockdata/shenzhenPE
+                  - columnheader "中小板市盈率" [ref=e132]:
+                    - link "中小板市盈率" [ref=e133] [cursor=pointer]:
+                      - /url: /stockdata/zxbPE
+                  - columnheader "创业板市盈率" [ref=e134]:
+                    - link "创业板市盈率" [ref=e135] [cursor=pointer]:
+                      - /url: /stockdata/cybPE
+                  - columnheader "科创板市盈率" [ref=e136]:
+                    - link "科创板市盈率" [ref=e137] [cursor=pointer]:
+                      - /url: /stockdata/ke-chuang-ban-pe
+              - rowgroup [ref=e138]:
+                - row "时间 2026-06-17 2026-06-17 2021-04-02 2026-06-17 2026-06-17" [ref=e139]:
+                  - cell "时间" [ref=e140]
+                  - cell "2026-06-17" [ref=e141]
+                  - cell "2026-06-17" [ref=e142]
+                  - cell "2021-04-02" [ref=e143]
+                  - cell "2026-06-17" [ref=e144]
+                  - cell "2026-06-17" [ref=e145]
+                - row "平均市盈率 16.83 34.1 33.16 53.34 102.59" [ref=e146]:
+                  - cell "平均市盈率" [ref=e147]
+                  - cell "16.83" [ref=e148]
+                  - cell "34.1" [ref=e149]
+                  - cell "33.16" [ref=e150]
+                  - cell "53.34" [ref=e151]
+                  - cell "102.59" [ref=e152]
+            - generic [ref=e153]:
+              - generic [ref=e154]:
+                - text: 轻松学习本页
+                - button "点我复制提示词" [ref=e155] [cursor=pointer]
+                - text: 问AI
+              - generic [ref=e156]:
+                - link "DeepSeek" [ref=e157] [cursor=pointer]:
+                  - /url: https://chat.deepseek.com
+                  - img "DeepSeek" [ref=e158]
+                - link "腾讯元宝" [ref=e159] [cursor=pointer]:
+                  - /url: https://yuanbao.tencent.com
+                  - img "腾讯元宝" [ref=e160]
+                - link "千问" [ref=e161] [cursor=pointer]:
+                  - /url: https://www.qianwen.com/
+                  - img "千问" [ref=e162]
+                - link "Kimi" [ref=e163] [cursor=pointer]:
+                  - /url: https://kimi.moonshot.cn
+                  - img "Kimi" [ref=e164]
+            - generic [ref=e165]:
+              - table [ref=e166]:
+                - rowgroup [ref=e167]:
+                  - row "数据来源 上海证券交易所，深证证券交易所" [ref=e168]:
+                    - cell "数据来源" [ref=e169]
+                    - cell "上海证券交易所，深证证券交易所" [ref=e170]
+                  - row "统计说明 平均市盈率＝∑(收盘价×发行数量)/∑(每股收益×发行数量)，统计时剔除亏损及暂停上市的上市公司。 市盈率使用最近一期年度报告财务数据计算，公司净利润为归属于母公司股东的净利润。年报数据更新时点统一为每年5月1日，即在每年5月1日前采用第N-2年年度报告财务数据，5月1日（含）之后一并更新为第N-1年年度报告财务数据。" [ref=e171]:
+                    - cell "统计说明" [ref=e172]
+                    - cell "平均市盈率＝∑(收盘价×发行数量)/∑(每股收益×发行数量)，统计时剔除亏损及暂停上市的上市公司。 市盈率使用最近一期年度报告财务数据计算，公司净利润为归属于母公司股东的净利润。年报数据更新时点统一为每年5月1日，即在每年5月1日前采用第N-2年年度报告财务数据，5月1日（含）之后一并更新为第N-1年年度报告财务数据。" [ref=e173]:
+                      - paragraph [ref=e174]: 平均市盈率＝∑(收盘价×发行数量)/∑(每股收益×发行数量)，统计时剔除亏损及暂停上市的上市公司。
+                      - paragraph [ref=e175]: 市盈率使用最近一期年度报告财务数据计算，公司净利润为归属于母公司股东的净利润。年报数据更新时点统一为每年5月1日，即在每年5月1日前采用第N-2年年度报告财务数据，5月1日（含）之后一并更新为第N-1年年度报告财务数据。
+              - heading "市场整体市盈率" [level=4] [ref=e176]
+              - paragraph [ref=e177]: 深圳证券交易所信息管理部：市场整体市盈率用于衡量一组股票价格高低的整体水平，通常整体市盈率有三种算法： 总股本加权法、算术平均法、中位数法。总股本加权法是以股票的总股本作为权重，对每只股票的价格和每股收益进行加总计算， 即一组股票的总市值除以总收益。算术平均法是取多只股票市盈率的简单算术平均数，中位数法则是多只股票市盈率排序后取中间的那个数值。 三种算法各有优缺点，总股本加权法容易受到大股本股票的影响，算术平均法容易受到微利股票的影响，而中位数法容易受到样本数和样本分布的影响。 目前，深交所对外发布的板块市盈率采用的是总股本加权法，证监会、上交所、世界交易所联合会（WFE）、境外信息商在计算整体市盈率时，大都也采用这种算法。
+              - paragraph [ref=e178]: 用总股本加权计算整体市盈率时，有一个细节需要分辨，就是包不包括亏损公司。深交所现有的算法是不包括亏损公司， 因为从经济学角度来看，整体市盈率即投资者买一组股票收回成本的时间，作为理性的投资者肯定想越快回本越有利， 自然不会选亏损的股票而延长回本时间,上交所也采用和我们一致的方法，即计算整体市盈率时排除亏损股票的数据。 由于亏损公司只是少数，所以包不包括亏损公司在实际运用中相差并不是很大。
+              - heading "股票市盈率的计算方法" [level=4] [ref=e179]
+              - paragraph [ref=e180]: 市盈率（Price-to-Earnings Ratio，缩写P/E或PER）等于股票价格除以每股收益，即市价盈利比率，其经济学含义是“按当前的每股收益分红， 以当前股价买股票多少年以后才能收回投资成本”。亏损公司即每股收益为负的公司不计算市盈率。
+              - paragraph [ref=e181]: 每股收益又可以分为上年每股收益（上一年度每股赚多少钱）、滚动每股收益（最近四个季度每股赚多少钱） 、预测每股收益（未来一年每股赚多少钱），按照这三种每股收益计算出来的市盈率分别称为静态市盈率、滚动市盈率和动态市盈率。 在证监会2013年颁布的《证券期货业统计指标标准指引》中，这三种计算标准都被罗列在内。一般而言，国内交易所多使用第一个指标， 信息商多使用第二个指标，而国外分析师则比较喜欢用后一种指标。因为公司未来的盈利预期对股价走势影响最大，而过去的数据只能反映历史。 下面是计算方法：
+              - table [ref=e182]:
+                - rowgroup [ref=e183]:
+                  - row "静态市盈率 股票现价 ÷ 当期每股收益" [ref=e184]:
+                    - cell "静态市盈率" [ref=e185]
+                    - cell "股票现价 ÷ 当期每股收益" [ref=e186]
+                  - row "预测市盈率 股票现价 ÷ 未来每股收益的预测值" [ref=e187]:
+                    - cell "预测市盈率" [ref=e188]
+                    - cell "股票现价 ÷ 未来每股收益的预测值" [ref=e189]
+                  - row "滚动市盈率（TTM） 股价 ÷ 过去四个季度的EPS" [ref=e190]:
+                    - cell "滚动市盈率（TTM）" [ref=e191]
+                    - cell "股价 ÷ 过去四个季度的EPS" [ref=e192]
+                  - row "发行市盈率 指股票上市时的发行价格与股票的每股收益的比例。这个收益是在一个考察期（通常为12个月的时间）内的收益。" [ref=e193]:
+                    - cell "发行市盈率" [ref=e194]
+                    - cell "指股票上市时的发行价格与股票的每股收益的比例。这个收益是在一个考察期（通常为12个月的时间）内的收益。" [ref=e195]
+              - paragraph [ref=e196]: 我们知道上市公司的股本并不是一成不变的，上市公司实施增发、送股、转增、配股等行为时，公司股本都会发生变化。 按期末股本数计算出来的每股收益称为全面摊薄每股收益，而用按股本对利润的贡献时间折算出来的加权股本（例如发行半年的只能计算一半） 计算得到的每股收益称为加权每股收益（也称基本每股收益）。以这两种每股收益计算出来的市盈率，称为摊薄市盈率和加权市盈率， 我们在上市公司的发行公告里经常会看到这两种指标。证监会曾经按照财政部颁布的新会计准则（2007年生效） 对上市公司净资产收益率和每股收益的计算及披露规则做过修订，其中基本每股收益和稀释每股收益（类似摊薄每股收益）是两个有显著区别的概念。 但在《证券期货业统计指标标准指引》中，并未对这两种指标计算的市盈率进行区分，其计算个股市盈率时使用加权每股收益， 而计算整体市盈率时则实际使用摊薄每股收益。目前，我所在证券信息库（SJSXX和SJSXXN）对外披露的每股收益是加权每股收益， 按照证券信息库和行情库实时计算出来的市盈率（SJSHQ中的一个字段）实为股票的加权市盈率。
+              - heading "股票市盈率的意义" [level=4] [ref=e197]
+              - heading "如果某股票有较高市盈率，则有可能是以下原因：" [level=5] [ref=e198]
+              - list [ref=e199]:
+                - listitem [ref=e200]: 市场的投资者预测未来的盈利增长速度快，给予该股票较高的估值。
+                - listitem [ref=e201]: 该企业一向盈利稳定，但在前一个年度出现一次过的特殊支出，降低了本年度的盈利，但从长期不影响盈利。
+                - listitem [ref=e202]: 市场出现泡沫，股票正以超过其内在价值的价格在交易。
+                - listitem [ref=e203]: 企业具有特殊的优势，强大的技术壁垒，能在行业激烈竞争中持续盈利。
+                - listitem [ref=e204]: 企业处于新兴行业，目前市场上可选择的股票有限，在供求定律下，股价将上升。这令跨时间的市盈率比较变得意义不大。
+              - heading "如果某股票有较低市盈率，则有可能是以下原因：" [level=5] [ref=e205]
+              - list [ref=e206]:
+                - listitem [ref=e207]: 市场预测未来的盈利会下降，投资者提前给予该股票较低的估值。
+                - listitem [ref=e208]: 该企业在去年出现过一次性的特殊收入（投资收入、资产变卖、国家补贴），暂时提高了去年的盈利，使得静态市盈率降低。
+                - listitem [ref=e209]: 市场低迷，股票的价值被低估。
+                - listitem [ref=e210]: 企业缺乏成长性，分红力度不佳，投资者则会选择更活跃企业。
+              - paragraph [ref=e211]: 事实上，市盈率水平与公司所处行业密切相关。例如，科技股的市盈率往往比传统产业如钢铁板块高，但是这也往往容易产生泡沫。
+              - paragraph [ref=e212]: 其次，市盈率还受股本大小和股价高低的影响。一般来说，股本越小的股票越受青睐，其市场定位和市盈率越高。
+              - paragraph [ref=e213]: 此外，公司的成长与否，对市盈率有重大影响。一个对未来有良好预期的个股，其股价自然就高。公司未来前景越好，成长性越高，市盈率水平就越高。
+              - heading "上交所：新股上市一年后市盈率普遍回归" [level=4] [ref=e214]
+              - paragraph [ref=e215]: 上海证券交易所参会代表表示，上交所的研究表明，新股发行改革实施以来，新股上市后市盈率水平本身就体现出和整体市盈率水平趋同的态势，新股上市后1年左右，市盈率水平都出现回归。数据表明，新股在上市后1年左右，市盈率水平出现回归：新股发行市盈率相对行业市盈率折价率在15%以上的上市公司，上市后走势明显强于所在行业的走势，1年后领先行业17.03%，其发行时的折价基本消失。该人士指出，这些数据说明，新股在挂牌交易后的1～2年间，其估值存在一个回归过程，即趋向其所在行业整体估值水平。新股上市以后估值水平回归的这个现象说明，行业市盈率对市场已形成重要的“标杆”作用。
+              - paragraph [ref=e216]: 根据中证指数的统计分析，在香港市场上，新股发行市盈率较市场平均水平高约36.75%，而同期A股新股发行市盈率较同期市场市盈率水平高125.66%；在香港市场上，46%的港股新股与其行业平均水平的市盈率差距不足30%，67%的新股与其行业平均水平的市盈率差距不足50%。而在更加成熟的美国市场上，总的来看，中资概念股首发市盈率均值与行业市盈率较为接近，大部分公司首发市盈率接近或者低于行业市盈率，除了软件与服务，消费者服务、媒体等行业的部分公司首发市盈率较高外，比如当当网发行市盈率为873倍，奇虎360为530倍，大部分行业的新股发行市盈率与该行业平均市盈率基本相当。
+              - heading "如何看市场整体平均市盈率？" [level=4] [ref=e217]
+              - paragraph [ref=e218]:
+                - text: 在A股中我们用分类指数的平均市盈率来衡量市场的整体估值，包括
+                - link "上证指数的平均市盈率" [ref=e219] [cursor=pointer]:
+                  - /url: /stockdata/shanghaiPE
+                - text: 、
+                - link "深圳成指的平均市盈率" [ref=e220] [cursor=pointer]:
+                  - /url: /stockdata/shenzhenPE
+                - text: 、
+                - link "中小板指数市盈率" [ref=e221] [cursor=pointer]:
+                  - /url: /stockdata/zxbPE
+                - text: 、
+                - link "创业板指数市盈率" [ref=e222] [cursor=pointer]:
+                  - /url: /stockdata/cybPE
+                - text: 、全市场平均市盈率。 一般来讲，各个指数的平均市盈率越接近历史底部，行情见底的可能性越大，越接近历史高位，行情见顶的可能性越大。请见下图：
+              - paragraph [ref=e223]:
+                - img "A股主要板块市盈率走势图全览" [ref=e224]
+              - paragraph [ref=e225]: 上图所示为上证指数的平均市盈率、深圳成指的平均市盈率、中小板指数市盈率、创业板指数市盈率同期走势图。图中计算所得平均市盈率采取的是股本加权平均法，该方法容易受到大市值权重股的影响，这是上证底部市盈率不断下移的技术原因之一。更深层的原因在于：一方面，上证指数以银行、保险、能源等传统行业为主导，这些行业本身市盈率偏低，且随着经济增速换挡，盈利预期持续走低；另一方面，高成长性的科技、消费公司多选择在创业板或深证上市，上证未能充分吸收这些新经济成分。两种因素叠加，使得上证指数近15年来底部市盈率持续创出新低。 而深证A股市场与中小板市场最近10年来的三个重要底部的市盈率非常接近，表现出一定的参考价值。
+              - paragraph [ref=e226]:
+                - text: 我们再以
+                - link "恒生指数市盈率" [ref=e227] [cursor=pointer]:
+                  - /url: /stockdata/market/hsi
+                - text: 为例。请见下图：
+              - paragraph [ref=e228]:
+                - img "恒生指数市盈率走势图" [ref=e229]
+              - paragraph [ref=e230]: 该图为恒生指数市盈率走势图，红色曲线代表恒生指数，蓝色背景代表平均市盈率，走势囊括了1994年至2017年市盈率走势以及1991年至2017年恒生指数走势。 从图表走势可以观察到，当恒生指数市盈率低于10倍时，恒生指数大部分处于被市场低估的时间。由此可见，平均市盈率在长期的投资中具有一定指导意义。
+      - generic [ref=e231]: 免责声明：上述数据不构成有关任何证券、金融产品或其他投资工具或任何交易策略的依据或建议。对因直接或间接使用上述数据而造成的任何损失，包括但不限于因上述数据不准确、不完整或因依赖其任何内容而导致的损失，本网站不承担任何法律责任。
+    - generic [ref=e233] [cursor=pointer]: 我的收藏
+    - generic [ref=e235] [cursor=pointer]:
+      - text: 关注微信公众号
+      - img "微信公众号二维码" [ref=e236]
+      - text: 获取更多数据
+      - generic [ref=e237]: 关闭 X
+  - contentinfo [ref=e239]:
+    - generic [ref=e241]:
+      - generic [ref=e243]:
+        - generic [ref=e244]:
+          - generic [ref=e245]: 乐咕乐股网 - 在这里学会股票投资
+          - generic [ref=e246]:
+            - link "关于我们" [ref=e247] [cursor=pointer]:
+              - /url: /about
+            - text: "|"
+            - link "版权声明" [ref=e248] [cursor=pointer]:
+              - /url: /announce
+            - text: "|"
+            - link "免责声明" [ref=e249] [cursor=pointer]:
+              - /url: /relief
+            - text: "|"
+            - link "数据预览" [ref=e250] [cursor=pointer]:
+              - /url: /stockdata/charts-map
+        - generic [ref=e251]:
+          - generic [ref=e252]:
+            - text: Copyright © 2015-2026
+            - link "乐咕乐股网" [ref=e253] [cursor=pointer]:
+              - /url: /
+            - link "legulegu.com" [ref=e254] [cursor=pointer]:
+              - /url: /
+            - text: All Rights Reserved.
+          - generic [ref=e255]:
+            - link "鄂ICP备16005346号" [ref=e256] [cursor=pointer]:
+              - /url: http://www.miitbeian.gov.cn/
+            - link "鄂公网安备 鄂公网安备 42010402000129号" [ref=e257] [cursor=pointer]:
+              - /url: http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=42010402000129
+              - img "鄂公网安备" [ref=e258]
+              - text: 鄂公网安备 42010402000129号
+          - generic [ref=e259]:
+            - text: 本站由
+            - link "阿里云" [ref=e260] [cursor=pointer]:
+              - /url: https://www.aliyun.com/
+            - text: 提供计算和安全服务
+      - generic [ref=e262]:
+        - img "微信公众号二维码" [ref=e263]
+        - generic [ref=e264]: 微信公众号

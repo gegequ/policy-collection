@@ -1,0 +1,2 @@
+[    1558ms] [ERROR] Failed to load resource: the server responded with a status of 502 (Bad Gateway) @ https://push2.eastmoney.com/api/qt/stock/get?secid=1.000300&fields=f43,f57,f58,f115,f116:0
+[    2170ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ https://push2.eastmoney.com/favicon.ico:0
