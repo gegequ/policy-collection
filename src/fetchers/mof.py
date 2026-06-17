@@ -26,8 +26,7 @@ class MOFFetcher(BaseFetcher):
             if href and not href.startswith("http"):
                 href = MOF_BASE + href
 
-            span = li.select_one("span, .date")
-            date_str = span.get_text(strip=True) if span else ""
+            date_str = self.extract_date(li)
 
             if title and href:
                 articles.append(Article(

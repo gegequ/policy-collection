@@ -31,8 +31,7 @@ class YicaiFetcher(BaseFetcher):
             if not title or not href or len(title) < 5:
                 continue
 
-            span = item.select_one("span, .date, time")
-            date_str = span.get_text(strip=True) if span else ""
+            date_str = self.extract_date(item)
 
             articles.append(Article(
                 title=title, url=href, source="第一财经",

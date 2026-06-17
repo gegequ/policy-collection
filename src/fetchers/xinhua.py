@@ -27,8 +27,7 @@ class XinhuaFetcher(BaseFetcher):
             if href and not href.startswith("http"):
                 href = XINHUA_BASE + href
 
-            span = item.select_one("span, .date, time")
-            date_str = span.get_text(strip=True) if span else ""
+            date_str = self.extract_date(item)
 
             if title and href:
                 articles.append(Article(

@@ -184,11 +184,10 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
         if today_date_prefix in pub or pub.startswith(today_date_prefix):
             filtered.append(a)
         # 无日期的一律丢弃（多数是采集器没抓到日期，非今天文章）
-    if filtered:
-        skipped = len(all_articles) - len(filtered)
-        if skipped > 0:
-            print(f"📅 日期过滤：跳过 {skipped} 篇非今日文章（保留 {len(filtered)} 篇）")
-        all_articles = filtered
+    skipped = len(all_articles) - len(filtered)
+    all_articles = filtered
+    if skipped > 0 or not filtered:
+        print(f"📅 日期过滤：{len(filtered)} 篇今日文章，{skipped} 篇跳过（{len(filtered)} 保留）")
 
     # 2.6 提取新闻联播 + 生成独立新闻稿
     xwlb_articles = [a for a in all_articles if a.source == "新闻联播"]

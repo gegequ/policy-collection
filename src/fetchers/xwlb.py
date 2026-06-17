@@ -18,8 +18,10 @@ class XWLBFetcher(BaseFetcher):
     tier = "一手"
 
     async def fetch(self, client: httpx.AsyncClient) -> List[Article]:
-        today = datetime.now().strftime("%Y%m%d")
-        url = f"https://cn.govopendata.com/xinwenlianbo/{today}/"
+        today = datetime.now()
+        today_fmt = today.strftime("%Y%m%d")
+        today_date = today.strftime("%Y-%m-%d")
+        url = f"https://cn.govopendata.com/xinwenlianbo/{today_fmt}/"
 
         try:
             html = await self.fetch_html(client, url, timeout=20)
@@ -59,7 +61,7 @@ class XWLBFetcher(BaseFetcher):
                 url=f"{url}#{title[:20]}",
                 source="新闻联播",
                 category=self.category,
-                published_at=datetime.now().strftime("%Y-%m-%d"),
+                published_at=today_date,
                 summary=summary,
                 tags=[],
             ))
@@ -86,7 +88,7 @@ class XWLBFetcher(BaseFetcher):
                 url=url,
                 source="新闻联播",
                 category="新闻联播",
-                published_at=datetime.now().strftime("%Y-%m-%d"),
+                published_at=today_date,
                 summary=summary,
                 tags=[],
             ))

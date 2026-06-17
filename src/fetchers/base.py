@@ -143,6 +143,33 @@ class BaseFetcher(ABC):
         return resp.text
 
     @staticmethod
+    def extract_date(element) -> str:
+        """从 HTML 元素中提取日期。支持 YYYY-MM-DD、YYYY年MM月DD、MM-DD 等格式。"""
+        import re as _re
+        text = element.get_text(strip=True) if hasattr(element, 'get_text') else str(element)
+        if not text:
+            return ""
+        patterns = [
+            (r'(\d{4}[-/]\d{1,2}[-/]\d{1,2})', True),  # 2026-06-18
+            (r'(\d{4}年\d{1,2}月\d{1,2}日)', True),      # 2026年6月18日
+            (r'(\d{1,2}[-/]\d{1,2})', False),              # 06-18
+        ]
+        for p, is_full in patterns:
+            m = _re.search(p, text)
+            if m:
+                d = m.group(1)
+                if '年' in d:
+                    parts = _re.findall(r'\d+', d)
+                    return f"{parts[0]}-{parts[1]:0>2}-{parts[2]:0>2}" if len(parts) == 3 else d
+                if not is_full:
+                    import datetime as _dt
+                    sep = '-' if '-' in d else '/'
+                    parts = d.split(sep)
+                    return f"{_dt.datetime.now().year}-{parts[0]:0>2}-{parts[1]:0>2}"
+                return d.replace('/', '-')
+        return text[:10] if text else ""
+
+    @staticmethod
     def parse_html(html: str) -> BeautifulSoup:
         """使用 lxml 解析 HTML。"""
         return BeautifulSoup(html, "lxml")

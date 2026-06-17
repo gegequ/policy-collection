@@ -27,8 +27,7 @@ class NMPAFetcher(BaseFetcher):
             href = link.get("href", "")
             if href and not href.startswith("http"):
                 href = NMPA_BASE + href
-            span = li.select_one("span, .date")
-            date_str = span.get_text(strip=True) if span else ""
+            date_str = self.extract_date(li)
 
             if title and href:
                 articles.append(Article(
