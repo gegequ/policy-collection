@@ -297,13 +297,19 @@ def format_pe_for_ai() -> str:
         return ""
     lines = [
         f"\n## 📊 指数PE估值参考（{pe.get('updated', '?')}，{pe.get('source', '?')}）",
-        f"⚠️ 以下PE/分位数据来自公开数据源，{pe.get('note', '每周更新')}",
+        f"⚠️ {pe.get('note', '')}",
         "",
-        "| 指数 | PE | 近5年分位 | 估值水平 |",
-        "|------|----|----------|---------|",
+        "| 指数 | PE | PB | 分位 | 估值 | 数据源",
+        "|------|----|----|------|------|------|",
     ]
     for name, d in pe.get("indices", {}).items():
-        lines.append(f"| {name} | {d['pe']} | {d['pe_pct_5y']}% | {d['level']} |")
+        pe_val = d.get('pe', '—')
+        pb_val = d.get('pb', '—')
+        pct = d.get('pe_pct') or d.get('pb_pct')
+        pct_str = f"{pct}%" if pct else '—'
+        level = d.get('level') or '—'
+        srcs = ', '.join(d.get('sources', [])[:2])
+        lines.append(f"| {name} | {pe_val} | {pb_val} | {pct_str} | {level} | {srcs} |")
     return "\n".join(lines)
 
 
