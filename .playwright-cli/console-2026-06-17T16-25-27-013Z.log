@@ -6,3 +6,4 @@
 [    1020ms] [ERROR] Failed to load resource: the server responded with a status of 401 () @ https://www.legulegu.com/user/is-this-page-star?mobileToken=&pagePath=/stockdata/market_pe&pathName=A%E8%82%A1%E5%B9%B3%E5%9D%87%E5%B8%82%E7%9B%88%E7%8E%87%E8%B5%B0%E5%8A%BF%E5%9B%BE&pathParam=:0
 [    1091ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://image.legulegu.com/fonts/fontawesome-webfont.woff?v=4.4.0:0
 [    1202ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://image.legulegu.com/fonts/fontawesome-webfont.ttf?v=4.4.0:0
+[  127941ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_TIMED_OUT @ https://fundingchoicesmessages.google.com/i/ca-pub-4841635508396044?href=https%3A%2F%2Fwww.legulegu.com%2Fstockdata%2Fmarket_pe&ers=2:0
