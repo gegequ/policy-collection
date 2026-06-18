@@ -175,32 +175,7 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
     print(f"✅ 采集完成：共 {len(all_articles)} 篇文章 "
           f"（{success_count}/{len(fetchers)} 个信息源成功）")
 
-    # 2.5 日期过滤：保留今天+昨天的文章，丢弃无日期/过旧的
-    today_date = today
-    yesterday_date = (datetime.strptime(today, "%Y-%m-%d") - timedelta(days=1)).strftime("%Y-%m-%d")
-    filtered = []
-    for a in all_articles:
-        pub = a.published_at or ""
-        # 保留今天或昨天的文章
-        if today_date in pub or yesterday_date in pub:
-            filtered.append(a)
-        elif pub and len(pub) >= 8:
-            # 尝试解析任何日期格式
-            try:
-                import re as _re2
-                m = _re2.search(r'(\d{4}-\d{1,2}-\d{1,2})', pub)
-                if m:
-                    art_date = m.group(1)
-                    if art_date >= yesterday_date:
-                        filtered.append(a)
-                        continue
-            except:
-                pass
-    skipped = len(all_articles) - len(filtered)
-    all_articles = filtered
-    print(f"📅 日期过滤：{len(filtered)} 篇（今天/昨天），{skipped} 篇跳过")
-
-    # 2.6 提取新闻联播 + 生成独立新闻稿
+    # 2.5 提取新闻联播（不受日期过滤影响）
     xwlb_articles = [a for a in all_articles if a.source == "新闻联播"]
     if xwlb_articles:
         xwlb_dir = os.path.join(config.output.report_dir, "xwlb")
@@ -214,6 +189,35 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
                     f.write(f"{a.summary}\n\n")
                 f.write(f"---\n\n")
         print(f"📺 新闻联播：{len(xwlb_articles)} 条 → {xwlb_path}")
+
+    # 2.6 日期过滤（新闻联播保留，其余只留今天+昨天）
+    today_date = today
+    yesterday_date = (datetime.strptime(today, "%Y-%m-%d") - timedelta(days=1)).strftime("%Y-%m-%d")
+    filtered = []
+    for a in all_articles:
+        if a.source == "新闻联播":
+            filtered.append(a)  # 新闻联播永远保留
+            continue
+        pub = a.published_at or ""
+        if today_date in pub or yesterday_date in pub:
+            filtered.append(a)
+        elif pub and len(pub) >= 8:
+            try:
+                import re as _re2
+                m = _re2.search(r'(\d{4}-\d{1,2}-\d{1,2})', pub)
+                if m:
+                    art_date = m.group(1)
+                    if art_date >= yesterday_date:
+                        filtered.append(a)
+                        continue
+            except:
+                pass
+    skipped = len(all_articles) - len(filtered)
+    all_articles = filtered
+    print(f"📅 日期过滤：{len(filtered)} 篇保留，{skipped} 篇跳过")
+
+    # 重新提取 xwlb（已在过滤中保留）
+    xwlb_articles = [a for a in all_articles if a.source == "新闻联播"]
 
     # 3. 存储（去重）
     new_count = 0
