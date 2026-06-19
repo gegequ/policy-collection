@@ -129,7 +129,9 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
     db.initialize()
 
     today = datetime.now().strftime("%Y-%m-%d")
-    logger.info("=== 政策雷达启动 · %s ===", today)
+    weekday = datetime.now().weekday()  # 0=Mon, 6=Sun
+    is_weekend = weekday >= 5
+    logger.info("=== 政策雷达启动 · %s (%s) ===", today, "周末" if is_weekend else "交易日")
 
     # 2. 采集
     registry = build_registry()
@@ -346,6 +348,15 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
                 xwlb_text += f"{i}. {a.title}\n"
             xwlb_text += "\n" + compute_xwlb_monthly(db, config.output.report_dir)
             ai_prompt = xwlb_text + "\n" + ai_prompt
+
+        # 周末提示
+        if is_weekend:
+            ai_prompt = (
+                f"⚠️ 今天是{['周六','周日'][weekday-5]}，A股休市。以下指数行情为上一个交易日收盘数据。"
+                "政府网站通常周末不更新，今日新增政策信息极少属正常现象。"
+                "请基于现有信息做分析，不要在报告中声称\"今日行情\"或\"今日政策\"，"
+                "应标注\"上一个交易日\"和\"近期政策\"。\n\n"
+            ) + ai_prompt
 
         ai_analysis = await analyze_with_deepseek(ai_prompt, config)
 
