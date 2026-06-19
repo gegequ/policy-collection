@@ -28,7 +28,7 @@ import httpx
 from src.config import load_config
 from src.db import Database
 from src.fetchers.registry import FetcherRegistry
-from src.analyzer import compute_stats, compute_trends, format_stats_for_ai, format_trends_for_ai, analyze_with_deepseek
+from src.analyzer import compute_stats, compute_trends, compute_xwlb_monthly, format_stats_for_ai, format_trends_for_ai, analyze_with_deepseek
 from src.market_data import get_market_snapshot, format_market_for_ai, get_index_snapshot, format_index_for_ai, format_pe_for_ai
 from src.funds import get_fund_names_for_prompt, get_all_sectors
 from src.backtest import extract_predictions, save_predictions, get_backtest_summary
@@ -339,11 +339,12 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
         if fund_ref:
             ai_prompt += "\n\n" + fund_ref
 
-        # 新闻联播要目（仅标题+首句，控制长度）
+        # 新闻联播要目 + 月度趋势
         if xwlb_articles:
             xwlb_text = "\n## 📺 新闻联播今日要目\n"
             for i, a in enumerate(xwlb_articles[:12], 1):
                 xwlb_text += f"{i}. {a.title}\n"
+            xwlb_text += "\n" + compute_xwlb_monthly(db)
             ai_prompt = xwlb_text + "\n" + ai_prompt
 
         ai_analysis = await analyze_with_deepseek(ai_prompt, config)
