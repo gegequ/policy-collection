@@ -344,7 +344,7 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
             xwlb_text = "\n## 📺 新闻联播今日要目\n"
             for i, a in enumerate(xwlb_articles[:12], 1):
                 xwlb_text += f"{i}. {a.title}\n"
-            xwlb_text += "\n" + compute_xwlb_monthly(db)
+            xwlb_text += "\n" + compute_xwlb_monthly(db, config.output.report_dir)
             ai_prompt = xwlb_text + "\n" + ai_prompt
 
         ai_analysis = await analyze_with_deepseek(ai_prompt, config)
