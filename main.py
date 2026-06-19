@@ -130,8 +130,22 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
 
     today = datetime.now().strftime("%Y-%m-%d")
     weekday = datetime.now().weekday()  # 0=Mon, 6=Sun
+
+    # 2026年中国节假日（A股休市）
+    HOLIDAYS_2026 = {
+        "2026-01-01", "2026-01-02",  # 元旦
+        "2026-02-16", "2026-02-17", "2026-02-18", "2026-02-19", "2026-02-20",  # 春节
+        "2026-04-06",  # 清明节
+        "2026-05-01", "2026-05-04", "2026-05-05",  # 劳动节
+        "2026-06-19",  # 端午节
+        "2026-09-25",  # 中秋节
+        "2026-10-01", "2026-10-02", "2026-10-05", "2026-10-06", "2026-10-07",  # 国庆
+    }
     is_weekend = weekday >= 5
-    logger.info("=== 政策雷达启动 · %s (%s) ===", today, "周末" if is_weekend else "交易日")
+    is_holiday = today in HOLIDAYS_2026
+    is_trading_day = not is_weekend and not is_holiday
+    status = "节假日休市" if is_holiday else ("周末休市" if is_weekend else "交易日")
+    logger.info("=== 政策雷达启动 · %s (%s) ===", today, status)
 
     # 2. 采集
     registry = build_registry()
@@ -349,13 +363,13 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
             xwlb_text += "\n" + compute_xwlb_monthly(db, config.output.report_dir)
             ai_prompt = xwlb_text + "\n" + ai_prompt
 
-        # 周末提示
-        if is_weekend:
+        # 休市提示
+        if not is_trading_day:
+            reason = "节假日" if is_holiday else "周末"
             ai_prompt = (
-                f"⚠️ 今天是{['周六','周日'][weekday-5]}，A股休市。以下指数行情为上一个交易日收盘数据。"
-                "政府网站通常周末不更新，今日新增政策信息极少属正常现象。"
-                "请基于现有信息做分析，不要在报告中声称\"今日行情\"或\"今日政策\"，"
-                "应标注\"上一个交易日\"和\"近期政策\"。\n\n"
+                f"⚠️ 今天是{reason}，A股休市。以下指数行情为上一个交易日收盘数据，"
+                "政府网站今日不更新，新增政策信息极少属正常。"
+                "报告中禁止声称\"今日行情\"，应标注\"上一交易日\"。\n\n"
             ) + ai_prompt
 
         ai_analysis = await analyze_with_deepseek(ai_prompt, config)
