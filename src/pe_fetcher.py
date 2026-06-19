@@ -28,7 +28,8 @@ def _run_cli(args: str, timeout: int = 30) -> str:
     try:
         result = subprocess.run(
             f"playwright-cli {args}",
-            shell=True, capture_output=True, text=True, timeout=timeout
+            shell=True, capture_output=True, text=True, timeout=timeout,
+            encoding="utf-8", errors="replace"
         )
         return result.stdout
     except subprocess.TimeoutExpired:
