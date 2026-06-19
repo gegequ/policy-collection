@@ -64,8 +64,11 @@ async def fetch_legulegu_pe() -> Optional[Dict]:
     if not _ensure_browser():
         return None
 
-    _run_cli('goto "https://www.legulegu.com/stockdata/market_pe"', timeout=20)
-    text = _run_cli('eval "document.body.innerText"', timeout=10)
+    try:
+        _run_cli('goto "https://www.legulegu.com/stockdata/market_pe"', timeout=20)
+        text = _run_cli('eval "document.body.innerText"', timeout=10)
+    finally:
+        _run_cli('close', timeout=5)  # 无论如何关闭浏览器
 
     if not text:
         return None
