@@ -326,17 +326,26 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
         # 读昨日报告作为连续性参考（已在上面获取）
         continuity_note = ""
         if yesterday_report:
-            continuity_note = f"""
-## ⚠️ 连续性要求（极其重要）
-以下是昨日的分析结论摘要，你今天生成的报告必须：
-1. 如果今日数据支持昨日判断，明确标注「延续昨日判断」
-2. 如果今日数据与昨日矛盾或有重大变化，标注「调整原因：XXX」并说明为什么改变了判断
-3. 不允许在没有新证据支持的情况下随意改变配置方向
-4. 金融板块等重点板块如果方向改变，必须给出清晰的逻辑对比
+            # 从昨日报告中提取板块方向（简洁表格，AI 必须对照）
+            from src.backtest import extract_predictions as _extract
+            try:
+                yesterday_preds = _extract(yesterday_report.report_md, yesterday)
+                if yesterday_preds:
+                    pred_table = "\n".join(
+                        f"| {p['sector']} | {p['direction']} | {p.get('confidence','?')} |"
+                        for p in yesterday_preds
+                    )
+                    continuity_note = f"""
+## ⚠️ 昨日报告板块方向（必须严格对照，禁止杜撰）
+| 板块 | 昨日方向 | 强度 |
+|------|---------|------|
+{pred_table}
 
-昨日完整报告（以此为连续性基准，今日分析需严格对照）：
-{yesterday_report.report_md[:5000]}
+规则：保持一致标注「延续昨日」。改变方向必须标注原因。**昨天方向以本表格为准，不准凭记忆编造。**
 """
+            except Exception:
+                continuity_note = f"昨日报告摘要（供参考）：{yesterday_report.report_md[:500]}"
+
 
         # 真实基金数据库的板块覆盖
         fund_ref = get_fund_names_for_prompt(get_all_sectors())
