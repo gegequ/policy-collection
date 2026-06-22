@@ -32,6 +32,7 @@ from src.analyzer import compute_stats, compute_trends, compute_xwlb_monthly, fo
 from src.market_data import get_market_snapshot, format_market_for_ai, get_index_snapshot, format_index_for_ai, format_pe_for_ai
 from src.funds import get_fund_names_for_prompt, get_all_sectors
 from src.backtest import extract_predictions, save_predictions, get_backtest_summary
+from src.pred_tracker import generate_prediction_table
 from src.validator import validate_ai_output
 from src.validator import validate_ai_output
 from src.reporter import (
@@ -414,6 +415,7 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
         if predictions:
             save_predictions(predictions)
             logger.info("回测记录：%d 条预测已保存", len(predictions))
+            generate_prediction_table()  # 更新追踪表
     except Exception as e:
         logger.debug("回测记录失败: %s", e)
 
