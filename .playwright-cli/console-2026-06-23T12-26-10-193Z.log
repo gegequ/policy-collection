@@ -1,0 +1,8 @@
+[     681ms] [LOG] %c乐咕乐股网 欢迎你 color: #1a73e8; font-size: 14px; font-weight: bold; @ https://www.legulegu.com/static/js/all.min.js?date=20260621:0
+[     681ms] [LOG] %c🎉 感谢您使用 Chrome浏览器 color: #28a745; font-size: 14px; font-weight: bold; @ https://www.legulegu.com/static/js/all.min.js?date=20260621:0
+[     681ms] [LOG] %c您将体验到完整、流畅的网站功能！ color: #17a2b8; font-size: 12px; @ https://www.legulegu.com/static/js/all.min.js?date=20260621:0
+[     732ms] [ERROR] Access to font at 'https://image.legulegu.com/fonts/fontawesome-webfont.woff2?v=4.4.0' from origin 'https://www.legulegu.com' has been blocked by CORS policy: The 'Access-Control-Allow-Origin' header has a value 'https://legulegu.com' that is not equal to the supplied origin. @ https://www.legulegu.com/stockdata/market_pe:0
+[     732ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://image.legulegu.com/fonts/fontawesome-webfont.woff2?v=4.4.0:0
+[     759ms] [ERROR] Failed to load resource: the server responded with a status of 401 () @ https://www.legulegu.com/user/is-this-page-star?mobileToken=&pagePath=/stockdata/market_pe&pathName=A%E8%82%A1%E5%B9%B3%E5%9D%87%E5%B8%82%E7%9B%88%E7%8E%87%E8%B5%B0%E5%8A%BF%E5%9B%BE&pathParam=:0
+[     784ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://image.legulegu.com/fonts/fontawesome-webfont.woff?v=4.4.0:0
+[     831ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://image.legulegu.com/fonts/fontawesome-webfont.ttf?v=4.4.0:0

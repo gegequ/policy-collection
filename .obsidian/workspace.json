@@ -11,10 +11,14 @@
             "id": "a2a2c0e18ebdc86d",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "reports/predictions.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "predictions"
             }
           }
         ]
@@ -177,5 +181,11 @@
     }
   },
   "active": "a2a2c0e18ebdc86d",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "reports/xwlb/2026-06-22.md",
+    "reports/xwlb/2026-06.md",
+    "reports/xwlb/2026-06-17.md",
+    "reports/predictions.md",
+    "reports/2026-06-23.md"
+  ]
 }
