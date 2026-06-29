@@ -11,6 +11,8 @@ import re
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional
 
+from src.validator import _find_sector_section
+
 BACKTEST_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "backtest.json")
 
 SECTOR_TO_INDEX = {
@@ -99,8 +101,8 @@ def extract_predictions(report_md: str, date: str) -> List[Dict]:
 
 
 def save_predictions(predictions: List[Dict]):
-    """保存预测到回测文件。"""
-    records = []
+    """保存预测到回测文件（按 (date, sector) 去重，校准模式不会重复追加）。"""
+    records: list[dict] = []
     if os.path.exists(BACKTEST_PATH):
         try:
             with open(BACKTEST_PATH, "r", encoding="utf-8") as f:
@@ -109,11 +111,21 @@ def save_predictions(predictions: List[Dict]):
         except (json.JSONDecodeError, OSError):
             pass
 
-    records.extend(predictions)
+    # 按 (date, sector) 去重：同名板块同一天只保留第一次预测
+    seen = {(r["date"], r["sector"]) for r in records}
+    new_predictions = [
+        p for p in predictions
+        if (p["date"], p["sector"]) not in seen
+    ]
+    records.extend(new_predictions)
+
     os.makedirs(os.path.dirname(BACKTEST_PATH), exist_ok=True)
-    with open(BACKTEST_PATH, "w", encoding="utf-8") as f:
+    # 原子写入：先写临时文件，成功后再重命名
+    tmp_path = BACKTEST_PATH + ".tmp"
+    with open(tmp_path, "w", encoding="utf-8") as f:
         json.dump({"predictions": records, "updated": datetime.now().isoformat()},
                   f, ensure_ascii=False, indent=2)
+    os.replace(tmp_path, BACKTEST_PATH)
 
 
 def evaluate_predictions(days_later: int = 1) -> Dict:
@@ -171,19 +183,3 @@ def get_backtest_summary() -> str:
         lines.append(f"- {sector}：{data['total']} 次预测，待行情验证")
     lines.append(f"\n{result.get('note', '')}")
     return "\n".join(lines)
-
-
-def _find_sector_section(report: str, sector: str) -> str:
-    """在报告中定位某板块的分析段落。"""
-    # 搜索 "**板块名**" 或 "板块名：" 开头的段落
-    patterns = [
-        rf"\*\*{sector}\*\*",    # **金融**
-        rf"{sector}板块",        # 金融板块
-    ]
-    for p in patterns:
-        m = re.search(p, report)
-        if m:
-            start = m.start()
-            # 取前后各200字符
-            return report[max(0, start - 50):min(len(report), start + 250)]
-    return ""

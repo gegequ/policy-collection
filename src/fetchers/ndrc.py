@@ -26,8 +26,7 @@ class NDRCFetcher(BaseFetcher):
             if href and not href.startswith("http"):
                 href = NDRC_BASE + href
 
-            span = li.select_one("span")
-            date_str = span.get_text(strip=True) if span else ""
+            date_str = self.extract_date(li)
 
             if title and href:
                 articles.append(Article(
@@ -39,4 +38,15 @@ class NDRCFetcher(BaseFetcher):
                     summary="",
                     tags=[],
                 ))
+
+        # 抓取每篇文章的正文
+        for a in articles:
+            if a.url:
+                a.summary = await self.fetch_article_body(client, a.url)
+                date = await self.fetch_article_date(client, a.url)
+                if date:
+                    a.published_at = date
+                else:
+                    a.published_at = ""  # 提取失败则清空，避免残留错误日期
+
         return articles

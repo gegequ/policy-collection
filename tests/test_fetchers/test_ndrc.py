@@ -20,6 +20,12 @@ async def test_ndrc_parses(httpx_mock):
     </body></html>
     """
     httpx_mock.add_response(url="https://www.ndrc.gov.cn/xwdt/xwfb/", html=html)
+    # 模拟正文详情页（body + date 各请求一次，设为可复用）
+    httpx_mock.add_response(
+        url="https://www.ndrc.gov.cn/xwzx/xwtt/202501/t20250120_12345.html",
+        html="<html><body><span id='con_time'>发布时间：2025-01-20 10:00</span><div class='article-content'><p>为深入贯彻落实能源安全新战略，推动能源高质量发展，现提出以下意见。加快规划建设新型能源体系。</p></div></body></html>",
+        is_reusable=True,
+    )
 
     async with httpx.AsyncClient() as client:
         articles = await NDRCFetcher().fetch(client)

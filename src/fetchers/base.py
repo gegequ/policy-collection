@@ -143,6 +143,45 @@ class BaseFetcher(ABC):
         return resp.text
 
     @staticmethod
+    async def fetch_html_js(url: str, timeout: int = 30) -> str:
+        """用 Playwright（Node.js）抓取 JS 渲染页面。
+
+        通过调用项目根目录下的 fetch_page.js 启动 headless 浏览器，
+        等待 networkidle 后返回完整 HTML。
+
+        Args:
+            url: 目标 URL。
+            timeout: 超时秒数（传给 Playwright goto）。
+
+        Returns:
+            渲染后的 HTML 文本。
+        """
+        import asyncio
+        import os
+
+        script = os.path.join(
+            os.path.dirname(os.path.dirname(os.path.dirname(__file__))),
+            "fetch_page.js",
+        )
+        proc = await asyncio.create_subprocess_exec(
+            "node", script, url,
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
+        )
+        try:
+            stdout, stderr = await asyncio.wait_for(
+                proc.communicate(), timeout=timeout + 10
+            )
+        except asyncio.TimeoutError:
+            proc.kill()
+            raise RuntimeError(f"Playwright timeout for {url}")
+
+        if proc.returncode != 0:
+            raise RuntimeError(f"Playwright failed: {stderr.decode()}")
+
+        return stdout.decode()
+
+    @staticmethod
     def extract_date(element) -> str:
         """从 HTML 元素中提取日期。支持 YYYY-MM-DD、YYYY年MM月DD、MM-DD 等格式。"""
         import re as _re
@@ -167,7 +206,7 @@ class BaseFetcher(ABC):
                     parts = d.split(sep)
                     return f"{_dt.datetime.now().year}-{parts[0]:0>2}-{parts[1]:0>2}"
                 return d.replace('/', '-')
-        return text[:10] if text else ""
+        return ""  # 未匹配到日期则返回空，避免标题碎片当日期
 
     @staticmethod
     def parse_html(html: str) -> BeautifulSoup:
@@ -222,6 +261,110 @@ class BaseFetcher(ABC):
             # 清理多余空行
             lines = [l.strip() for l in text.split("\n") if l.strip() and len(l.strip()) > 10]
             return "\n".join(lines)[:max_chars]
+        except Exception:
+            return ""
+
+    @staticmethod
+    async def fetch_article_date(
+        client: httpx.AsyncClient, url: str
+    ) -> str:
+        """从文章详情页提取发布日期。
+
+        在详情页 HTML 中搜索常见日期容器（#con_time, .date, .time, <time> 等），
+        提取并规范化为 YYYY-MM-DD 格式。
+
+        Args:
+            client: httpx 客户端。
+            url: 文章详情页 URL。
+
+        Returns:
+            YYYY-MM-DD 格式的日期字符串，抓取失败返回空字符串。
+        """
+        import re as _re
+        try:
+            resp = await client.get(
+                url, timeout=15, follow_redirects=True,
+                headers=BaseFetcher.DEFAULT_HEADERS,
+            )
+            resp.raise_for_status()
+            soup = BeautifulSoup(resp.text, "lxml")
+
+            # 从 <meta> 标签提取日期。
+            # 注意：政府网站 meta name 写法各异（PubDate / pubdate / createDate 等）。
+            # createDate 往往是 CMS 页面生成日期（≈当天），不能代表发布日期；
+            # 必须优先取 PubDate/publishdate，再降级到 createDate/date 等。
+            PRIORITY_HIGH = {"pubdate", "publishdate"}
+            PRIORITY_LOW = {"createdate", "date", "dc.date", "published"}
+            meta_candidates: list[tuple[int, str]] = []  # (priority: 0=high, 1=low, 2=fallback), date_str
+            for meta in soup.select("meta[name]"):
+                name = (meta.get("name") or "").lower()
+                content = meta.get("content", "")
+                if not content:
+                    continue
+                m = _re.search(r'(\d{4})[-/](\d{1,2})[-/](\d{1,2})', content)
+                if not m:
+                    continue
+                date_str = f"{m.group(1)}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
+                if name in PRIORITY_HIGH:
+                    meta_candidates.append((0, date_str))
+                elif any(kw in name for kw in PRIORITY_LOW):
+                    meta_candidates.append((1, date_str))
+                else:
+                    meta_candidates.append((2, date_str))
+            if meta_candidates:
+                meta_candidates.sort(key=lambda x: x[0])
+                return meta_candidates[0][1]
+
+            # 常见日期元素选择器（按优先级）
+            date_selectors = [
+                "#con_time", "#pubtime", "#pub_time", "#publish_time",
+                ".date", ".time", ".pub-date", ".article-date",
+                ".info time", ".article-info time",
+                "time", "span.time", "span.date",
+                ".article-meta time", ".meta time",
+                "[datetime]",  # HTML5 <time datetime="...">
+                ".t_l",               # 中经网 "时间：2026-06-22"
+                ".hui12",             # 中国人民银行 <td class="hui12"> 发布日期
+            ]
+
+            # 证券时报特殊处理：.detail-info 下多个 span，逐个检查
+            for span in soup.select(".detail-info span"):
+                text = span.get_text(strip=True)
+                m = _re.search(r'(\d{4}-\d{2}-\d{2})', text)
+                if m:
+                    return m.group(1)
+
+            # 第一财经特殊处理：从 script 中提取 actime/autime
+            for script in soup.select("script"):
+                text = script.string or ""
+                m = _re.search(r"\[['\"]actime['\"],\s*['\"](\d{4}-\d{2}-\d{2})", text)
+                if m:
+                    return m.group(1)
+                m = _re.search(r"\[['\"]autime['\"],\s*['\"](\d{4}-\d{2}-\d{2})", text)
+                if m:
+                    return m.group(1)
+            for sel in date_selectors:
+                el = soup.select_one(sel)
+                if el:
+                    # 优先取 datetime 属性
+                    dt_attr = el.get("datetime", "")
+                    if dt_attr:
+                        m = _re.search(r'(\d{4}-\d{1,2}-\d{1,2})', dt_attr)
+                        if m:
+                            return m.group(1)
+
+                    # 取文本内容中的日期
+                    text = el.get_text(strip=True)
+                    # 匹配常见中文日期格式
+                    patterns = [
+                        r'(\d{4})[年/-](\d{1,2})[月/-](\d{1,2})',  # 2024年9月18日 / 2024-09-18
+                        r'(\d{4})-(\d{1,2})-(\d{1,2})',               # 2024-09-18
+                    ]
+                    for p in patterns:
+                        m = _re.search(p, text)
+                        if m:
+                            return f"{m.group(1)}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
+            return ""
         except Exception:
             return ""
 

@@ -129,6 +129,16 @@ class Database:
             # URL 重复 — 静默忽略
             return None
 
+    def count_articles(self) -> int:
+        """返回数据库中的文章总数。
+
+        Returns:
+            文章总行数。
+        """
+        with self._connect() as conn:
+            row = conn.execute("SELECT COUNT(*) FROM articles").fetchone()
+            return row[0] if row else 0
+
     def get_articles_by_date(self, date_str: str) -> List[Article]:
         """按日期查询文章（匹配 published_at 前缀）。
 
@@ -147,17 +157,28 @@ class Database:
             ).fetchall()
         return [Article.from_dict(dict(r)) for r in rows]
 
-    def get_unanalyzed_articles(self) -> List[Article]:
-        """获取所有尚未 AI 分析的文章。
+    def get_unanalyzed_articles(self, date: str | None = None) -> List[Article]:
+        """获取尚未 AI 分析的文章。
+
+        Args:
+            date: 可选，限定日期（YYYY-MM-DD）。不传返回全部日期。
 
         Returns:
-            is_analyzed=0 的 Article 列表。
+            is_analyzed=0 的 Article 列表，按发布时间倒序。
         """
         with self._connect() as conn:
-            rows = conn.execute(
-                "SELECT * FROM articles WHERE is_analyzed = 0 "
-                "ORDER BY published_at DESC"
-            ).fetchall()
+            if date:
+                rows = conn.execute(
+                    "SELECT * FROM articles WHERE is_analyzed = 0 "
+                    "AND published_at LIKE ? "
+                    "ORDER BY published_at DESC",
+                    (f"{date}%",),
+                ).fetchall()
+            else:
+                rows = conn.execute(
+                    "SELECT * FROM articles WHERE is_analyzed = 0 "
+                    "ORDER BY published_at DESC"
+                ).fetchall()
         return [Article.from_dict(dict(r)) for r in rows]
 
     def mark_analyzed(self, article_ids: List[int]) -> None:
@@ -171,6 +192,23 @@ class Database:
                 "UPDATE articles SET is_analyzed = 1 WHERE id = ?",
                 [(aid,) for aid in article_ids],
             )
+
+    def reset_analyzed_for_date(self, date_str: str) -> int:
+        """重置指定日期所有文章的 is_analyzed 标记（--fresh 用）。
+
+        Args:
+            date_str: 日期 YYYY-MM-DD。
+
+        Returns:
+            重置的文章数。
+        """
+        with self._connect() as conn:
+            cursor = conn.execute(
+                "UPDATE articles SET is_analyzed = 0 "
+                "WHERE published_at = ?",
+                (date_str,),
+            )
+            return cursor.rowcount
 
     # ── 日报操作 ──────────────────────────────────────────────
 

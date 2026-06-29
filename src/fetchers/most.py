@@ -17,26 +17,34 @@ class MOSTFetcher(BaseFetcher):
         soup = self.parse_html(html)
         articles = []
 
-        for li in soup.select(".list_main li, .news-list li"):
-            link = li.select_one("a")
-            if not link:
+        for a_tag in soup.select("a[href]"):
+            title = a_tag.get_text(strip=True)
+            if len(title) < 15:
                 continue
-            title = link.get_text(strip=True)
-            href = link.get("href", "")
+            href = a_tag.get("href", "")
             if href and not href.startswith("http"):
                 href = MOST_BASE + href
 
-            span = li.select_one("span")
-            date_str = span.get_text(strip=True) if span else ""
+            date_str = self.extract_date(a_tag.parent)
 
-            if title and href:
-                articles.append(Article(
-                    title=title,
-                    url=href,
-                    source="科学技术部",
-                    category=self.category,
-                    published_at=date_str,
-                    summary="",
-                    tags=[],
-                ))
+            articles.append(Article(
+                title=title,
+                url=href,
+                source="科学技术部",
+                category=self.category,
+                published_at=date_str,
+                summary="",
+                tags=[],
+            ))
+
+        # 抓取每篇文章的正文
+        for a in articles[:10]:
+            if a.url:
+                a.summary = await self.fetch_article_body(client, a.url)
+                date = await self.fetch_article_date(client, a.url)
+                if date:
+                    a.published_at = date
+                else:
+                    a.published_at = ""  # 提取失败则清空，避免残留错误日期
+
         return articles

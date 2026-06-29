@@ -38,4 +38,15 @@ class STCNFetcher(BaseFetcher):
                 category=self.category, published_at=date_str,
                 summary="", tags=[],
             ))
+
+        # 抓取前 10 篇正文
+        for a in articles[:10]:
+            if a.url:
+                a.summary = await self.fetch_article_body(client, a.url)
+                date = await self.fetch_article_date(client, a.url)
+                if date:
+                    a.published_at = date
+                else:
+                    a.published_at = ""  # 提取失败则清空，避免残留错误日期
+
         return articles[:30]

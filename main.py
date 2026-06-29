@@ -30,16 +30,17 @@ from src.db import Database
 from src.fetchers.registry import FetcherRegistry
 from src.analyzer import compute_stats, compute_trends, compute_xwlb_monthly, format_stats_for_ai, format_trends_for_ai, analyze_with_deepseek
 from src.market_data import get_market_snapshot, format_market_for_ai, get_index_snapshot, format_index_for_ai, format_pe_for_ai
+from src.pe_fetcher import update_pe_data
 from src.funds import get_fund_names_for_prompt, get_all_sectors
-from src.backtest import extract_predictions, save_predictions, get_backtest_summary
+from src.backtest import extract_predictions, save_predictions
 from src.pred_tracker import generate_prediction_table
-from src.validator import validate_ai_output
 from src.validator import validate_ai_output
 from src.reporter import (
     generate_markdown_report,
     print_summary,
     save_report,
     cleanup_old_reports,
+    split_xwlb_analysis,
 )
 
 # 注册所有采集器
@@ -51,15 +52,15 @@ from src.fetchers.most import MOSTFetcher
 from src.fetchers.csrc import CSRCFetcher
 from src.fetchers.nfra import NFRAFetcher
 from src.fetchers.stats_gov import StatsGovFetcher
-from src.fetchers.customs import CustomsFetcher
+# from src.fetchers.customs import CustomsFetcher  # 反爬，暂未启用
 from src.fetchers.nea import NEAFetcher
 from src.fetchers.mof import MOFFetcher
-from src.fetchers.mofcom import MOFCOMFetcher
+# from src.fetchers.mofcom import MOFCOMFetcher  # 反爬，暂未启用
 from src.fetchers.cei import CEIFetcher
 from src.fetchers.xinhua import XinhuaFetcher
 from src.fetchers.people_daily import PeopleDailyFetcher
-from src.fetchers.nhc import NHCFetcher
-from src.fetchers.nmpa import NMPAFetcher
+# from src.fetchers.nhc import NHCFetcher  # 412 反爬，暂未启用
+# from src.fetchers.nmpa import NMPAFetcher  # 412 反爬，暂未启用
 from src.fetchers.stcn import STCNFetcher
 from src.fetchers.yicai import YicaiFetcher
 from src.fetchers.xwlb import XWLBFetcher
@@ -72,6 +73,20 @@ logging.basicConfig(
     datefmt="%H:%M:%S",
 )
 logger = logging.getLogger("policy_radar")
+
+
+# ── 中国节假日（A股休市日） ──────────────────────────────
+
+# 2026年中国节假日（需每年年初更新）
+HOLIDAYS = {
+    "2026-01-01", "2026-01-02",                                    # 元旦
+    "2026-02-16", "2026-02-17", "2026-02-18", "2026-02-19", "2026-02-20",  # 春节
+    "2026-04-06",                                                   # 清明节
+    "2026-05-01", "2026-05-04", "2026-05-05",                      # 劳动节
+    "2026-06-19",                                                   # 端午节
+    "2026-09-25",                                                   # 中秋节
+    "2026-10-01", "2026-10-02", "2026-10-05", "2026-10-06", "2026-10-07",  # 国庆
+}
 
 
 # ── 采集器注册 ──────────────────────────────────────────────
@@ -108,7 +123,7 @@ def build_registry() -> FetcherRegistry:
 
 # ── 主管线 ──────────────────────────────────────────────────
 
-async def run_pipeline(config_path: str = "config.yaml") -> None:
+async def run_pipeline(config_path: str = "config.yaml", fresh: bool = False) -> None:
     """执行完整采集 → 分析 → 输出管线。
 
     Args:
@@ -125,6 +140,9 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
         8. 清理过期报告
     """
     # 1. 初始化
+    # Windows 控制台默认 GBK 编码无法输出 emoji，强制 UTF-8
+    if hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
     config = load_config(config_path)
     db = Database(config.database.path)
     db.initialize()
@@ -132,18 +150,8 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
     today = datetime.now().strftime("%Y-%m-%d")
     weekday = datetime.now().weekday()  # 0=Mon, 6=Sun
 
-    # 2026年中国节假日（A股休市）
-    HOLIDAYS_2026 = {
-        "2026-01-01", "2026-01-02",  # 元旦
-        "2026-02-16", "2026-02-17", "2026-02-18", "2026-02-19", "2026-02-20",  # 春节
-        "2026-04-06",  # 清明节
-        "2026-05-01", "2026-05-04", "2026-05-05",  # 劳动节
-        "2026-06-19",  # 端午节
-        "2026-09-25",  # 中秋节
-        "2026-10-01", "2026-10-02", "2026-10-05", "2026-10-06", "2026-10-07",  # 国庆
-    }
     is_weekend = weekday >= 5
-    is_holiday = today in HOLIDAYS_2026
+    is_holiday = today in HOLIDAYS
     is_trading_day = not is_weekend and not is_holiday
     status = "节假日休市" if is_holiday else ("周末休市" if is_weekend else "交易日")
     logger.info("=== 政策雷达启动 · %s (%s) ===", today, status)
@@ -192,7 +200,7 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
     print(f"✅ 采集完成：共 {len(all_articles)} 篇文章 "
           f"（{success_count}/{len(fetchers)} 个信息源成功）")
 
-    # 2.5 提取新闻联播（不受日期过滤影响）
+    # 2.5 新闻联播 — fetcher 内部已处理时间门控（详情页无内容时自动回退）
     xwlb_articles = [a for a in all_articles if a.source == "新闻联播"]
     if xwlb_articles:
         xwlb_dir = os.path.join(config.output.report_dir, "xwlb")
@@ -207,34 +215,21 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
                 f.write(f"---\n\n")
         print(f"📺 新闻联播：{len(xwlb_articles)} 条 → {xwlb_path}")
 
-    # 2.6 日期过滤（新闻联播保留，其余只留今天+昨天）
+    # 2.6 日期过滤 — 仅保留当日（发布日期必须严格等于今天）
     today_date = today
-    yesterday_date = (datetime.strptime(today, "%Y-%m-%d") - timedelta(days=1)).strftime("%Y-%m-%d")
     filtered = []
     for a in all_articles:
         if a.source == "新闻联播":
-            filtered.append(a)  # 新闻联播永远保留
-            continue
+            continue  # 新闻联播不参与日期过滤，由时间门控决定
         pub = a.published_at or ""
-        if today_date in pub or yesterday_date in pub:
+        if pub == today_date:
             filtered.append(a)
-        elif pub and len(pub) >= 8:
-            try:
-                import re as _re2
-                m = _re2.search(r'(\d{4}-\d{1,2}-\d{1,2})', pub)
-                if m:
-                    art_date = m.group(1)
-                    if art_date >= yesterday_date:
-                        filtered.append(a)
-                        continue
-            except:
-                pass
+        # 日期不是今天的全部丢弃，不兜底
     skipped = len(all_articles) - len(filtered)
+    # XWLB 不参与日期过滤，加回 all_articles
     all_articles = filtered
-    print(f"📅 日期过滤：{len(filtered)} 篇保留，{skipped} 篇跳过")
-
-    # 重新提取 xwlb（已在过滤中保留）
-    xwlb_articles = [a for a in all_articles if a.source == "新闻联播"]
+    all_articles.extend(xwlb_articles)
+    print(f"📅 日期过滤（仅当日）：{len(filtered)} 篇保留，{skipped} 篇跳过（+{len(xwlb_articles)} 篇新闻联播）")
 
     # 3. 存储（去重）
     new_count = 0
@@ -246,12 +241,19 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
     print(f"✅ 去重后新增：{new_count} 篇")
 
     if new_count == 0:
-        print("ℹ️ 没有新文章，跳过分析")
-        return
+        report_path = os.path.join(config.output.report_dir, f"{today}.md")
+        if os.path.exists(report_path):
+            print("ℹ️ 没有新文章且报告已存在，跳过分析")
+            return
+        print("ℹ️ 没有新文章，但报告文件缺失，用今日已有数据重新生成")
 
     # 4. 统计
-    today_articles = db.get_unanalyzed_articles()
+    today_articles = db.get_unanalyzed_articles(date=today)
+    if not today_articles:
+        # 重新生成模式：从数据库取今日全部文章
+        today_articles = db.get_articles_by_date(today)
     stats = compute_stats(today_articles, db, today)
+    stats["total_in_db"] = db.count_articles()
 
     # 5. 趋势分析
     trends = compute_trends(db, days=7)
@@ -264,10 +266,14 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
     # 6. 检查是否已有今日报告 → 增量模式 vs 全量模式
     existing_report = db.get_daily_report(today)
     is_update = existing_report is not None
+    if fresh:
+        is_update = False  # --fresh 强制全量重新生成
+        # 同时重置今日文章的已分析标记，让已采集的文章重新参与分析
+        reset_count = db.reset_analyzed_for_date(today)
+        if reset_count:
+            logger.info("--fresh: 已重置 %d 篇文章的已分析标记", reset_count)
 
-    # 准备验证所需数据（跨分支共用）
-    market_data = None
-    indices = None
+
     yesterday = (datetime.strptime(today, "%Y-%m-%d") - timedelta(days=1)).strftime("%Y-%m-%d")
     yesterday_report = db.get_daily_report(yesterday)
 
@@ -318,6 +324,11 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
         try:
             market_data = await get_market_snapshot()
             indices = await get_index_snapshot()
+            # PE 估值数据更新
+            try:
+                await update_pe_data()
+            except Exception as e:
+                logger.warning("PE 估值更新失败（不影响管线）: %s", e)
             market_text = format_market_for_ai() + "\n\n" + format_index_for_ai(indices)
             print(f"   行情更新（COMEX + {len(indices)} 个指数）")
         except Exception as e:
@@ -370,6 +381,8 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
             xwlb_text = "\n## 📺 新闻联播今日要目\n"
             for i, a in enumerate(xwlb_articles[:12], 1):
                 xwlb_text += f"{i}. {a.title}\n"
+                if a.summary:
+                    xwlb_text += f"   {a.summary[:200]}...\n"
             xwlb_text += "\n" + compute_xwlb_monthly(db, config.output.report_dir)
             ai_prompt = xwlb_text + "\n" + ai_prompt
 
@@ -390,24 +403,10 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
             )
             print("⚠️ AI 分析跳过（需配置 DEEPSEEK_API_KEY 环境变量）")
 
-    # 事后校验：检测 AI 是否编造基金代码/URL/价格等
-    try:
-        all_urls = {a.url for a in all_articles if a.url}
-        validation_warnings = validate_ai_output(
-            ai_analysis,
-            real_urls=all_urls,
-            stats=stats,
-            market_data=market_data,
-            index_data=indices,
-            old_analysis=existing_report.report_md if is_update and existing_report else None,
-        )
-        if validation_warnings:
-            ai_analysis += "\n" + validation_warnings
-    except Exception as e:
-        logger.debug("校验模块执行失败: %s", e)
-
     # 标记已分析，避免下次运行时重复统计
-    db.mark_analyzed([a.id for a in today_articles if a.id])
+    # 只标记实际参与报告的 article（防止非当日文章被永久标记）
+    report_urls = {a.url for a in all_articles}
+    db.mark_analyzed([a.id for a in today_articles if a.id and a.url in report_urls])
 
     # 回测：从报告中提取预测并保存
     try:
@@ -420,6 +419,7 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
         logger.debug("回测记录失败: %s", e)
 
     # 🔍 事后校验：检测 AI 杜撰（基金代码/URL/价格/板块一致性等）
+    validation_warnings = ""
     try:
         real_urls = {a.url for a in today_articles}
         yday_preds = extract_predictions(yesterday_report.report_md, yesterday) if yesterday_report else []
@@ -451,12 +451,21 @@ async def run_pipeline(config_path: str = "config.yaml") -> None:
         # 如果 AI 有校准内容，追加
         if correction:
             full_report = full_report.rstrip() + "\n\n---\n\n" + correction
+        if validation_warnings:
+            full_report = full_report.rstrip() + "\n" + validation_warnings
         with open(report_path, "w", encoding="utf-8") as f:
             f.write(full_report)
         report_md = full_report
     else:
         report_md = generate_markdown_report(stats, ai_analysis, today_articles, trends)
         report_path = save_report(report_md, config.output.report_dir, today)
+
+    # 7.5 拆出新闻联播分析到独立文件
+    xwlb_count = len([a for a in all_articles if a.source == "新闻联播"])
+    report_md = split_xwlb_analysis(report_md, today, config.output.report_dir, xwlb_count)
+    # 主报告可能已被修改，重新写入
+    with open(report_path, "w", encoding="utf-8") as f:
+        f.write(report_md)
 
     # 8. 存储报告到数据库
     db.insert_daily_report(
@@ -500,10 +509,16 @@ def main() -> None:
         default=True,
         help="立即运行一次采集分析",
     )
+    parser.add_argument(
+        "--fresh",
+        action="store_true",
+        default=False,
+        help="强制全量重新生成报告（跳过校准/增量模式）",
+    )
     args = parser.parse_args()
 
     try:
-        asyncio.run(run_pipeline(args.config))
+        asyncio.run(run_pipeline(args.config, fresh=args.fresh))
     except KeyboardInterrupt:
         print("\n⏹ 用户中断")
         sys.exit(0)

@@ -1,152 +1,117 @@
 {
-  "updated": "2026-06-23 20:26",
-  "method": "全网搜索综合——券商研报+财经网站+第三方估值平台",
-  "note": "每次运行前可手动更新此文件。PE分位为近5年数据（除非标注）",
+  "updated": "2026-06-30 00:09",
   "indices": {
     "沪深300": {
-      "pe": 14.4,
-      "pe_pct": 90,
-      "level": "高位",
-      "sources": [
-        "海证期货(PE14.39,>90%)",
-        "value500(PE14.25,96.67%)",
-        "新浪财经(PE14.42,88.1%)"
-      ],
-      "urls": [
-        "https://futures.10jqka.com.cn",
-        "https://haiguitouzi.com",
-        "https://finance.sina.com.cn"
-      ]
-    },
-    "科创50": {
-      "pe": 157.6,
-      "pe_pct": 90,
-      "level": "高位",
-      "sources": [
-        "申万宏源研报"
-      ],
-      "urls": [
-        "https://data.eastmoney.com"
-      ]
-    },
-    "半导体": {
-      "pe": 116,
-      "pe_pct": 96,
-      "level": "高位",
-      "sources": [
-        "国信证券(东方财富)"
-      ],
-      "urls": [
-        "https://data.eastmoney.com"
-      ]
-    },
-    "中证消费": {
-      "pe": 19.7,
-      "pe_pct": 7,
-      "level": "低位(近10年)",
-      "sources": [
-        "搜狐财经(PE19.71,10年7.3%)",
-        "南方基金(5年10.59%)"
-      ],
-      "urls": [
-        "https://stock.sohu.com",
-        "https://nffund.com"
-      ]
-    },
-    "中证医药": {
-      "pe": null,
+      "pe": 8.0,
       "pe_pct": null,
-      "level": "历史底部",
+      "pe_pct_auto": null,
+      "level": null,
       "sources": [
-        "证券之星(跌回十二年前)",
-        "钛媒体(创10年新低)"
+        "东方财富(自动)"
       ],
-      "urls": [
-        "https://sfccn.com",
-        "https://tmtpost.com"
-      ]
+      "updated": "2026-06-30 00:09"
+    },
+    "中证500": {
+      "pe": 12.0,
+      "pe_pct": null,
+      "pe_pct_auto": null,
+      "level": null,
+      "sources": [
+        "东方财富(自动)"
+      ],
+      "updated": "2026-06-30 00:09"
+    },
+    "创业板指": {
+      "pe": 14.0,
+      "pe_pct": null,
+      "pe_pct_auto": null,
+      "level": null,
+      "sources": [
+        "东方财富(自动)"
+      ],
+      "updated": "2026-06-30 00:09"
+    },
+    "上证50": {
+      "pe": 1.0,
+      "pe_pct": null,
+      "pe_pct_auto": null,
+      "level": null,
+      "sources": [
+        "东方财富(自动)"
+      ],
+      "updated": "2026-06-30 00:09"
     },
     "中证银行": {
-      "pe": null,
-      "pb": 0.51,
-      "pb_pct": 23,
-      "level": "低位",
+      "pe": 7.0,
+      "pe_pct": null,
+      "pe_pct_auto": null,
+      "level": null,
       "sources": [
-        "华创证券(PB0.51,近10年23.2%)"
+        "东方财富(自动)"
       ],
-      "urls": [
-        "https://stock.finance.sina.com.cn"
-      ]
+      "updated": "2026-06-30 00:09"
     },
     "中证证券": {
-      "pe": null,
-      "pe_pct": 1.2,
-      "level": "历史底部",
-      "sources": [
-        "东方财富(5年1.18%分位)",
-        "每日经济新闻(分位归零)"
-      ],
-      "urls": [
-        "https://finance.eastmoney.com",
-        "https://nbd.com.cn"
-      ]
-    },
-    "电力": {
-      "pe": 19.4,
-      "pe_pct": 49,
-      "level": "中位",
-      "sources": [
-        "长城证券/Wind(PE19.36,5年49.42%)"
-      ],
-      "urls": [
-        "https://finance.eastmoney.com"
-      ]
-    },
-    "机器人": {
-      "pe": 65.9,
-      "pe_pct": 17,
-      "level": "低位(近1年)",
-      "sources": [
-        "每日经济新闻(PE65.92,1年16.94%)"
-      ],
-      "urls": [
-        "https://nbd.com.cn"
-      ]
-    },
-    "光伏": {
-      "pe": null,
-      "pe_pct": 17,
-      "level": "低位(近1年)",
-      "sources": [
-        "中金公司(三重底部)",
-        "每日经济新闻(1年14-20%)"
-      ],
-      "urls": [
-        "https://nbd.com.cn"
-      ]
-    },
-    "中证军工": {
-      "pe": 66.7,
-      "pe_pct": 96,
-      "level": "高位(2025数据)",
-      "sources": [
-        "中泰证券(PE66.7,5年95.8%)—注:2025年数据"
-      ],
-      "urls": [
-        "https://stock.finance.sina.com.cn"
-      ]
-    },
-    "建筑材料": {
-      "pe": 35.5,
+      "pe": 1.0,
       "pe_pct": null,
-      "level": "中位",
+      "pe_pct_auto": null,
+      "level": null,
       "sources": [
-        "理杏仁(PE~35-36,2026初)"
+        "东方财富(自动)"
       ],
-      "urls": [
-        "https://lixinger.com"
-      ]
+      "updated": "2026-06-30 00:09"
+    },
+    "中证新能源": {
+      "pe": 2.0,
+      "pe_pct": null,
+      "pe_pct_auto": null,
+      "level": null,
+      "sources": [
+        "东方财富(自动)"
+      ],
+      "updated": "2026-06-30 00:09"
+    },
+    "房地产": {
+      "pe": 2.0,
+      "pe_pct": null,
+      "pe_pct_auto": null,
+      "level": null,
+      "sources": [
+        "东方财富(自动)"
+      ],
+      "updated": "2026-06-30 00:09"
+    },
+    "CS新能车": {
+      "pe": 2.0,
+      "pe_pct": null,
+      "pe_pct_auto": null,
+      "level": null,
+      "sources": [
+        "东方财富(自动)"
+      ],
+      "updated": "2026-06-30 00:09"
+    },
+    "中证基建": {
+      "pe": 5.0,
+      "pe_pct": null,
+      "pe_pct_auto": null,
+      "level": null,
+      "sources": [
+        "东方财富(自动)"
+      ],
+      "updated": "2026-06-30 00:09"
+    },
+    "中证旅游": {
+      "pe": 2.0,
+      "pe_pct": null,
+      "pe_pct_auto": null,
+      "level": null,
+      "sources": [
+        "东方财富(自动)"
+      ],
+      "updated": "2026-06-30 00:09"
     }
   },
-  "source": "legulegu.com + eastmoney.com (自动抓取)"
+  "note": "所有PE数据由东方财富API自动抓取。注意：API返回的f115字段对指数PE不准确（可能偏低），仅作相对趋势参考。分位基于自积累历史数据计算，至少需30个交易日。",
+  "source": "eastmoney.com API 自动获取 + 历史分位自动计算"
 }

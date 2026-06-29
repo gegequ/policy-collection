@@ -42,7 +42,10 @@ def generate_markdown_report(
 
     # ── 今日概览 ──
     lines.append("## 📊 今日概览")
-    lines.append(f"- 新增文章：**{stats['total_articles']}** 篇")
+    total_in_db = stats.get("total_in_db")
+    if total_in_db:
+        lines.append(f"- 数据库收录：**{total_in_db}** 篇")
+    lines.append(f"- 今日新增：**{stats['total_articles']}** 篇")
     if stats.get("top_sectors"):
         top5 = stats["top_sectors"][:5]
         top5_str = " > ".join(f"{s}({c})" for s, c in top5)
@@ -72,9 +75,11 @@ def generate_markdown_report(
         lines.append("## 📈 板块热度 {days} 日趋势".format(days=len(trends["dates"])))
         lines.append("| 板块 | 趋势 | " + " | ".join(trends["dates"]) + " |")
         lines.append("|------|------|" + "|".join(["-" * 6 for _ in trends["dates"]]) + "|")
+        num_days = len(trends["dates"])
         for sector in trends["top_sectors"]:
             direction = trends["series"].get(sector + "_direction", "➖")
-            values = " | ".join(str(trends["series"].get(sector, [0]*len(trends["dates"]))[i]) for i in range(len(trends["dates"])))
+            sector_values = trends["series"].get(sector, [0] * num_days)
+            values = " | ".join(str(sector_values[i]) for i in range(num_days))
             lines.append(f"| {sector} | {direction} | {values} |")
         lines.append("")
 
@@ -139,7 +144,10 @@ def print_summary(stats: Dict, ai_analysis: str) -> None:
                 border_style="cyan",
             )
         )
-        console.print(f"[bold]新增文章：[/bold]{stats['total_articles']} 篇")
+        total_in_db = stats.get("total_in_db")
+        if total_in_db:
+            console.print(f"[bold]数据库收录：[/bold]{total_in_db} 篇")
+        console.print(f"[bold]今日新增：[/bold]{stats['total_articles']} 篇")
 
         if stats.get("top_sectors"):
             top5 = stats["top_sectors"][:5]
@@ -234,3 +242,78 @@ def cleanup_old_reports(report_dir: str, keep_days: int) -> None:
                 os.remove(fpath)
                 logger = __import__("logging").getLogger(__name__)
                 logger.debug("清理旧报告: %s", fpath)
+
+
+# ── 新闻联播分析独立输出 ──────────────────────────────────
+
+def split_xwlb_analysis(report_md: str, date: str, report_dir: str,
+                        article_count: int = 0) -> str:
+    """从完整报告中提取新闻联播分析段落，独立保存。
+
+    在报告中找到「## 📺 新闻联播信号解读」和「## 📺 新闻联播月度趋势」
+    段落，提取到独立文件 reports/xwlb/{date}-analysis.md，
+    主报告该位置替换为简要摘要和文件链接。
+
+    Args:
+        report_md: 完整 Markdown 报告。
+        date: 日期 YYYY-MM-DD。
+        report_dir: 报告输出目录。
+        article_count: XWLB 文章数（用于摘要）。
+
+    Returns:
+        替换后的主报告 Markdown。
+    """
+    import re
+
+    # 匹配两个 XWLB 段落（从 ## 标题到下一个 ## 或文档末尾）
+    xwlb_signal_pattern = re.compile(
+        r'(## 📺 新闻联播信号解读\n.*?)(?=\n## [^#]|\Z)', re.DOTALL
+    )
+    xwlb_monthly_pattern = re.compile(
+        r'(## 📺 新闻联播月度趋势[^\n]*\n.*?)(?=\n## [^#]|\Z)', re.DOTALL
+    )
+
+    signal_match = xwlb_signal_pattern.search(report_md)
+    monthly_match = xwlb_monthly_pattern.search(report_md)
+
+    extracted_parts = []
+    if signal_match:
+        extracted_parts.append(signal_match.group(1))
+    if monthly_match:
+        extracted_parts.append(monthly_match.group(1))
+
+    if not extracted_parts:
+        return report_md  # 无 XWLB 内容，不处理
+
+    # 写入独立 XWLB 分析文件
+    xwlb_dir = os.path.join(report_dir, "xwlb")
+    os.makedirs(xwlb_dir, exist_ok=True)
+    xwlb_path = os.path.join(xwlb_dir, f"{date}-analysis.md")
+
+    xwlb_content = (
+        f"# 📺 新闻联播深度分析 · {date}\n\n"
+        f"> 关联报告：[政策雷达日报](../{date}.md)\n\n"
+        + "\n\n".join(extracted_parts)
+        + f"\n\n---\n*分析时间：{datetime.now().isoformat()}*"
+    )
+
+    with open(xwlb_path, "w", encoding="utf-8") as f:
+        f.write(xwlb_content)
+
+    # 主报告中替换为摘要 + 链接
+    replacement = (
+        f"## 📺 新闻联播信号\n\n"
+        f"> 📺 今日新闻联播已采集 **{article_count}** 条。"
+        f" 完整分析请见："
+        f"[新闻联播深度分析](xwlb/{date}-analysis.md)\n"
+    )
+
+    # 先替换信号解读段落
+    if signal_match:
+        report_md = report_md[:signal_match.start()] + replacement + report_md[signal_match.end():]
+    # 再替换月度趋势段落（注意位置已偏移）
+    monthly_match = xwlb_monthly_pattern.search(report_md) if monthly_match else None
+    if monthly_match:
+        report_md = report_md[:monthly_match.start()] + report_md[monthly_match.end():]
+
+    return report_md

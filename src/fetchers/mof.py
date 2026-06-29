@@ -1,5 +1,6 @@
 # src/fetchers/mof.py
 from typing import List
+from urllib.parse import urljoin
 import httpx
 from src.fetchers.base import BaseFetcher
 from src.models import Article
@@ -24,7 +25,7 @@ class MOFFetcher(BaseFetcher):
             title = link.get_text(strip=True)
             href = link.get("href", "")
             if href and not href.startswith("http"):
-                href = MOF_BASE + href
+                href = urljoin(MOF_BASE + "/", href)
 
             date_str = self.extract_date(li)
 
@@ -39,9 +40,14 @@ class MOFFetcher(BaseFetcher):
                     tags=[],
                 ))
 
-        # 为前5篇抓正文
-        for a in articles[:5]:
+        # 为每篇文章抓正文
+        for a in articles:
             if a.url:
                 a.summary = await self.fetch_article_body(client, a.url)
+                date = await self.fetch_article_date(client, a.url)
+                if date:
+                    a.published_at = date
+                else:
+                    a.published_at = ""  # 提取失败则清空，避免残留错误日期
 
         return articles

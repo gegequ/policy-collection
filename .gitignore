@@ -34,5 +34,8 @@ reports/.claudian/
 run.bat
 check.bat
 
+# Playwright CLI artifacts
+.playwright-cli/
+
 # Reasonix internal
 .reasonix/truncated-results/

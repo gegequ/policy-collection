@@ -50,26 +50,6 @@ SECTOR_INDICES = {
 }
 
 SINA_URL = "http://hq.sinajs.cn/list="
-EM_URL = "http://push2.eastmoney.com/api/qt/stock/get"
-
-# 东方财富板块指数 secid 映射（更稳定，数据更全）
-EM_INDICES = {
-    "沪深300": "1.000300",
-    "中证500": "1.000905",
-    "创业板指": "0.399006",
-    "科创50": "1.000688",
-    "中证银行": "0.399986",
-    "中证证券": "0.399975",
-    "中证军工": "0.399967",
-    "中证消费": "1.000932",
-    "中证医药": "1.000933",
-    "中证新能源": "0.399808",
-    "半导体": "1.990001",
-    "有色金属": "1.000819",
-    "房地产": "0.399393",
-    "CS新能车": "0.399976",
-    "中证基建": "0.399995",
-}
 
 
 async def fetch_quote(code: str) -> Optional[Dict]:
@@ -125,10 +105,12 @@ def load_history() -> Dict:
 
 
 def save_history(data: Dict):
-    """保存历史数据到本地缓存。"""
+    """原子写入历史数据到本地缓存。"""
     os.makedirs(os.path.dirname(CACHE_FILE), exist_ok=True)
-    with open(CACHE_FILE, "w", encoding="utf-8") as f:
+    tmp_path = CACHE_FILE + ".tmp"
+    with open(tmp_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+    os.replace(tmp_path, CACHE_FILE)
 
 
 def cleanup_old_records(data: Dict, max_days: int = 90):
@@ -212,37 +194,11 @@ async def fetch_index_quote(code: str) -> Optional[Dict]:
         return None
 
 
-async def fetch_em_index(secid: str) -> Optional[Dict]:
-    """从东方财富抓取指数行情。"""
-    try:
-        url = f"{EM_URL}?secid={secid}&fields=f43,f57,f58,f170"
-        async with httpx.AsyncClient(timeout=10) as client:
-            resp = await client.get(url, headers={"Referer": "https://quote.eastmoney.com"})
-            data = resp.json().get("data")
-            if not data:
-                return None
-            price = data.get("f43", 0) / 100 if data.get("f43") else 0
-            prev_close = data.get("f57", 0) / 100 if data.get("f57") else 0
-            change_pct = data.get("f170", 0) / 100 if data.get("f170") else 0
-            if price <= 0:
-                return None
-            return {
-                "name": data.get("f58", ""),
-                "price": price,
-                "change": round(price - prev_close, 2),
-                "change_pct": change_pct,
-                "prev_close": prev_close,
-            }
-    except Exception:
-        return None
-
-
 async def get_index_snapshot() -> Dict:
     """抓取所有板块指数快照。"""
     result = {}
 
     for name, code in SECTOR_INDICES.items():
-        q = await fetch_index_quote(code)
         q = await fetch_index_quote(code)
         if q and q["price"] > 0:
             result[name] = {
