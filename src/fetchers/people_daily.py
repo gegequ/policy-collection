@@ -43,8 +43,7 @@ class PeopleDailyFetcher(BaseFetcher):
         # 抓取前 10 篇正文
         for a in articles[:10]:
             if a.url:
-                a.summary = await self.fetch_article_body(client, a.url)
-                date = await self.fetch_article_date(client, a.url)
+                a.summary, date = await self.fetch_article_detail(client, a.url)
                 if date:
                     a.published_at = date
                 else:

@@ -169,22 +169,9 @@ async def run_pipeline(config_path: str = "config.yaml", fresh: bool = False) ->
     limits = httpx.Limits(max_connections=config.fetch.max_concurrent)
     timeout = httpx.Timeout(config.fetch.timeout_sec)
 
-    # 中国官网域名直连，不走系统代理（否则 Clash 等代理会导致这些网站不可达）
-    # 中国官网域名直连（后缀匹配，不用 glob）
-    gov_domains = [
-        "gov.cn", "pbc.gov.cn", "ndrc.gov.cn", "miit.gov.cn",
-        "most.gov.cn", "csrc.gov.cn", "nfra.gov.cn", "stats.gov.cn",
-        "customs.gov.cn", "nea.gov.cn", "mof.gov.cn", "mofcom.gov.cn",
-        "cei.cn", "news.cn", "people.com.cn", "people.cn",
-    ]
-    os.environ.setdefault("no_proxy", "")
-    existing = os.environ["no_proxy"]
-    if existing:
-        os.environ["no_proxy"] = existing + "," + ",".join(gov_domains)
-    else:
-        os.environ["no_proxy"] = ",".join(gov_domains)
-
-    async with httpx.AsyncClient(limits=limits, timeout=timeout, trust_env=True) as client:
+    # trust_env=False：所有中国官网直连，不走系统代理
+    # 乐股网（legulegu）的代理由 pe_fetcher 内部独立管理
+    async with httpx.AsyncClient(limits=limits, timeout=timeout, trust_env=False) as client:
         tasks = [f.fetch_with_retry(client) for f in fetchers]
         results = await asyncio.gather(*tasks, return_exceptions=True)
 
@@ -225,7 +212,8 @@ async def run_pipeline(config_path: str = "config.yaml", fresh: bool = False) ->
         if pub == today_date:
             filtered.append(a)
         # 日期不是今天的全部丢弃，不兜底
-    skipped = len(all_articles) - len(filtered)
+    # 跳过数 = 非 XWLB 文章中被日期过滤掉的数量（XWLB 不参与日期过滤）
+    skipped = (len(all_articles) - len(xwlb_articles)) - len(filtered)
     # XWLB 不参与日期过滤，加回 all_articles
     all_articles = filtered
     all_articles.extend(xwlb_articles)

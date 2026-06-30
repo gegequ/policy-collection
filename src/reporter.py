@@ -235,6 +235,7 @@ def cleanup_old_reports(report_dir: str, keep_days: int) -> None:
         return
 
     cutoff = time.time() - keep_days * 86400
+    # 清理主报告目录
     for fname in os.listdir(report_dir):
         fpath = os.path.join(report_dir, fname)
         if fname.endswith(".md") and os.path.isfile(fpath):
@@ -242,6 +243,16 @@ def cleanup_old_reports(report_dir: str, keep_days: int) -> None:
                 os.remove(fpath)
                 logger = __import__("logging").getLogger(__name__)
                 logger.debug("清理旧报告: %s", fpath)
+    # 同时清理 xwlb 子目录（每日文字稿 + 分析文件 + 月度汇总）
+    xwlb_dir = os.path.join(report_dir, "xwlb")
+    if os.path.isdir(xwlb_dir):
+        for fname in os.listdir(xwlb_dir):
+            fpath = os.path.join(xwlb_dir, fname)
+            if fname.endswith(".md") and os.path.isfile(fpath):
+                if os.path.getmtime(fpath) < cutoff:
+                    os.remove(fpath)
+                    logger = __import__("logging").getLogger(__name__)
+                    logger.debug("清理旧XWLB文件: %s", fpath)
 
 
 # ── 新闻联播分析独立输出 ──────────────────────────────────

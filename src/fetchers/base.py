@@ -214,12 +214,13 @@ class BaseFetcher(ABC):
         return BeautifulSoup(html, "lxml")
 
     @staticmethod
-    async def fetch_article_body(
+    async def fetch_article_detail(
         client: httpx.AsyncClient, url: str, max_chars: int = 500
-    ) -> str:
-        """抓取文章详情页并提取正文摘要。
+    ) -> tuple[str, str]:
+        """一次 HTTP 请求同时提取正文摘要和发布日期（替代分别调用 body/date）。
 
-        尝试多种常见选择器定位正文容器，提取纯文本。
+        将 fetch_article_body 和 fetch_article_date 合并，避免对同一 URL
+        发起两次 GET 请求，将网络开销减半。
 
         Args:
             client: httpx 客户端。
@@ -227,58 +228,7 @@ class BaseFetcher(ABC):
             max_chars: 最大提取字符数。
 
         Returns:
-            正文摘要文本，抓取失败返回空字符串。
-        """
-        try:
-            resp = await client.get(
-                url, timeout=15, follow_redirects=True,
-                headers=BaseFetcher.DEFAULT_HEADERS,
-            )
-            resp.raise_for_status()
-            soup = BeautifulSoup(resp.text, "lxml")
-
-            # 去除脚本、样式、注释
-            for tag in soup(["script", "style", "nav", "footer", "header"]):
-                tag.decompose()
-
-            # 尝试常见正文选择器（政府网站 + 新闻网站）
-            selectors = [
-                "#UCAP-CONTENT", ".article-con", ".TRS_Editor",
-                ".Custom_UnionStyle", ".article-content", ".news-content",
-                ".content", "article", ".article", ".post-body",
-                ".entry-content", ".main-content",
-            ]
-            body = None
-            for sel in selectors:
-                body = soup.select_one(sel)
-                if body:
-                    break
-
-            if body is None:
-                body = soup  # fallback: 全文
-
-            text = body.get_text(separator="\n", strip=True)
-            # 清理多余空行
-            lines = [l.strip() for l in text.split("\n") if l.strip() and len(l.strip()) > 10]
-            return "\n".join(lines)[:max_chars]
-        except Exception:
-            return ""
-
-    @staticmethod
-    async def fetch_article_date(
-        client: httpx.AsyncClient, url: str
-    ) -> str:
-        """从文章详情页提取发布日期。
-
-        在详情页 HTML 中搜索常见日期容器（#con_time, .date, .time, <time> 等），
-        提取并规范化为 YYYY-MM-DD 格式。
-
-        Args:
-            client: httpx 客户端。
-            url: 文章详情页 URL。
-
-        Returns:
-            YYYY-MM-DD 格式的日期字符串，抓取失败返回空字符串。
+            (summary, date) — 正文摘要文本和 YYYY-MM-DD 格式日期。
         """
         import re as _re
         try:
@@ -289,13 +239,33 @@ class BaseFetcher(ABC):
             resp.raise_for_status()
             soup = BeautifulSoup(resp.text, "lxml")
 
-            # 从 <meta> 标签提取日期。
-            # 注意：政府网站 meta name 写法各异（PubDate / pubdate / createDate 等）。
-            # createDate 往往是 CMS 页面生成日期（≈当天），不能代表发布日期；
-            # 必须优先取 PubDate/publishdate，再降级到 createDate/date 等。
+            # ── 提取正文 ──────────────────────────────────
+            for tag in soup(["script", "style", "nav", "footer", "header"]):
+                tag.decompose()
+
+            body_selectors = [
+                "#UCAP-CONTENT", ".article-con", ".TRS_Editor",
+                ".Custom_UnionStyle", ".article-content", ".news-content",
+                ".content", "article", ".article", ".post-body",
+                ".entry-content", ".main-content",
+            ]
+            body = None
+            for sel in body_selectors:
+                body = soup.select_one(sel)
+                if body:
+                    break
+            if body is None:
+                body = soup
+
+            text = body.get_text(separator="\n", strip=True)
+            lines = [l.strip() for l in text.split("\n") if l.strip() and len(l.strip()) > 10]
+            summary = "\n".join(lines)[:max_chars]
+
+            # ── 提取日期 ──────────────────────────────────
+            date = ""
             PRIORITY_HIGH = {"pubdate", "publishdate"}
             PRIORITY_LOW = {"createdate", "date", "dc.date", "published"}
-            meta_candidates: list[tuple[int, str]] = []  # (priority: 0=high, 1=low, 2=fallback), date_str
+            meta_candidates: list[tuple[int, str]] = []
             for meta in soup.select("meta[name]"):
                 name = (meta.get("name") or "").lower()
                 content = meta.get("content", "")
@@ -304,69 +274,90 @@ class BaseFetcher(ABC):
                 m = _re.search(r'(\d{4})[-/](\d{1,2})[-/](\d{1,2})', content)
                 if not m:
                     continue
-                date_str = f"{m.group(1)}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
+                ds = f"{m.group(1)}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
                 if name in PRIORITY_HIGH:
-                    meta_candidates.append((0, date_str))
+                    meta_candidates.append((0, ds))
                 elif any(kw in name for kw in PRIORITY_LOW):
-                    meta_candidates.append((1, date_str))
+                    meta_candidates.append((1, ds))
                 else:
-                    meta_candidates.append((2, date_str))
+                    meta_candidates.append((2, ds))
             if meta_candidates:
                 meta_candidates.sort(key=lambda x: x[0])
-                return meta_candidates[0][1]
+                date = meta_candidates[0][1]
 
-            # 常见日期元素选择器（按优先级）
-            date_selectors = [
-                "#con_time", "#pubtime", "#pub_time", "#publish_time",
-                ".date", ".time", ".pub-date", ".article-date",
-                ".info time", ".article-info time",
-                "time", "span.time", "span.date",
-                ".article-meta time", ".meta time",
-                "[datetime]",  # HTML5 <time datetime="...">
-                ".t_l",               # 中经网 "时间：2026-06-22"
-                ".hui12",             # 中国人民银行 <td class="hui12"> 发布日期
-            ]
+            if not date:
+                # 证券时报特殊处理
+                for span in soup.select(".detail-info span"):
+                    m = _re.search(r'(\d{4}-\d{2}-\d{2})', span.get_text(strip=True))
+                    if m:
+                        date = m.group(1)
+                        break
 
-            # 证券时报特殊处理：.detail-info 下多个 span，逐个检查
-            for span in soup.select(".detail-info span"):
-                text = span.get_text(strip=True)
-                m = _re.search(r'(\d{4}-\d{2}-\d{2})', text)
-                if m:
-                    return m.group(1)
+            if not date:
+                # 第一财经特殊处理：从 script 中提取 actime/autime
+                for script in soup.select("script"):
+                    text_s = script.string or ""
+                    m = _re.search(r"\[['\"]actime['\"],\s*['\"](\d{4}-\d{2}-\d{2})", text_s)
+                    if m:
+                        date = m.group(1)
+                        break
+                    m = _re.search(r"\[['\"]autime['\"],\s*['\"](\d{4}-\d{2}-\d{2})", text_s)
+                    if m:
+                        date = m.group(1)
+                        break
 
-            # 第一财经特殊处理：从 script 中提取 actime/autime
-            for script in soup.select("script"):
-                text = script.string or ""
-                m = _re.search(r"\[['\"]actime['\"],\s*['\"](\d{4}-\d{2}-\d{2})", text)
-                if m:
-                    return m.group(1)
-                m = _re.search(r"\[['\"]autime['\"],\s*['\"](\d{4}-\d{2}-\d{2})", text)
-                if m:
-                    return m.group(1)
-            for sel in date_selectors:
-                el = soup.select_one(sel)
-                if el:
-                    # 优先取 datetime 属性
+            if not date:
+                date_selectors = [
+                    "#con_time", "#pubtime", "#pub_time", "#publish_time",
+                    ".date", ".time", ".pub-date", ".article-date",
+                    ".info time", ".article-info time",
+                    "time", "span.time", "span.date",
+                    ".article-meta time", ".meta time",
+                    "[datetime]", ".t_l", ".hui12",
+                ]
+                for sel in date_selectors:
+                    el = soup.select_one(sel)
+                    if not el:
+                        continue
                     dt_attr = el.get("datetime", "")
                     if dt_attr:
                         m = _re.search(r'(\d{4}-\d{1,2}-\d{1,2})', dt_attr)
                         if m:
-                            return m.group(1)
-
-                    # 取文本内容中的日期
-                    text = el.get_text(strip=True)
-                    # 匹配常见中文日期格式
-                    patterns = [
-                        r'(\d{4})[年/-](\d{1,2})[月/-](\d{1,2})',  # 2024年9月18日 / 2024-09-18
-                        r'(\d{4})-(\d{1,2})-(\d{1,2})',               # 2024-09-18
-                    ]
-                    for p in patterns:
-                        m = _re.search(p, text)
+                            date = m.group(1)
+                            break
+                    txt = el.get_text(strip=True)
+                    for p in [
+                        r'(\d{4})[年/-](\d{1,2})[月/-](\d{1,2})',
+                        r'(\d{4})-(\d{1,2})-(\d{1,2})',
+                    ]:
+                        m = _re.search(p, txt)
                         if m:
-                            return f"{m.group(1)}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
-            return ""
+                            date = f"{m.group(1)}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
+                            break
+                    if date:
+                        break
+
+            return summary, date
         except Exception:
-            return ""
+            return "", ""
+
+    # ── 保留旧方法（内部委托给 fetch_article_detail，保持向后兼容）──
+
+    @staticmethod
+    async def fetch_article_body(
+        client: httpx.AsyncClient, url: str, max_chars: int = 500
+    ) -> str:
+        """抓取文章详情页并提取正文摘要。已委托给 fetch_article_detail。"""
+        summary, _ = await BaseFetcher.fetch_article_detail(client, url, max_chars)
+        return summary
+
+    @staticmethod
+    async def fetch_article_date(
+        client: httpx.AsyncClient, url: str
+    ) -> str:
+        """从文章详情页提取发布日期。已委托给 fetch_article_detail。"""
+        _, date = await BaseFetcher.fetch_article_detail(client, url)
+        return date
 
     @staticmethod
     def extract_body_sync(html: str, max_chars: int = 500) -> str:

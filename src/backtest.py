@@ -101,7 +101,14 @@ def extract_predictions(report_md: str, date: str) -> List[Dict]:
 
 
 def save_predictions(predictions: List[Dict]):
-    """保存预测到回测文件（按 (date, sector) 去重，校准模式不会重复追加）。"""
+    """保存预测到回测文件。
+
+    每次运行以最新结论覆盖同日同板块的旧预测（而非只保留第一次）。
+    不影响其他日期的历史记录。
+    """
+    if not predictions:
+        return
+
     records: list[dict] = []
     if os.path.exists(BACKTEST_PATH):
         try:
@@ -111,13 +118,13 @@ def save_predictions(predictions: List[Dict]):
         except (json.JSONDecodeError, OSError):
             pass
 
-    # 按 (date, sector) 去重：同名板块同一天只保留第一次预测
-    seen = {(r["date"], r["sector"]) for r in records}
-    new_predictions = [
-        p for p in predictions
-        if (p["date"], p["sector"]) not in seen
+    # 覆盖式更新：先移除同日同板块的旧记录，再写入新结论
+    today = predictions[0]["date"]  # 所有 prediction 同一天
+    records = [
+        r for r in records
+        if not (r["date"] == today and r["sector"] in {p["sector"] for p in predictions})
     ]
-    records.extend(new_predictions)
+    records.extend(predictions)
 
     os.makedirs(os.path.dirname(BACKTEST_PATH), exist_ok=True)
     # 原子写入：先写临时文件，成功后再重命名

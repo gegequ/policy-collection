@@ -42,8 +42,7 @@ class NDRCFetcher(BaseFetcher):
         # 抓取每篇文章的正文
         for a in articles:
             if a.url:
-                a.summary = await self.fetch_article_body(client, a.url)
-                date = await self.fetch_article_date(client, a.url)
+                a.summary, date = await self.fetch_article_detail(client, a.url)
                 if date:
                     a.published_at = date
                 else:
